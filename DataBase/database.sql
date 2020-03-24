@@ -70,6 +70,23 @@ create table tblGrupos(
 	foreign key (idDocente) references tblDocentes(id)
 );
 
+create table tblHorarios(
+	id int primary key auto_increment,
+	horaInicio varchar(2) not null,
+	minutoInicio varchar(2) not null,
+	horaFin varchar(2) not null,
+	minutoFin varchar(2) not null
+);
+
+create table tblDias(
+	id int primary key auto_increment,
+	dia int not null,
+	idGrupo int not null,
+	idHorario int not null,
+	foreign key (idGrupo) references tblGrupos(id),
+	foreign key (idHorario) references tblHorarios(id)	
+);
+
 create table tblProyectos(
 	id int primary key auto_increment,
 	nombre varchar(50) not null,
@@ -110,6 +127,7 @@ create table tblPagos(
 create table tblAsistencias(
 	id int primary key auto_increment,
 	tipo varchar(1) not null,
+	/*Tipo:  r:Retrasos, l:Licencia, f:Faltas*/
 	motivo varchar(100),
 	fecha date not null,
 	trimestre varchar(1),
@@ -117,7 +135,7 @@ create table tblAsistencias(
 	foreign key (idEstudiantes_grupos) references tblEstudiantes_grupos(id)
 );
 
-create table tblParamestros(
+create table tblParametros(
 	id int primary key auto_increment,
 	nombre varchar(30) not null,
 	tipo varchar(1) not null,
@@ -132,7 +150,7 @@ create table tblNotas(
 	idEstudiantes_grupos int not null,
 	idParametro int not null,
 	foreign key (idEstudiantes_grupos) references tblEstudiantes_grupos(id),
-	foreign key (idParametro) references tblParamestros(id)
+	foreign key (idParametro) references tblParametros(id)
 );
 
 
