@@ -24,7 +24,7 @@ insert into tblDocentes values(default,'Noelia','Gandarilla','Mauro','12345');
 insert into tblGrupos values(default,'5','20',1,1,1);
 insert into tblGrupos values(default,'5','20',1,1,1);
 
-insert into tblHorarios values(default,'14','00','18','00');
+insert into tblHoras values(default,'14:00:00','18:00:00');
 
 insert into tblDias values(default,1,1,1);
 insert into tblDias values(default,3,1,1);
@@ -64,3 +64,4 @@ insert into tblNotas values(default,99,5,1);
 insert into tblNotas values(default,41,6,2);
 insert into tblNotas values(default,49,7,2);
 insert into tblNotas values(default,100,8,2);
+

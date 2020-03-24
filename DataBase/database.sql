@@ -70,21 +70,19 @@ create table tblGrupos(
 	foreign key (idDocente) references tblDocentes(id)
 );
 
-create table tblHorarios(
+create table tblHoras(
 	id int primary key auto_increment,
-	horaInicio varchar(2) not null,
-	minutoInicio varchar(2) not null,
-	horaFin varchar(2) not null,
-	minutoFin varchar(2) not null
+	inicio time not null,
+	fin time not null
 );
 
 create table tblDias(
 	id int primary key auto_increment,
 	dia int not null,
 	idGrupo int not null,
-	idHorario int not null,
+	idHora int not null,
 	foreign key (idGrupo) references tblGrupos(id),
-	foreign key (idHorario) references tblHorarios(id)	
+	foreign key (idHora) references tblHoras(id)	
 );
 
 create table tblProyectos(
