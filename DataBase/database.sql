@@ -11,7 +11,11 @@ create table tblColegios(
 	director varchar(65),
 	direccion varchar(100),
 	telefono varchar(8),
-	esModulo bool
+	esModulo bool,
+	correo varchar(50) not null,
+	username varchar(50) not null,
+	contrasenia text not null,
+	estado bool
 );
 
 create table tblEstudiantes(
@@ -36,7 +40,10 @@ create table tblDocentes(
 	nombre varchar(50) not null,
 	aPaterno varchar(30) not null,
 	aMaterno varchar(30),
-	contrasenia varchar(50)
+	correo varchar(50) not null,
+	username varchar(50) not null,
+	contrasenia text not null,
+	estado bool
 );
 
 create table tblCarreras(
@@ -156,5 +163,13 @@ create table tblNotas(
 	idParametro int not null,
 	foreign key (idEstudiantes_grupos) references tblEstudiantes_grupos(id),
 	foreign key (idParametro) references tblParametros(id)
+);
+
+create table tblConfirmaciones(
+	id int primary key auto_increment,
+	sha text not null,
+	tipo varchar(1) not null,
+	/tipo: d:docente, c:colegio, a:admin/
+	fecha date not null
 );
 
