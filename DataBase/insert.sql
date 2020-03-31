@@ -1,7 +1,7 @@
 
 
-insert into tblColegios values(default, 'Satelite Norte','DAD-45','Juan Villarues Palacios','Avenida principal Satelite Norte #54','45331',1);
-insert into tblColegios values(default, 'Juan Pablo II','DQW-45','','Urbanizacion Juan Pablo II uv 5','45331',1);
+insert into tblColegios values(default, 'Satelite Norte','DAD-45','Juan Villarues Palacios','Avenida principal Satelite Norte #54','45331',1,'derxal@gmail.com','Derxal','123456',1);
+insert into tblColegios values(default, 'Juan Pablo II','DQW-45','','Urbanizacion Juan Pablo II uv 5','45331',1,'derxal@gmail.com','Derxal','123456',1);
 
 insert into tblEstudiantes values(default, '110','Pepe','Perales','Torres','0','7946456','m','19930502','q',1);
 insert into tblEstudiantes values(default, '111','Maria','Rosales','Jonc','0','7946456','f','19930502','q',1);
@@ -18,8 +18,8 @@ insert into tblCarreras values(default, 'Sistemas Informaticos Redes Computacion
 insert into tblCarreras values(default, 'Gastronomia','Gas','Carrera de ejemplo esto se cambiara despues','fjasklfjasld/fsadfds/fasfsa');
 insert into tblCarreras values(default, 'Mecanica','Mec','Carrera de ejemplo esto se cambiara despues','fjasklfjasld/fsadfds/fasfsa');	
 
-insert into tblDocentes values(default,'Alan','Gandarilla','Mauro','12345');
-insert into tblDocentes values(default,'Noelia','Gandarilla','Mauro','12345');
+insert into tblDocentes values(default,'Alan','Gandarilla','Mauro','docente@gmail.com','Doc','123456',1);
+insert into tblDocentes values(default,'Noelia','Gandarilla','Mauro','docente@gmail.com','Doc','123456',1);
 
 insert into tblGestiones values(DEFAULT, 4);
 
