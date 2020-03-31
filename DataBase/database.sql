@@ -169,7 +169,7 @@ create table tblConfirmaciones(
 	id int primary key auto_increment,
 	sha text not null,
 	tipo varchar(1) not null,
-	/tipo: d:docente, c:colegio, a:admin/
+	/*tipo: d:docente, c:colegio, a:admin*/
 	fecha date not null
 );
 
