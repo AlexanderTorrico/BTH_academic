@@ -42,29 +42,38 @@ create table tblDocentes(
 create table tblCarreras(
 	id int primary key auto_increment,
 	nombre varchar(50) not null,
-	sigla varchar(3) not null,
+	sigla varchar(5) not null,
 	descripcion varchar(200),
-	img varchar(120)
+	img text
 );
 
 create table tblInformaciones(
 	id int primary key auto_increment,
-	titulo varchar(30) not null,
-	descripcion varchar(200) not null,
-	img varchar(50) not null,
+	titulo varchar(50) not null,
+	descripcion text not null,
+	img text not null,
 	idCarrera int not null,
 	foreign key (idCarrera) references tblCarreras(id)
 );
+
+create table tblGestiones(
+	id int primary key auto_increment,
+	mesAPagar int not null
+)
+AUTO_INCREMENT = 20;
 
 create table tblGrupos(
 	id int primary key auto_increment,
 	nivel varchar(1) not null,
 	/*nivel: q:5, s:6*/
-	gestion varchar(2) not null,
+	estado varchar(1),
+	/*estado a:aprovado, r:reprobado, e:Ejecutando*/
+	idGestion int not null,
 	/*gestion: 20:2020 - 38: 2038 */
 	idColegio int not null,
 	idCarrera int not null,
 	idDocente int,
+	foreign key (idGestion) references tblGestiones(id),
 	foreign key (idColegio) references tblColegios(id),
 	foreign key (idCarrera) references tblCarreras(id),
 	foreign key (idDocente) references tblDocentes(id)
@@ -88,7 +97,7 @@ create table tblDias(
 create table tblProyectos(
 	id int primary key auto_increment,
 	nombre varchar(50) not null,
-	descripcion varchar(200) not null,
+	descripcion text not null,
 	imgJson text,
 	idCarrera int not null,
 	foreign key (idCarrera) references tblCarreras(id)
@@ -106,8 +115,6 @@ create table tblEstudiantes_grupos(
 	id int primary key auto_increment,
 	idEstudiante int not null,
 	idGrupo int not null,
-	estado varchar(1),
-	/*estado a:aprovado, r:reprobado*/
 	foreign key (idEstudiante) references tblEstudiantes(id),
 	foreign key (idGrupo) references tblGrupos(id)
 );
@@ -150,5 +157,4 @@ create table tblNotas(
 	foreign key (idEstudiantes_grupos) references tblEstudiantes_grupos(id),
 	foreign key (idParametro) references tblParametros(id)
 );
-
 

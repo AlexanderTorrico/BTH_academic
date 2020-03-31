@@ -21,8 +21,10 @@ insert into tblCarreras values(default, 'Mecanica','Mec','Carrera de ejemplo est
 insert into tblDocentes values(default,'Alan','Gandarilla','Mauro','12345');
 insert into tblDocentes values(default,'Noelia','Gandarilla','Mauro','12345');
 
-insert into tblGrupos values(default,'5','20',1,1,1);
-insert into tblGrupos values(default,'5','20',1,1,1);
+insert into tblGestiones values(DEFAULT, 4);
+
+insert into tblGrupos values(default,'5','e',20,1,1,1);
+insert into tblGrupos values(default,'5','e',20,1,1,1);
 
 insert into tblHoras values(default,'14:00:00','18:00:00');
 
@@ -31,14 +33,14 @@ insert into tblDias values(default,3,1,1);
 insert into tblDias values(default,2,2,1);
 insert into tblDias values(default,4,2,1);
 
-insert into tblEstudiantes_grupos values(default,1,1,null);
-insert into tblEstudiantes_grupos values(default,2,1,null);
-insert into tblEstudiantes_grupos values(default,3,1,null);
-insert into tblEstudiantes_grupos values(default,4,1,null);
-insert into tblEstudiantes_grupos values(default,5,1,null);
-insert into tblEstudiantes_grupos values(default,6,2,null);
-insert into tblEstudiantes_grupos values(default,7,2,null);
-insert into tblEstudiantes_grupos values(default,8,2,null);
+insert into tblEstudiantes_grupos values(default,1,1);
+insert into tblEstudiantes_grupos values(default,2,1);
+insert into tblEstudiantes_grupos values(default,3,1);
+insert into tblEstudiantes_grupos values(default,4,1);
+insert into tblEstudiantes_grupos values(default,5,1);
+insert into tblEstudiantes_grupos values(default,6,2);
+insert into tblEstudiantes_grupos values(default,7,2);
+insert into tblEstudiantes_grupos values(default,8,2);
 
 insert into tblAsistencias values(default,'f','Estube resfriado','20200324',1,1);
 insert into tblAsistencias values(default,'r',null,'20200324',1,1);
@@ -50,6 +52,10 @@ insert into tblPagos values(default,25,3,'20200324',1);
 insert into tblPagos values(default,25,3,'20200324',2);
 insert into tblPagos values(default,25,3,'20200324',3);
 insert into tblPagos values(default,25,3,'20200324',4);
+insert into tblPagos values(default,25,4,'20200324',4);
+insert into tblPagos values(default,25,5,'20200324',4);
+insert into tblPagos values(default,25,6,'20200324',4);
+insert into tblPagos values(default,25,7,'20200324',4);
 insert into tblPagos values(default,25,3,'20200324',5);
 insert into tblPagos values(default,25,3,'20200324',6);
 
