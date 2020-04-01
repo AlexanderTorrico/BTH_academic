@@ -1,0 +1,21 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body{ 
+     width: 100%;
+      background: #1518;
+}
+h1{
+  color: #fff;
+}
+
+table,tr,td,th{
+    background: #fff;
+    border: 1px solid black;
+    width: 80%;
+    height: 20px;
+    border-radius: 7%;
+}

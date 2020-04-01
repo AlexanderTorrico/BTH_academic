@@ -1,0 +1,24 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: sans-serif;
+    color:#ffffff;
+}
+
+body{ 
+     width: 100%;
+     background: #1518;
+}
+
+table,tr,td,th{
+    margin-left: 5%;
+    border: 1px solid black;
+    width: 80%;
+    height: 20px;  
+}
+button{
+   border: solid 0px;
+   border-radius:2px; 
+   color:#1518;
+}
+
