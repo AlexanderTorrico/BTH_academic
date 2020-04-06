@@ -8,10 +8,8 @@ package services;
 import com.google.gson.Gson;
 import dao.ColegioDao;
 import dao.DocenteDao;
-import dao.UsuarioDao;
 import dto.Colegio;
 import dto.Docente;
-import dto.Usuario;
 import factory.FactoryDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,18 +41,18 @@ public class DocenteService {
         Docente docente = dao.get(param.getUsername(), param.getCorreo());
 
 //         si ya hay un usuario en la bd con ese nombre de usuario
-//        if (docente != null) {
-//            if (docente.getCorreo().equals(param.getCorreo()) && docente.getUsername().equals(param.getUsername())) {
-//                respuesta.setMessage("el docente ya esta registrado");
-//                return new Gson().toJson(respuesta);
-//            } else if (docente.getCorreo().equals(param.getCorreo())) {
-//                respuesta.setMessage("el correo ya fue utilizado");
-//                return new Gson().toJson(respuesta);
-//            } else if (docente.getUsername().equals(param.getUsername())) {
-//                respuesta.setMessage("el username ya fue utilizado");
-//                return new Gson().toJson(respuesta);
-//            }
-//        }
+        if (docente != null) {
+            if (docente.getCorreo().equals(param.getCorreo()) && docente.getUsername().equals(param.getUsername())) {
+                respuesta.setMessage("el docente ya esta registrado");
+                return new Gson().toJson(respuesta);
+            } else if (docente.getCorreo().equals(param.getCorreo())) {
+                respuesta.setMessage("el correo ya fue utilizado");
+                return new Gson().toJson(respuesta);
+            } else if (docente.getUsername().equals(param.getUsername())) {
+                respuesta.setMessage("el username ya fue utilizado");
+                return new Gson().toJson(respuesta);
+            }
+        }
         try {
             int idGenerado = dao.insert(param);
             param.setId(idGenerado);

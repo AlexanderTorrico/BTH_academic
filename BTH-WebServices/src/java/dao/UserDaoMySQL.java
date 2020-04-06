@@ -4,7 +4,6 @@ import consola.MessageCorreo;
 import consola.SendEmail;
 import dal.Conexion;
 import dto.User;
-import dto.Usuario;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Base64;

@@ -19,7 +19,6 @@ public abstract class FactoryDao {
 		return instancia;
 	}
 
-	public abstract UsuarioDao getNewUsuarioDao();     
         // DESDE AQUI SE COMIENZA EL NUEVO CODIGO
         public abstract ColegioDao getNewColegioDao();
         public abstract DocenteDao getNewDocenteDao();

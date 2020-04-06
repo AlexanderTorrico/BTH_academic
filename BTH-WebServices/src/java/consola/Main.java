@@ -6,7 +6,6 @@
 package consola;
 
 import dao.ColegioDao;
-import dao.UsuarioDao;
 import dto.Colegio;
 import factory.FactoryDao;
 import java.util.List;

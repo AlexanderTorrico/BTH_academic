@@ -21,11 +21,6 @@ public class FactoryDaoMySQL extends FactoryDao {
     }
 
     @Override
-    public UsuarioDao getNewUsuarioDao() {
-        return new UsuarioDaoMySQL();
-    }
-
-    @Override
     public ColegioDao getNewColegioDao() {
         return new ColegioDaoMySQL();
     }
