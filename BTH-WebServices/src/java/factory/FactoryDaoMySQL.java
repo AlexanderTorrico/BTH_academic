@@ -35,4 +35,9 @@ public class FactoryDaoMySQL extends FactoryDao {
         return new DocenteDaoMySQL();
     }
 
+    @Override
+    public UserDao getNewUserDao() {
+       return new UserDaoMySQL();
+    }
+
 }

@@ -23,6 +23,7 @@ public abstract class FactoryDao {
         // DESDE AQUI SE COMIENZA EL NUEVO CODIGO
         public abstract ColegioDao getNewColegioDao();
         public abstract DocenteDao getNewDocenteDao();
+        public abstract UserDao getNewUserDao();
        
 
 }
