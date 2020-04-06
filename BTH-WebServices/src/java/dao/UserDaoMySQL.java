@@ -1,10 +1,16 @@
 package dao;
 
+import consola.MessageCorreo;
+import consola.SendEmail;
 import dal.Conexion;
 import dto.User;
 import dto.Usuario;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,6 +49,53 @@ public class UserDaoMySQL extends UserDao {
 
         return null;
 
+    }
+
+    @Override
+    public String insertToken() {
+        
+        Conexion objConexion = Conexion.getOrCreate();
+
+        try {
+            Date date = new Date();
+            
+            int a = (int)(Math.random()*150);
+        
+            String token = a+"qw";
+
+            byte[] ENCRYPTADO = Base64.getEncoder().encode(token.getBytes());
+            String encript = new String(ENCRYPTADO);
+            
+            StringBuilder query = new StringBuilder("INSERT INTO TBLTOKENS VALUES (");
+            query.append("null,");
+            query.append("'"+encript+"',");
+            query.append("'" + "cc" + "',");
+            query.append("'" + "c" + "',");
+            query.append("'" + "20200420" + "'");
+            query.append(")");
+            
+            
+            
+            objConexion.ejecutarInsert(query.toString());
+            return encript;
+        } catch (Exception e) {
+            
+            System.out.println("----------------------********************************Error al insertar el token "+e.getMessage());
+            
+        }
+        
+        
+        objConexion.desconectar();
+        
+        return "";
+    }
+
+    @Override
+    public boolean recoveryPassword(User obj) {
+        SendEmail enviarCorreo = new SendEmail();
+        MessageCorreo correo = new MessageCorreo(obj.getCorreo(), obj.getUsername(), "Confirmar cmabio de contraseña","colegio");
+        enviarCorreo.SendEmail(correo.getCorreo(), correo.getAsunto(),correo.recuverPasswordHtml("colegio", obj.getUsername()));
+        return false;
     }
 
 }

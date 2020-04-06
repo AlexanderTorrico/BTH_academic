@@ -20,6 +20,11 @@ public class MessageCorreo {
     private String codigo;
     private int id;
 
+    public MessageCorreo() {
+    }
+
+    
+    
     public MessageCorreo(String correo, String username, int id, String asunto, String tipo) {
         this.correo = correo;
         this.asunto = asunto;
@@ -28,10 +33,25 @@ public class MessageCorreo {
 //        recuperacion = RecuperacionHtml();
         // hace referencia si es docente o colegio
     }
+    
+    public MessageCorreo(String correo, String token, String asunto, String tipo) {
+        this.correo = correo;
+        this.asunto = asunto;
+        
+        verificacion = recuverPasswordHtml(tipo, token);
+//        recuperacion = RecuperacionHtml();
+        // hace referencia si es docente o colegio
+    }
 
     private String VerificacionHtml(String tipo,String username) {
         String token = codificador(username);
         String verificacion = "<a href=\"http://localhost:8080/bth/verificar.html?tipo=" + tipo + "&token=" + token + "\">CLICK PARA VERIFICAR TU CUENTA</a>";
+        return verificacion;
+    }
+    
+    public String recuverPasswordHtml(String tipo,String token) {
+        //String token = codificador(username);
+        String verificacion = "<a href=\"http://localhost:36129/bth/changePassword.html?tipo=" + tipo + "&token=" + token + "\">CLICK PARA VERIFICAR TU CUENTA</a>";
         return verificacion;
     }
 

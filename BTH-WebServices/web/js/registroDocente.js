@@ -36,6 +36,7 @@ function registrarDocente() {
     });
 }
 
+
 function procesarRegistro(respuesta){
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;

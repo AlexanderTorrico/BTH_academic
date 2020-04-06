@@ -14,9 +14,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import dto.User;
 import factory.FactoryDao;
+import javax.ws.rs.GET;
 /**
  *
- * @author LEO
+ * @author LEI
  */
 
 @Path("user")
@@ -46,7 +47,32 @@ public class UserService {
         return new Gson().toJson(respuesta);
     }
     
-    
+    @Path("recuperar")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String registro(User param) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        
+        UserDao dao = factory.getNewUserDao();
+        User n = new User();
+        n.setCorreo(param.getCorreo());
+        try {
+            param.setUsername(dao.insertToken());
+            
+            dao.recoveryPassword(param);
+            respuesta.setSuccess(true);
+            respuesta.setMessage("Token registrado");
+
+        } catch (Exception ex) {
+            respuesta.setSuccess(true);
+            respuesta.setMessage("registro fallido"+ex.getMessage());
+        }
+
+        return new Gson().toJson(respuesta);
+    }
     
     
     
