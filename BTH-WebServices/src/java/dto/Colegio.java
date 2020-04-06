@@ -112,9 +112,5 @@ public class Colegio {
 
     public void setEstado(int estado) {
         this.estado = estado;
-    }
-
-    
-    
-    
+    }   
 }

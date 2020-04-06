@@ -16,14 +16,14 @@ public abstract class DocenteDao {
 
     public abstract void ValidarCuenta(Docente obj) throws Exception;
 
-    public abstract void ActivarCuenta(Docente obj) throws Exception;
+    public abstract void ActivarCuenta(String username) throws Exception;
 
     public abstract void delete(int id);
 
     public abstract ArrayList<Docente> getList();
 
     public abstract Docente get(int id);
-
+    
     public abstract Docente get(String username, String correo);
 
 }

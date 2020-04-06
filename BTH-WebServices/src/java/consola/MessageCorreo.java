@@ -5,6 +5,8 @@
  */
 package consola;
 
+import java.util.Base64;
+
 /**
  *
  * @author MarceloVillca
@@ -17,69 +19,33 @@ public class MessageCorreo {
     private String recuperacion;
     private String codigo;
     private int id;
-    private String username;
 
-    public MessageCorreo(String correo, String username, int id, String asunto) {
+    public MessageCorreo(String correo, String username, int id, String asunto, String tipo) {
         this.correo = correo;
         this.asunto = asunto;
-        this.username = username;
         this.id = id;
-        verificacion = VerificacionHtml();
-        recuperacion = RecuperacionHtml();
+        verificacion = VerificacionHtml(tipo,username);
+//        recuperacion = RecuperacionHtml();
+        // hace referencia si es docente o colegio
     }
 
-    private String VerificacionHtml() {
-        String verificacion = "<a href=\"http://localhost:8080/bth/\">CLICK PARA VERIFICAR TU CUENTA</a>";
+    private String VerificacionHtml(String tipo,String username) {
+        String token = codificador(username);
+        String verificacion = "<a href=\"http://localhost:8080/bth/verificar.html?tipo=" + tipo + "&token=" + token + "\">CLICK PARA VERIFICAR TU CUENTA</a>";
         return verificacion;
     }
 
     private String RecuperacionHtml() {
-        String verificacion = "<!doctype html>\n"
-                + "<html lang=‘en’>\n"
-                + "<head>\n"
-                + "  <meta charset=‘utf-8’>\n"
-                + "  <title>submit demo</title>\n"
-                + "  <style>\n"
-                + "  p {\n"
-                + "    margin: 0;\n"
-                + "    color: blue;\n"
-                + "  }\n"
-                + "  div,p {\n"
-                + "    margin-left: 10px;\n"
-                + "  }\n"
-                + "  span {\n"
-                + "    color: red;\n"
-                + "  }\n"
-                + "  </style>\n"
-                + "  <script src=‘https://code.jquery.com/jquery-3.4.1.js’></script>\n"
-                + "</head>\n"
-                + "<body>\n"
-                + " \n"
-                + "<p>Type 'correct' to validate.</p>\n"
-                + "<form action=‘javascript:alert( 'success!' );’>\n"
-                + "  <div>\n"
-                + "    <input type=‘text’>\n"
-                + "    <input type=‘submit’>\n"
-                + "  </div>\n"
-                + "</form>\n"
-                + "<span></span>\n"
-                + " \n"
-                + "<script>\n"
-                + "$( ‘form’ ).submit(function( event ) {\n"
-                + "  if ( $( ‘input’ ).first().val() === ‘correct’ ) {\n"
-                + "    $( ‘span’ ).text( ‘Validated...’ ).show();\n"
-                + "    return;\n"
-                + "  }\n"
-                + " \n"
-                + "  $( ‘span’ ).text( ‘Not valid!’ ).show().fadeOut( 1000 );\n"
-                + "  event.preventDefault();\n"
-                + "});\n"
-                + "</script>\n"
-                + " \n"
-                + "</body>\n"
-                + "</html>";
+        String verificacion = "";
 
         return verificacion;
+    }
+
+    private String codificador(String username) {
+        String token = username;
+        byte[] encodedBytes = Base64.getEncoder().encode(token.getBytes());
+        String code = new String(encodedBytes);
+        return code;
     }
 
     public String getCorreo() {
@@ -122,4 +88,11 @@ public class MessageCorreo {
         this.codigo = codigo;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

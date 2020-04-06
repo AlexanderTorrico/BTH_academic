@@ -102,18 +102,16 @@ public class DocenteDaoMySQL extends DocenteDao {
     @Override
     public void ValidarCuenta(Docente obj) throws Exception {
         SendEmail enviarCorreo = new SendEmail();
-        MessageCorreo correo = new MessageCorreo(obj.getCorreo(), obj.getUsername(), obj.getId(), "VERIFICAR CUENTA");
+        MessageCorreo correo = new MessageCorreo(obj.getCorreo(), obj.getUsername(), obj.getId(), "VERIFICAR CUENTA","docente");
         enviarCorreo.SendEmail(correo.getCorreo(), correo.getAsunto(),correo.getVerificacion());
     }
 
     // se actualiza el estado de la cuenta una vez confirmada la verificacion
     @Override
-    public void ActivarCuenta(Docente obj) throws Exception {
+    public void ActivarCuenta(String username) throws Exception {
         Conexion objConexion = Conexion.getOrCreate();
 
-        StringBuilder query = new StringBuilder("UPDATE tbldocentes SET estado = " + obj.getEstado()
-                + " where correo = " + obj.getCorreo()
-                + " and username =" + obj.getUsername() + "");
+        StringBuilder query = new StringBuilder("UPDATE tbldocentes SET estado = 1 WHERE username = '"+username+"'");
         int upd = objConexion.ejecutarSimple(query.toString());
         if (upd == 0) {
             throw new Exception("El registro no pudo ser actualizado");
@@ -121,5 +119,7 @@ public class DocenteDaoMySQL extends DocenteDao {
 
         objConexion.desconectar();
     }
+
+  
 
 }

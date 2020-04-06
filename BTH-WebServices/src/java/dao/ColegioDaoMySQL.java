@@ -24,14 +24,14 @@ public class ColegioDaoMySQL extends ColegioDao {
         query.append("'" + obj.getDirector() + "',");
         query.append("'" + obj.getDireccion() + "',");
         query.append("'" + obj.getTelefono() + "',");
-        query.append("" + obj.getEsModulo() + ",");
+        query.append("1,");
         query.append("'" + obj.getCorreo() + "',");
         query.append("'" + obj.getUsername() + "',");
         query.append("hex(aes_encrypt('" + obj.getContrasenia() + "','COL')),");
         query.append("" + obj.getEstado() + "");
         query.append(")");
         id = objConexion.ejecutarInsert(query.toString());
-        if (id == 0) {
+        if (id == 0){
             throw new Exception("El registro no pudo ser insertado");
         }
         objConexion.desconectar();
@@ -99,17 +99,15 @@ public class ColegioDaoMySQL extends ColegioDao {
     @Override
     public void ValidarCuenta(Colegio obj) throws Exception {
         SendEmail enviarCorreo = new SendEmail();
-        MessageCorreo correo = new MessageCorreo(obj.getCorreo(), obj.getUsername(), obj.getId(), "VERIFICAR CUENTA");
+        MessageCorreo correo = new MessageCorreo(obj.getCorreo(), obj.getUsername(), obj.getId(), "VERIFICAR CUENTA","colegio");
         enviarCorreo.SendEmail(correo.getCorreo(), correo.getAsunto(), correo.getVerificacion());
     }
 
     @Override
-    public void ActivarCuenta(Colegio obj) throws Exception {
+    public void ActivarCuenta(String username) throws Exception {
         Conexion objConexion = Conexion.getOrCreate();
 
-        StringBuilder query = new StringBuilder("UPDATE tblcolegios SET estado = " + obj.getEstado()
-                + " where correo = " + obj.getCorreo()
-                + " and username =" + obj.getUsername() + "");
+        StringBuilder query = new StringBuilder("UPDATE tblcolegios SET estado = 1 WHERE username = '"+username+"'");
         int upd = objConexion.ejecutarSimple(query.toString());
         if (upd == 0) {
             throw new Exception("El registro no pudo ser actualizado");

@@ -11,12 +11,14 @@ import dao.UsuarioDao;
 import dto.Colegio;
 import dto.Usuario;
 import factory.FactoryDao;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -26,17 +28,6 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("colegio")
 public class ColegioService {
-
-    @Path("prueba")
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String test() {
-        Respuesta respuesta = new Respuesta();
-        respuesta.setSuccess(true);
-        respuesta.setMessage("funciona el servicio para el colegio");
-
-        return new Gson().toJson(respuesta);
-    }
 
     @Path("registro")
     @POST
@@ -51,18 +42,18 @@ public class ColegioService {
         Colegio colegio = dao.get(param.getUsername(), param.getCorreo());
 
         // si ya hay un usuario en la bd con ese nombre de usuario
-        if (colegio != null) {
-            if (colegio.getCorreo().equals(param.getCorreo()) && colegio.getUsername().equals(param.getUsername())) {
-                respuesta.setMessage("el colegio ya esta registrado");
-                return new Gson().toJson(respuesta);
-            } else if (colegio.getCorreo().equals(param.getCorreo())) {
-                respuesta.setMessage("el correo ya fue utilizado");
-                return new Gson().toJson(respuesta);
-            } else if (colegio.getUsername().equals(param.getUsername())) {
-                respuesta.setMessage("el username ya fue utilizado");
-                return new Gson().toJson(respuesta);
-            }
-        }
+//        if (colegio != null) {
+//            if (colegio.getCorreo().equals(param.getCorreo()) && colegio.getUsername().equals(param.getUsername())) {
+//                respuesta.setMessage("el colegio ya esta registrado");
+//                return new Gson().toJson(respuesta);
+//            } else if (colegio.getCorreo().equals(param.getCorreo())) {
+//                respuesta.setMessage("el correo ya fue utilizado");
+//                return new Gson().toJson(respuesta);
+//            } else if (colegio.getUsername().equals(param.getUsername())) {
+//                respuesta.setMessage("el username ya fue utilizado");
+//                return new Gson().toJson(respuesta);
+//            }
+//        }
 
         try {
             int idGenerado = dao.insert(param);
@@ -75,6 +66,28 @@ public class ColegioService {
             respuesta.setMessage("registro fallido");
         }
 
+        return new Gson().toJson(respuesta);
+    }
+    
+    @Path("/{token}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String obtener(@PathParam("token") String tokenid) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        ColegioDao dao = factory.getNewColegioDao();
+        byte[] decodedBytes = Base64.getDecoder().decode(tokenid);
+        String desencriptado = new String(decodedBytes);
+       
+         try {
+            dao.ActivarCuenta(desencriptado);
+            respuesta.setSuccess(true);
+            respuesta.setMessage("cancion modificada!");
+        } catch (Exception ex) {
+            respuesta.setMessage("ascascs");
+        }
+        
         return new Gson().toJson(respuesta);
     }
 

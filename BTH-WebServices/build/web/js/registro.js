@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function registrarse() {
-    var usuario = $("#usuario").val();
+   var usuario = $("#usuario").val();
     var clave = $("#clave").val();
     var nombre = $("#nombreCompleto").val();
     
