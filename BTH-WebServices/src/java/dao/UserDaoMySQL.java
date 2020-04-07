@@ -51,16 +51,16 @@ public class UserDaoMySQL extends UserDao {
     }
 
     @Override
-    public String insertToken() {
+    public String insertToken(String correo) {
         
         Conexion objConexion = Conexion.getOrCreate();
 
         try {
             Date date = new Date();
             
-            int a = (int)(Math.random()*150);
+            int a = (int)(Math.random()*10000);
         
-            String token = a+"qw";
+            String token = a+"bth"+a;
 
             byte[] ENCRYPTADO = Base64.getEncoder().encode(token.getBytes());
             String encript = new String(ENCRYPTADO);
@@ -68,6 +68,7 @@ public class UserDaoMySQL extends UserDao {
             StringBuilder query = new StringBuilder("INSERT INTO TBLTOKENS VALUES (");
             query.append("null,");
             query.append("'"+encript+"',");
+            query.append("'"+correo+"',");
             query.append("'" + "cc" + "',");
             query.append("'" + "c" + "',");
             query.append("'" + "20200420" + "'");
@@ -93,7 +94,8 @@ public class UserDaoMySQL extends UserDao {
     public boolean recoveryPassword(User obj) {
         SendEmail enviarCorreo = new SendEmail();
         MessageCorreo correo = new MessageCorreo(obj.getCorreo(), obj.getUsername(), "Confirmar cmabio de contraseña","colegio");
-        enviarCorreo.SendEmail(correo.getCorreo(), correo.getAsunto(),correo.recuverPasswordHtml("colegio", obj.getUsername()));
+        //enviarCorreo.SendEmail(correo.getCorreo(), correo.getAsunto(),correo.recuverPasswordHtml("colegio", obj.getUsername()));
+        enviarCorreo.SendEmail(obj.getCorreo(), correo.getAsunto(), correo.recuverPasswordHtml(obj.getTipo(), obj.getUsername(), obj.getCorreo() ));
         return false;
     }
 

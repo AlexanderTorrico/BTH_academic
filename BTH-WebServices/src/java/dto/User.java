@@ -10,6 +10,7 @@ public class User {
     private String correo;
     private String contrasenia;
     private int estado;
+    private String tipo;
     
     public User() {
     }
@@ -45,6 +46,16 @@ public class User {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
  
 
     

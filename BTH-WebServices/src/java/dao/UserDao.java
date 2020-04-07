@@ -7,7 +7,7 @@ public abstract class UserDao {
 
     public abstract User getLogin(String username , String correo , String contrasenia);
     
-    public abstract String insertToken();
+    public abstract String insertToken(String correo);
     public abstract boolean recoveryPassword(User obj);
     
     

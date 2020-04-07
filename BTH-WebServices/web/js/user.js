@@ -19,18 +19,27 @@ function sendEmail() {
         alert("El correo insertado no es valido");
         return;
     }
-
+    
+    var obj = new Object();
+    obj.correo = correo;
+    obj.tipo = "docente";
+    
+    console.log(JSON.stringify(obj));
+    //location.href="http://www.fento.com.mx";
     jQuery.ajax({
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        'type': 'GET',
-        'url': 'api/user/sendVerificacion',
-        //'data': JSON.stringify(obj), // lo que se envia
+        'type': 'POST',
+        
+        'url': 'api/user/recuperar?',
+        'data': JSON.stringify(obj), // lo que se envia
         'dataType': 'json', // lo que se recibe 
         'success': procesarRegistro
     });    
+    
+    
 }
 
 function validateChangePass(){

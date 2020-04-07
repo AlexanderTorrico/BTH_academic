@@ -165,11 +165,13 @@ create table tblNotas(
 	foreign key (idParametro) references tblParametros(id)
 );
 
-create table tblConfirmaciones(
+create table tblTokens(
 	id int primary key auto_increment,
 	sha text not null,
-	tipo varchar(1) not null,
+	email varchar(50) not null,
+	tipo varchar(5) not null,
+	/*cc*/
+	usuario varchar(1) not null,
 	/*tipo: d:docente, c:colegio, a:admin*/
 	fecha date not null
 );
-

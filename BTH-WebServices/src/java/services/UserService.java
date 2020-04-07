@@ -60,7 +60,7 @@ public class UserService {
         User n = new User();
         n.setCorreo(param.getCorreo());
         try {
-            param.setUsername(dao.insertToken());
+            param.setUsername(dao.insertToken(param.getCorreo()));
             
             dao.recoveryPassword(param);
             respuesta.setSuccess(true);
