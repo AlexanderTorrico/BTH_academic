@@ -36,9 +36,9 @@ public class UserService {
         FactoryDao factory = FactoryDao.getFactoryInstance();
         UserDao dao = factory.getNewUserDao();
 
-        User usuario = dao.getLogin(param.getUsername(), param.getUsername(), param.getContrasenia());
+        User usuario = dao.getLogin(param.getUsername(), param.getUsername(),param.getContrasenia());
 
-        if (usuario != null && usuario.getContrasenia() != null) {
+        if (usuario!= null && usuario.getContrasenia().equals(param.getContrasenia())) {
             respuesta.setSuccess(true);
             respuesta.setMessage("ingreso correcto");
             respuesta.setResponse(usuario);

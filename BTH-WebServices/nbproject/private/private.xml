@@ -3,19 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/dao/ColegioDaoMySQL.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/dto/User.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/dal/ConexionMySQL.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/dao/UserDaoMySQL.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/dao/UserDao.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/services/ColegioService.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/web/changePassword.html</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/dal/Conexion.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/dal/IConexion.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/consola/SendEmail.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/services/UserService.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/src/java/consola/MessageCorreo.java</file>
-            <file>file:/C:/Users/merxdev/Desktop/oportunidad/BTH_academic/BTH-WebServices/web/js/user.js</file>
+            <file>file:/C:/Users/LEO/Desktop/proyecto%20final%20software%20lll/BTH_academic/BTH-WebServices/src/java/services/UserService.java</file>
         </group>
     </open-files>
 </project-private>
