@@ -23,9 +23,8 @@ public class UserDaoMySQL extends UserDao {
 
         try {
             Conexion objConexion = Conexion.getOrCreate();
-             String query = "select * from tblcolegios where username = '" + username + "'or correo='" + correo + "' "
-                    + "and contrasenia = hex(aes_encrypt('" + contrasenia + "','COL')) and estado =1 \n"
-                    + "";
+             String query = "select * from tblcolegios where username = '"+username+ 
+                    "' and contrasenia = hex(aes_encrypt('"+contrasenia+"','COL')) and estado =1";
   
             ResultSet objResultSet = objConexion.ejecutar(query);
             if (objResultSet.next()) {

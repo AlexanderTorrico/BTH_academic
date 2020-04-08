@@ -38,7 +38,7 @@ public class UserService {
 
         User usuario = dao.getLogin(param.getUsername(), param.getUsername(),param.getContrasenia());
 
-        if (usuario!= null && usuario.getContrasenia().equals(param.getContrasenia())) {
+        if (usuario!= null && usuario.getContrasenia() != null) {
             respuesta.setSuccess(true);
             respuesta.setMessage("ingreso correcto");
             respuesta.setResponse(usuario);
