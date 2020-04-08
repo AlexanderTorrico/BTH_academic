@@ -10,6 +10,7 @@ import java.sql.Statement;
  * @author Jose Carlos Gutierrez
  */
 public class ConexionMySQL extends Conexion {
+    public static String puertoServidor = "36129";
 
     public static Conexion getOrCreate(){
         if(objSingleton==null)
@@ -23,7 +24,7 @@ public class ConexionMySQL extends Conexion {
         this.instance = "";
         this.port = "3306";
         this.userName = "root";
-        this.password = "root";
+        this.password = "";
     }
 
     public void conectar() {

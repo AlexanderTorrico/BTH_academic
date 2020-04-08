@@ -34,7 +34,7 @@ function sendEmail() {
         'url': 'api/user/recuperar',
         'data': JSON.stringify(obj), // lo que se envia
         'dataType': 'json', // lo que se recibe 
-        'success': procesarRequest
+        'success': procesarRequestSend
     });    
 }
 
@@ -69,25 +69,27 @@ function validateChangePass(){
         'url': 'api/user/cambiarPass',
         'data': JSON.stringify(obj), // lo que se envia
         'dataType': 'json', // lo que se recibe 
-        'success': procesarRequest
+        'success': procesarRequestChange
     });  
     
     
 }
 
-function procesarRequest(respuesta){
+function procesarRequestSend(respuesta){
     if(respuesta.success){
         alert(respuesta.message);
-        if(respuesta.message = "Se envieo el enlace del cambio e contraseña a su correo"){
-            location.href="/bth/index.html";
-        }else{
-            location.href="/bth/login.html";
-        }
-        
+        location.href="/bth/index.html";  
     }else{
         alert(respuesta.message);
     }
-    
+}
+function procesarRequestChange(respuesta){
+    if(respuesta.success){
+        alert(respuesta.message);
+        location.href="/bth/login.html";  
+    }else{
+        alert(respuesta.message);
+    }
 }
 
 function validar_email( email ) 

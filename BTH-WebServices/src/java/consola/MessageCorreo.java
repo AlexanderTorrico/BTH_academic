@@ -5,6 +5,7 @@
  */
 package consola;
 
+import dal.ConexionMySQL;
 import java.util.Base64;
 
 /**
@@ -45,13 +46,13 @@ public class MessageCorreo {
 
     private String VerificacionHtml(String tipo,String username) {
         String token = codificador(username);
-        String verificacion = "<a href=\"http://localhost:36129/bth/verificar.html?tipo=" + tipo + "&token=" + token + "\">CLICK PARA VERIFICAR TU CUENTA</a>";
+        String verificacion = "<a href=\"http://localhost:"+ConexionMySQL.puertoServidor+"/bth/verificar.html?tipo=" + tipo + "&token=" + token + "\">CLICK PARA VERIFICAR TU CUENTA</a>";
         return verificacion;
     }
     
     public String recuverPasswordHtml(String tipo,String token, String correo) {
         //String token = codificador(username);
-        String verificacion = "<a href=\"http://localhost:36129/bth/changePassword.html?tipo=" + tipo + "&correo="+correo+ "&token=" + token + "\">CLICK PARA VERIFICAR TU CUENTA</a>";
+        String verificacion = "<a href=\"http://localhost:"+ConexionMySQL.puertoServidor+"/bth/changePassword.html?tipo=" + tipo + "&correo="+correo+ "&token=" + token + "\">CLICK PARA VERIFICAR TU CUENTA</a>";
         return verificacion;
     }
 
