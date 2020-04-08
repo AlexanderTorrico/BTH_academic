@@ -91,7 +91,7 @@ public class ColegioDaoMySQL extends ColegioDao {
                 return obj;
             }
         } catch (Exception ex) {
-            ;
+            
         }
         return null;
     }

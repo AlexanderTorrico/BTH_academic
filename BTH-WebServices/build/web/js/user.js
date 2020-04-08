@@ -34,14 +34,17 @@ function sendEmail() {
         'url': 'api/user/recuperar',
         'data': JSON.stringify(obj), // lo que se envia
         'dataType': 'json', // lo que se recibe 
-        'success': procesarRegistro
+        'success': procesarRequest
     });    
 }
 
 function validateChangePass(){
     var password = $("#password").val();
     var repeat = $("#repeat").val();
-    alert("dsfdfdsgfdg bueno")
+    var correo = getParameterByName("correo");
+    var token = getParameterByName("token");
+    
+    
     if(password.length < 6){
         alert("La contraseña deve tener al menos 6 caracteres");
         return;
@@ -50,11 +53,10 @@ function validateChangePass(){
         alert("Las contraseñas no coinciden");
         return;
     }
-    
     var obj = new Object();
-    obj.correo = "torrico.torrico.alexander@gmail.com";
+    obj.correo = correo;
     obj.tipo = "c";
-    obj.username = "OTIyMGJ0aDkyMjA=";
+    obj.username = token;
     obj.contrasenia = password;
     
     jQuery.ajax({
@@ -67,21 +69,25 @@ function validateChangePass(){
         'url': 'api/user/cambiarPass',
         'data': JSON.stringify(obj), // lo que se envia
         'dataType': 'json', // lo que se recibe 
-        'success': "Se cambio contraseña correptamente"
+        'success': procesarRequest
     });  
-    alert("-----");
+    
     
 }
 
-function procesarRegistro(respuesta){
-    if (respuesta.success) { // if (respuesta.success == true)
-        var usuario = respuesta.response;
-        localStorage.setItem('objUsuario', JSON.stringify(usuario));
-        alert("Confirme el cambio de su contraseña a partir de su correo electroncio");
-//        $(location).attr('href', 'index.html');
-    } else {
+function procesarRequest(respuesta){
+    if(respuesta.success){
+        alert(respuesta.message);
+        if(respuesta.message = "Se envieo el enlace del cambio e contraseña a su correo"){
+            location.href="/bth/index.html";
+        }else{
+            location.href="/bth/login.html";
+        }
+        
+    }else{
         alert(respuesta.message);
     }
+    
 }
 
 function validar_email( email ) 
@@ -90,5 +96,10 @@ function validar_email( email )
     return regex.test(email) ? true : false;
 }
 
-
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+    results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 

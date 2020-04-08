@@ -6,7 +6,9 @@
 package services;
 
 import com.google.gson.Gson;
+import dao.ColegioDao;
 import dao.UserDao;
+import dto.Colegio;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -56,15 +58,22 @@ public class UserService {
 
         FactoryDao factory = FactoryDao.getFactoryInstance();
         
+        ColegioDao daoColegio = factory.getNewColegioDao();
+        Colegio colegio = daoColegio.get("", param.getCorreo()); //
+        
         UserDao dao = factory.getNewUserDao();
         User n = new User();
         n.setCorreo(param.getCorreo());
         try {
-            param.setUsername(dao.insertToken(param.getCorreo()));
+            if(colegio!=null){
+                param.setUsername(dao.insertToken(param.getCorreo()));
             
-            dao.recoveryPassword(param);
-            respuesta.setSuccess(true);
-            respuesta.setMessage("Token registrado");
+                dao.recoveryPassword(param);
+                respuesta.setSuccess(true);
+                respuesta.setMessage("Se envieo el enlace del cambio e contraseña a su correo");
+            } else {
+                respuesta.setMessage("El correo electonico no existe");
+            }
 
         } catch (Exception ex) {
             respuesta.setSuccess(true);
@@ -91,7 +100,7 @@ public class UserService {
             dao.cambiarConstraseña(param);
             
             respuesta.setSuccess(true);
-            respuesta.setMessage("Token registrado");
+            respuesta.setMessage("Se cambio la contraseña correptamente");
 
         } catch (Exception ex) {
             respuesta.setSuccess(true);

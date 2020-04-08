@@ -56,12 +56,9 @@ public class UserDaoMySQL extends UserDao {
         Conexion objConexion = Conexion.getOrCreate();
 
         try {
-            Date date = new Date();
             
             int a = (int)(Math.random()*10000);
-        
             String token = a+"bth"+a;
-
             byte[] ENCRYPTADO = Base64.getEncoder().encode(token.getBytes());
             String encript = new String(ENCRYPTADO);
             
@@ -104,6 +101,7 @@ public class UserDaoMySQL extends UserDao {
         Conexion objConexion = Conexion.getOrCreate();
 
         try {
+            
            
             StringBuilder query = new StringBuilder("select fn_changePassword(");
             query.append("'"+obj.getCorreo()+"',");
