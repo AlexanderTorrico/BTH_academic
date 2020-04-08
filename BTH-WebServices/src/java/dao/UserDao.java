@@ -10,6 +10,8 @@ public abstract class UserDao {
     public abstract String insertToken(String correo);
     public abstract boolean recoveryPassword(User obj);
     
+    public abstract String cambiarConstraseña(User obj);
+    
     
     
 

@@ -175,3 +175,5 @@ create table tblTokens(
 	/*tipo: d:docente, c:colegio, a:admin*/
 	fecha date not null
 );
+
+

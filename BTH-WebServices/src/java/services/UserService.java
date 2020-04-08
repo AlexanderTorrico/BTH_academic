@@ -75,5 +75,32 @@ public class UserService {
     }
     
     
+    @Path("cambiarPass")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String cambiarContraseña(User param) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        
+        UserDao dao = factory.getNewUserDao();
+        User n = new User();
+        n.setCorreo(param.getCorreo());
+        try {
+            dao.cambiarConstraseña(param);
+            
+            respuesta.setSuccess(true);
+            respuesta.setMessage("Token registrado");
+
+        } catch (Exception ex) {
+            respuesta.setSuccess(true);
+            respuesta.setMessage("registro fallido"+ex.getMessage());
+        }
+
+        return new Gson().toJson(respuesta);
+    }
+    
+    
     
 }

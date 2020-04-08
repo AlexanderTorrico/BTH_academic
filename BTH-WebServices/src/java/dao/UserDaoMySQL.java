@@ -99,4 +99,33 @@ public class UserDaoMySQL extends UserDao {
         return false;
     }
 
+    @Override
+    public String cambiarConstraseña(User obj) {
+        Conexion objConexion = Conexion.getOrCreate();
+
+        try {
+           
+            StringBuilder query = new StringBuilder("select fn_changePassword(");
+            query.append("'"+obj.getCorreo()+"',");
+            query.append("'" + obj.getUsername() + "',");
+            query.append("'" + obj.getTipo() + "',");
+            query.append("'" + obj.getContrasenia() + "'");
+            query.append(")");
+            
+            
+            
+            objConexion.ejecutar(query.toString());
+            
+        } catch (Exception e) {
+            //return "incorrepto";
+            System.out.println("----------------------********************************Error al insertar el token "+e.getMessage());
+            
+        }
+        
+        
+        objConexion.desconectar();
+        
+        return "";
+    }
+
 }

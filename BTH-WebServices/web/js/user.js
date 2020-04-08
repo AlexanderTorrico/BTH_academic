@@ -5,10 +5,8 @@ function saludo(){
     alert("Hola mundo");
 }
 function sendEmail() {
-    
     var correo = $("#email").val();
     
-    ;
 
     // validar que no esten vacios
     if (!correo) {
@@ -33,21 +31,17 @@ function sendEmail() {
         },
         'type': 'POST',
         
-        'url': 'api/user/recuperar?',
+        'url': 'api/user/recuperar',
         'data': JSON.stringify(obj), // lo que se envia
         'dataType': 'json', // lo que se recibe 
         'success': procesarRegistro
     });    
-    
-    
 }
 
 function validateChangePass(){
     var password = $("#password").val();
     var repeat = $("#repeat").val();
-  
-    alert(password);
-    alert(repeat);
+    alert("dsfdfdsgfdg bueno")
     if(password.length < 6){
         alert("La contraseña deve tener al menos 6 caracteres");
         return;
@@ -56,7 +50,27 @@ function validateChangePass(){
         alert("Las contraseñas no coinciden");
         return;
     }
-  
+    
+    var obj = new Object();
+    obj.correo = "torrico.torrico.alexander@gmail.com";
+    obj.tipo = "c";
+    obj.username = "OTIyMGJ0aDkyMjA=";
+    obj.contrasenia = password;
+    
+    jQuery.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'type': 'POST',
+        
+        'url': 'api/user/cambiarPass',
+        'data': JSON.stringify(obj), // lo que se envia
+        'dataType': 'json', // lo que se recibe 
+        'success': "Se cambio contraseña correptamente"
+    });  
+    alert("-----");
+    
 }
 
 function procesarRegistro(respuesta){
