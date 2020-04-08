@@ -17,38 +17,38 @@ import javax.ws.rs.core.MediaType;
 import dto.User;
 import factory.FactoryDao;
 import javax.ws.rs.GET;
+
 /**
  *
- * @author LEI
+ * @author LEO
  */
-
 @Path("user")
 public class UserService {
-    
+
     @Path("login")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    
-    public String login(User param) { 
+
+    public String login(User param) {
         Respuesta respuesta = new Respuesta();
-        
+
         FactoryDao factory = FactoryDao.getFactoryInstance();
         UserDao dao = factory.getNewUserDao();
-        
-        User usuario = dao.getLogin(param.getUsername(),param.getUsername(),param.getContrasenia());
-        
-        if (usuario != null) {
+
+        User usuario = dao.getLogin(param.getUsername(), param.getUsername(), param.getContrasenia());
+
+        if (usuario != null && usuario.getContrasenia() != null) {
             respuesta.setSuccess(true);
             respuesta.setMessage("ingreso correcto");
             respuesta.setResponse(usuario);
         } else {
             respuesta.setMessage("ingreso incorrecto");
         }
-        
+
         return new Gson().toJson(respuesta);
     }
-    
+
     @Path("recuperar")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -57,17 +57,17 @@ public class UserService {
         Respuesta respuesta = new Respuesta();
 
         FactoryDao factory = FactoryDao.getFactoryInstance();
-        
+
         ColegioDao daoColegio = factory.getNewColegioDao();
         Colegio colegio = daoColegio.get("", param.getCorreo()); //
-        
+
         UserDao dao = factory.getNewUserDao();
         User n = new User();
         n.setCorreo(param.getCorreo());
         try {
-            if(colegio!=null){
+            if (colegio != null) {
                 param.setUsername(dao.insertToken(param.getCorreo()));
-            
+
                 dao.recoveryPassword(param);
                 respuesta.setSuccess(true);
                 respuesta.setMessage("Se envieo el enlace del cambio e contraseña a su correo");
@@ -77,13 +77,12 @@ public class UserService {
 
         } catch (Exception ex) {
             respuesta.setSuccess(true);
-            respuesta.setMessage("registro fallido"+ex.getMessage());
+            respuesta.setMessage("registro fallido" + ex.getMessage());
         }
 
         return new Gson().toJson(respuesta);
     }
-    
-    
+
     @Path("cambiarPass")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -92,24 +91,22 @@ public class UserService {
         Respuesta respuesta = new Respuesta();
 
         FactoryDao factory = FactoryDao.getFactoryInstance();
-        
+
         UserDao dao = factory.getNewUserDao();
         User n = new User();
         n.setCorreo(param.getCorreo());
         try {
             dao.cambiarConstraseña(param);
-            
+
             respuesta.setSuccess(true);
             respuesta.setMessage("Se cambio la contraseña correptamente");
 
         } catch (Exception ex) {
             respuesta.setSuccess(true);
-            respuesta.setMessage("registro fallido"+ex.getMessage());
+            respuesta.setMessage("registro fallido" + ex.getMessage());
         }
 
         return new Gson().toJson(respuesta);
     }
-    
-    
-    
+
 }

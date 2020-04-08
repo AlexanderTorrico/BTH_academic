@@ -23,7 +23,7 @@ public class ConexionMySQL extends Conexion {
         this.instance = "";
         this.port = "3306";
         this.userName = "root";
-        this.password = "";
+        this.password = "root";
     }
 
     public void conectar() {
