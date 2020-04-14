@@ -35,4 +35,9 @@ public class FactoryDaoMySQL extends FactoryDao {
        return new UserDaoMySQL();
     }
 
+    @Override
+    public ParametroDao getNewParametroDao() {
+        return new ParametroDaoMySQL();
+    }
+
 }

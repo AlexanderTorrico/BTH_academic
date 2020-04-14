@@ -23,6 +23,7 @@ public abstract class FactoryDao {
         public abstract ColegioDao getNewColegioDao();
         public abstract DocenteDao getNewDocenteDao();
         public abstract UserDao getNewUserDao();
+        public abstract ParametroDao getNewParametroDao();
        
 
 }
