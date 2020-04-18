@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public abstract class ParametroDao {
     
     public abstract int insert (Parametro obj) throws Exception;
-    public abstract ArrayList<Parametro> getByGrupo(int id) throws Exception;
+    public abstract ArrayList<Parametro> getByGrupo(Parametro obj) throws Exception;
     public abstract ArrayList<Parametro> getList() throws Exception;
+    public abstract int delete (int id)throws Exception;
+    public abstract int update (Parametro obj) throws Exception;
 }

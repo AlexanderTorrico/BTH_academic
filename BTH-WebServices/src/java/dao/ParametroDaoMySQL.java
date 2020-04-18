@@ -18,12 +18,14 @@ public class ParametroDaoMySQL extends ParametroDao{
 
     @Override
     public int insert(Parametro obj) throws Exception {
-                Conexion objConexion = Conexion.getOrCreate();
+        Conexion objConexion = Conexion.getOrCreate();
         int id = 0;
         StringBuilder query = new StringBuilder("INSERT INTO tblparametros VALUES (");
         query.append("default,");
         query.append("'" + obj.getNombre() + "',");
-        query.append("'" + obj.getTipo()+"'");
+        query.append("'" + obj.getTipo()+"',");
+        query.append("'" + obj.getTrimestre()+"',");
+        query.append(obj.getIdGrupo());
         query.append(")");
         id = objConexion.ejecutarInsert(query.toString());
         if (id == 0) {
@@ -61,11 +63,11 @@ public class ParametroDaoMySQL extends ParametroDao{
     }
 
     @Override
-    public ArrayList<Parametro> getByGrupo(int id) throws Exception {
+    public ArrayList<Parametro> getByGrupo(Parametro param) throws Exception {
         ArrayList<Parametro> list = new ArrayList<>();
         String query = "select p.* from tblGrupos g " +
             "join tblParametros p on g.id = p.idGrupo " +
-            "where g.id = "+id;
+            "where g.id = "+param.getIdGrupo()+" and p.trimestre = '"+param.getTrimestre()+"'";
         try {
             Conexion objConexion = Conexion.getOrCreate();
             ResultSet objResultSet = objConexion.ejecutar(query);
@@ -86,6 +88,38 @@ public class ParametroDaoMySQL extends ParametroDao{
         }
         return list;
     }
+    
+    @Override
+    public int delete(int id) throws Exception {
+        Conexion objConexion = Conexion.getOrCreate();
+        StringBuilder query = new StringBuilder("DELETE FROM tblParametros ");
+        int i = 0;
+        try {
 
+            query.append("WHERE id = " + id + ";");
+            i = objConexion.ejecutarSimple(query.toString());
+            objConexion.desconectar();
+            return i;
+        } catch (Exception e) {
+            objConexion.desconectar();
+            return i;
+        }
+    }
+
+    @Override
+    public int update(Parametro obj) throws Exception {
+                Conexion objConexion = Conexion.getOrCreate();
+
+        StringBuilder query = new StringBuilder("UPDATE tblParametros SET ");
+        query.append("nombre = '" + obj.getNombre()+"'");
+        query.append("WHERE id = " + obj.getId());
+        int upd = objConexion.ejecutarSimple(query.toString());
+        if (upd == 0) {
+            throw new Exception("El registro no pudo ser actualizado"+query.toString());
+        }
+        
+        objConexion.desconectar();
+        return upd;
+    }
     
 }

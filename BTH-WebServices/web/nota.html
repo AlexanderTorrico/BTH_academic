@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>VERIFICAR CUENTA</title>
+        <title>B T H</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--===============================================================================================-->
@@ -10,7 +10,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous"/>
 
- 
+
     </head>
     <body>
 
@@ -44,14 +44,68 @@
                 <button type="button" class="btn btn-primary col ml-2" onclick='loadVerNota()'>Ver nota</button>
                 <button type="button" class="btn btn-primary col ml-2" onclick='loadAddNota()'>Agregar nota</button>
                 <button type="button" class="btn btn-primary col ml-2" onclick='loadParametro()'>Parametro</button>
-
-
-
             </div>
 
-            <div id="body" class="row"> </div>
+            <div id="header" class="row">
+                <div id="grupo" class="col-2"></div>
+                <div id="trimestre" class="col-2 ml-3"></div>
+                <div id="trimestre" class="col-12">
+                    <div class="alert alert-light m-3" id="divInfoGrupo" role="alert">
+                        Seleccione el grupo y el trimestre
+                      </div>
+                </div>
+            </div>
+            
+            <div id="body" class="row"></div>  
+            
+            
+
+            <!-- Modal agregar Parametros-->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Parametro de calificacion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Recomendable que el nombre sea lo mas corto:</label>
+                                    <input type="text" class="form-control" id="txtModalParam">
+                                </div>                                
+                                <button type="button" class="btn btn-primary text-center" data-dismiss="modal" onclick="insertParam()">Agregar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
+            <!-- Modal editar Parametros-->
+            <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle2">Editar parametro de cal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Recomendable que el nombre sea lo mas corto:</label>
+                                    <input type="text" class="form-control" id="txtModalUpdateParam">
+                                </div>                                
+                                <button type="button" class="btn btn-warning text-center" data-dismiss="modal" onclick="updateParam()">Editar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <script type="text/template" id="parametroTemplate">
                 <div class="accordion col-12" id="accordionExample">
@@ -70,7 +124,6 @@
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="d-flex bd-highlight mb-3 mr-5 ml-5 mt-1 mb-1">
                 <div class="mr-auto p-2 bd-highlight">Practico</div>
-
 
                 <button class="btn btn-warning bd-highlight">
                 <svg class="bi bi-pen" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
@@ -97,8 +150,19 @@
                 </button>
                 </div>
 
+                <div class="mr-auto p-2 bd-highlight">
+                <button class="btn btn-success bd-highlight offset-1">
+                <svg class="bi bi-file-earmark-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 1H4a2 2 0 00-2 2v10a2 2 0 002 2h5v-1H4a1 1 0 01-1-1V3a1 1 0 011-1h5v2.5A1.5 1.5 0 0010.5 6H13v2h1V6L9 1z"/>
+                <path fill-rule="evenodd" d="M13.5 10a.5.5 0 01.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 010-1H13v-1.5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+                <path fill-rule="evenodd" d="M13 12.5a.5.5 0 01.5-.5h2a.5.5 0 010 1H14v1.5a.5.5 0 01-1 0v-2z" clip-rule="evenodd"/>
+                </svg>
+                </button>
+                </div>
+
 
                 </div>
+
 
                 </div>
                 <div class="card">
@@ -143,7 +207,6 @@
                 </div>
                 </div>
             </script>
-
 
             <script type="text/template" id="verNotaTemplate">
                 <div class="col-12 mt-5">

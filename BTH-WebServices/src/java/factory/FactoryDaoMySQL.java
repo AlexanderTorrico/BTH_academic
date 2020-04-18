@@ -40,4 +40,9 @@ public class FactoryDaoMySQL extends FactoryDao {
         return new ParametroDaoMySQL();
     }
 
+    @Override
+    public GrupoDao getNewGrupoDao() {
+        return new GrupoDaoMysql();
+    }
+
 }

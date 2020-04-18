@@ -81,24 +81,79 @@ public class ParametroService {
         }
     }
     //  http://localhost:43169/bth/api/parametro/gbg/2
-    @Path("/gbg/{id}")
-    @GET
+    @Path("/gbg")
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String getByGroup(@PathParam("id") int id) {
+    public String getByGroup(Parametro param) {
         Respuesta respuesta = new Respuesta();
         FactoryDao factory = FactoryDao.getFactoryInstance();
         ParametroDao dao = factory.getNewParametroDao();
 
         try {
-            ArrayList<Parametro> parametro = dao.getByGrupo(id);
+            ArrayList<Parametro> parametro = dao.getByGrupo(param);
 
             respuesta.setSuccess(true);
             respuesta.setMessage("lista obtenida");
             respuesta.setResponse(parametro);
-
+            
             return new Gson().toJson(respuesta);
         } catch (Exception ex) {
             respuesta.setMessage(ex.getMessage());
+            return new Gson().toJson(respuesta);
+        }
+    }
+    
+    @Path("eliminar/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String eliminarCancion(@PathParam("id") int id) { // nicolino, 1234
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        ParametroDao dao = factory.getNewParametroDao();
+        int i = 0;
+        try {
+            i = dao.delete(id);
+            respuesta.setSuccess(true);
+            respuesta.setResponse(i);
+            if (i == 0) {
+                respuesta.setMessage("Sin datos a eliminar");
+            } else {
+                respuesta.setMessage("Dato eliminado");
+            }
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            respuesta.setResponse(i);
+            return new Gson().toJson(respuesta);
+        }
+
+    }
+
+    @Path("/update")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String update(Parametro obj) { // nicolino, 1234
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        ParametroDao dao = factory.getNewParametroDao();
+        int i = 0;
+        try {
+            i = dao.update(obj);
+            respuesta.setSuccess(true);
+            respuesta.setResponse(i);
+            if (i == 0) {
+                respuesta.setMessage("Sin datos a actualizar");
+            } else {
+                respuesta.setMessage("Dato actualizado");
+            }
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            respuesta.setResponse(i);
             return new Gson().toJson(respuesta);
         }
     }

@@ -14,6 +14,8 @@ public class Parametro {
     private int id;
     private String nombre;
     private String tipo;
+    private String trimestre;
+    private int idGrupo;
 
     public Parametro() {
 
@@ -51,4 +53,20 @@ public class Parametro {
         this.tipo = tipo;
     }
 
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
+    }
+
+    public String getTrimestre() {
+        return trimestre;
+    }
+
+    public void setTrimestre(String trimestre) {
+        this.trimestre = trimestre;
+    }
+        
 }
