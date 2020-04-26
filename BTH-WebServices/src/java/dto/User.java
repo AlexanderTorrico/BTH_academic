@@ -5,7 +5,10 @@ package dto;
  * @author LEO
  */
 public class User {
- 
+    private int id, idGrupo;
+
+    
+    
     private String username;
     private String correo;
     private String contrasenia;
@@ -54,12 +57,21 @@ public class User {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-    
- 
+    public int getId() {
+        return id;
+    }
 
-    
-    
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
+    }
     
     
     

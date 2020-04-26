@@ -45,4 +45,14 @@ public class FactoryDaoMySQL extends FactoryDao {
         return new GrupoDaoMysql();
     }
 
+    @Override
+    public MovilInfoEstudianteDao getNewMovilInfoEstudiante() {
+        return new MovilInfoEstudianteDaoMysql();
+    }
+
+    @Override
+    public PagoDao getNewPagoDao() {
+        return new PagoDaoMysql();
+    }
+
 }
