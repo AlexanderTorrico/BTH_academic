@@ -35,7 +35,7 @@ public class UserService {
 
         FactoryDao factory = FactoryDao.getFactoryInstance();
         UserDao dao = factory.getNewUserDao();
-
+        System.out.print(param);
         User usuario = dao.getLogin(param.getUsername(), param.getUsername(),param.getContrasenia());
 
         if (usuario!= null && usuario.getContrasenia() != null) {

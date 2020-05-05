@@ -29,7 +29,9 @@ public class UserDaoMySQL extends UserDao {
             ResultSet objResultSet = objConexion.ejecutar(query);
             if (objResultSet.next()) {
                 User obj = new User();
-                
+                int _id = objResultSet.getInt("id");
+                obj.setId(_id);
+
                 String _username = objResultSet.getString("username");
                 obj.setUsername(_username);
 

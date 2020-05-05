@@ -1,14 +1,19 @@
 $(document).ready(function() {
     if (localStorage.getItem('objUsuario')) {
+        var us = JSON.parse(localStorage.getItem('objUsuario'));
         $("#login-btn").hide();
         $("#registro-btn").hide();
         $("#perfil-btn").show();
         $("#cerrarSecion-btn").show();
+        $('#cambiContracena').show();
+        alert(localStorage.getItem('objUsuario'));
+        $('#cambiContracena').attr('href','changePassword.html?id=' + us.id);
     } else {
         $("#login-btn").show();
         $("#registro-btn").show();
         $("#perfil-btn").hide();
         $("#cerrarSecion-btn").hide();
+        $('#cambiContracena').hide();
     }
     
     // por ahora, voy a conseguir todas las canciones
