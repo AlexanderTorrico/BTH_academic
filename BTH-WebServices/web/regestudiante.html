@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>REGISTRAR DOCENTE</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->
+        <link rel="icon" type="image/png" href="https://cdn.saaspass.com/a52e2205866340ea/authenticators/gitlab_128.png"/>
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link href="css/util.css" rel="stylesheet" type="text/css"/>
+        <link href="css/main.css" rel="stylesheet" type="text/css"/>
+        <!--===============================================================================================-->
+    </head>
+    <body>
+
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="container wrap-alert">
+                    <br>
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        Hello
+                    </div>
+                </div>
+
+                <div class="wrap-login100">
+                    <form class="login100-form validate-form" onsubmit="registrarEstudiante();
+                    return false;">
+                        <span class="login100-form-title">
+                            REGISTRAR ESTUDIANTE<br>
+                            <small style="font-weight: lighter; font-size: 14px; color: #777">BTH</small>
+                        </span>
+
+                        <div class="wrap-input100 validate-input" data-validate = "ingrese ci">
+                            <input class="input100" id="ci" type="text" name="ci" placeholder="numero C.I.">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate = "ingrese nombre">
+                            <input class="input100" id="nombre" type="text" name="nombre" placeholder="nombre">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "ingrese ap paterno">
+                            <input class="input100" id="apaterno" type="text" name="apaterno" placeholder="apellido paterno">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "ingrese ap materno">
+                            <input class="input100" id="amaterno" type="text" name="amaterno" placeholder="apellido materno">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "numero de telefono de 8 digitos">
+                            <input class="input100" id="telefono" type="text" name="telefono" required minlength="8" placeholder="telefono">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate = "ingrese su fecha de nacimiento">
+                            <input class="input100" id="nacimiento" type="date" name="nacimiento" placeholder="fecha de nacimiento">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "nivel de estudio">
+                            <input class="input100" id="estado" type="text" name="estado" placeholder="grado de estudio">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate = "carrera">
+                            <input class="input100" id="carrera" type="number" name="carrera" placeholder="carrera">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn" type="submit">
+                                Registrar
+                            </button>
+                        </div>
+                        <div class="text-center p-t-136">
+                            <a class="txt2" href="#">
+                                &copy 2020 Softwarelll .
+                                <!-- <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i> -->
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--===============================================================================================-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+        <script >
+                        $('.js-tilt').tilt({
+                            scale: 1.1
+                        })
+        </script>
+        <!--===============================================================================================-->
+
+        <script src="js/main.js" type="text/javascript"></script>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/registroEstudiante.js" type="text/javascript"></script>
+    </body>
+</html>
