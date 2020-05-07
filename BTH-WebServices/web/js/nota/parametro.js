@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
 });
+var puerto= "36129";
 var contacts = [
     "1: Primer Trimestre",
     "2: Segundo Trimestre",
@@ -89,7 +90,7 @@ function loadParametro() {
     };
     //getInfoGrupoInDropdowns();
     document.getElementById("body").innerHTML = templateParametro2();
-    fetch('http://localhost:36129/bth/api/parametro/gbg',{
+    fetch('http://localhost:'+puerto+'/bth/api/parametro/gbg',{
         method:"Post",
         body: JSON.stringify(data),
         headers: {
@@ -151,7 +152,7 @@ function insertParam() {
     };
 
     input.value = "";
-    fetch("http://localhost:36129/bth/api/parametro/i", {
+    fetch("http://localhost:"+puerto+"/bth/api/parametro/i", {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -170,7 +171,7 @@ function insertParam() {
 
 function deleteParam(obj) {
     if (confirm("Seguro al eliminar el parametro")) {
-        fetch("http://localhost:36129/bth/api/parametro/eliminar/" + obj)
+        fetch("http://localhost:"+puerto+"/bth/api/parametro/eliminar/" + obj)
                 .then(function (request) {
                     return request.json();
                 })
@@ -191,7 +192,7 @@ function updateParam() {
         id: localStorage.getItem('idParametro'),
         nombre: input.value
     };
-    fetch("http://localhost:36129/bth/api/parametro/update", {
+    fetch("http://localhost:"+puerto+"/bth/api/parametro/update", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -214,7 +215,7 @@ function getInfoGrupoInDropdowns() {
         id: 1,
         idDocente: 2 // ----------------------------- Id del docete modificar
     };
-    fetch("http://localhost:36129/bth/api/grupo/grupoInfo", {
+    fetch("http://localhost:"+puerto+"/bth/api/grupo/grupoInfo", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
