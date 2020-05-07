@@ -14,5 +14,5 @@ import dto.User;
  */
 public abstract class MovilInfoEstudianteDao {
     
-    public abstract Movil get(User obj) throws Exception;
+    public abstract Movil get(Movil obj) throws Exception;
 }

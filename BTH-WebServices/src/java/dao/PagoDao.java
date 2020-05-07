@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dto.MovilTrimestre;
 import dto.Pago;
 import dto.User;
 import java.util.ArrayList;
@@ -15,5 +16,5 @@ import java.util.ArrayList;
  */
 public abstract class PagoDao {
     
-    public abstract ArrayList<Pago> get(User param) throws Exception;
+    public abstract ArrayList<MovilTrimestre> get(User param) throws Exception;
 }

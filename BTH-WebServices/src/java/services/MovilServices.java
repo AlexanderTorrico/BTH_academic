@@ -29,7 +29,7 @@ public class MovilServices {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
 
-    public String login(User param) {
+    public String login(Movil param) {
         Respuesta respuesta = new Respuesta();
 
         FactoryDao factory = FactoryDao.getFactoryInstance();

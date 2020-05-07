@@ -6,6 +6,7 @@
 package dao;
 
 import dal.Conexion;
+import dto.MovilTrimestre;
 import dto.Pago;
 import dto.Parametro;
 import dto.User;
@@ -19,22 +20,24 @@ import java.util.ArrayList;
 public class PagoDaoMysql extends PagoDao{
 
     @Override
-    public ArrayList<Pago> get(User param) throws Exception {
-        ArrayList<Pago> lista = new ArrayList<Pago>();
+    public ArrayList<MovilTrimestre> get(User param) throws Exception {
+        ArrayList<MovilTrimestre> lista = new ArrayList<MovilTrimestre>();
 
         String query = "SELECT p.mes, p.monto, p.fecha from (select * from tblEstudiantes_grupos " +
-"                                    where idEstudiante = 1 and id = 1) ec " +
+"                                    where idEstudiante = "+param.getId()+" and idGrupo = "+param.getIdGrupo()+") ec " +
 "                                join tblPagos p on p.idEstudiantes_grupos = ec.id";
 
         try {
             Conexion objConexion = Conexion.getOrCreate();
             ResultSet objResultSet = objConexion.ejecutar(query);
             while (objResultSet.next()) {
-                Pago obj = new Pago();
+                MovilTrimestre obj = new MovilTrimestre();
 
-                obj.setMes(objResultSet.getInt("mes"));
+                obj.setMes(objResultSet.getInt("mes")+"");
 
-                obj.setMonto(objResultSet.getDouble("monto"));
+                obj.setMonto(objResultSet.getDouble("monto")+"");
+                
+                obj.setFecha("2020-03-24");
 
                 lista.add(obj);
             }

@@ -17,14 +17,14 @@ import java.sql.ResultSet;
 public class MovilInfoEstudianteDaoMysql extends MovilInfoEstudianteDao{
 
     @Override
-    public Movil get(User param) throws Exception {
+    public Movil get(Movil param) throws Exception {
         String query = "";
         try {
             Conexion objConexion = Conexion.getOrCreate();
-            query = "SELECT e.*, eg.id as idEG, c.nombre as deColegio, g.idGestion, g.nivel, c2.nombre as aColegio, concat(d.nombre, ' ',d.aPaterno, ' ', d.aMaterno) as docente, " +
+            query = "SELECT e.*, eg.idGrupo as idEG, c.nombre as deColegio, g.idGestion, g.nivel, c2.nombre as aColegio, concat(d.nombre, ' ',d.aPaterno, ' ', d.aMaterno) as docente, " +
 "                                ca.nombre as carrera " +
 "                              from (select id, ci, nombre, aPaterno, aMaterno, idColegio from tblEstudiantes " +
-"                                  WHERE ci = '110' and contrasenia = '0') e " +
+"                                  WHERE ci = '"+param.getCi()+"' and contrasenia = '"+param.getPassword()+"') e " +
 "                                join tblColegios c on e.idColegio = c.id " +
 "                                join tblEstudiantes_grupos eg on e.id = eg.idEstudiante " +
 "                                join tblgrupos g on eg.idGrupo = g.id " +
@@ -37,10 +37,10 @@ public class MovilInfoEstudianteDaoMysql extends MovilInfoEstudianteDao{
                 Movil obj = new Movil();
                 
                 
-                obj.setId(objResultSet.getInt("id"));
-                obj.setIdColegio(objResultSet.getInt("idColegio"));
+                obj.setId(objResultSet.getInt("id")+"");
+                obj.setIdColegio(objResultSet.getInt("idColegio")+"");
 
-                obj.setCi(objResultSet.getString("nombre"));
+                obj.setNombre(objResultSet.getString("nombre"));
                 obj.setaPaterno(objResultSet.getString("aPaterno"));
                 obj.setaMaterno(objResultSet.getString("aMaterno"));
                 obj.setIdEG(objResultSet.getString("idEG"));

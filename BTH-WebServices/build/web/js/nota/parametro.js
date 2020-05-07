@@ -164,7 +164,7 @@ function insertParam() {
             })
             .then(function (json) {
                 //console.log(json);
-                loadAddNota();
+                loadParametro()
             });
 }
 
@@ -175,8 +175,8 @@ function deleteParam(obj) {
                     return request.json();
                 })
                 .then(function (json) {
-                    console.log(json);
-                    loadAddNota();
+                    
+                    loadParametro();
                 });
     }
 }
@@ -203,7 +203,7 @@ function updateParam() {
                 return request.json();
             })
             .then(function (json) {
-                loadAddNota();
+                loadParametro();
                 localStorage.removeItem("idParametro");
             });
 

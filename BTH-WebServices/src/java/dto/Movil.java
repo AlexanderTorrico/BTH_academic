@@ -11,13 +11,14 @@ package dto;
  */
 public class Movil {
     
-    private int id, idColegio;
+    private String id, idColegio;
     private String ci, nombre, aPaterno, aMaterno, idEG, deColegio, idGestion, nivel, aColegio, docente, carrera;
+    private String password;
 
     public Movil() {
     }
 
-    public Movil(int id, int idColegio, String ci, String nombre, String aPaterno, String aMaterno, String idEG, String deColegio, String idGestion, String nivel, String aColegio, String docente, String carrera) {
+    public Movil(String id, String idColegio, String ci, String nombre, String aPaterno, String aMaterno, String idEG, String deColegio, String idGestion, String nivel, String aColegio, String docente, String carrera, String password) {
         this.id = id;
         this.idColegio = idColegio;
         this.ci = ci;
@@ -31,21 +32,22 @@ public class Movil {
         this.aColegio = aColegio;
         this.docente = docente;
         this.carrera = carrera;
+        this.password = password;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getIdColegio() {
+    public String getIdColegio() {
         return idColegio;
     }
 
-    public void setIdColegio(int idColegio) {
+    public void setIdColegio(String idColegio) {
         this.idColegio = idColegio;
     }
 
@@ -135,6 +137,14 @@ public class Movil {
 
     public void setCarrera(String carrera) {
         this.carrera = carrera;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     

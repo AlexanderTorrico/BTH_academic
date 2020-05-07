@@ -8,6 +8,7 @@ package services;
 import com.google.gson.Gson;
 import dao.PagoDao;
 import dao.ParametroDao;
+import dto.MovilTrimestre;
 import dto.Pago;
 import dto.Parametro;
 import dto.User;
@@ -36,13 +37,13 @@ public class PagoServices {
         PagoDao dao = factory.getNewPagoDao();
 
         try {
-            ArrayList<Pago> parametro = dao.get(param);
+            ArrayList<MovilTrimestre> parametro = dao.get(param);
 
             respuesta.setSuccess(true);
             respuesta.setMessage("lista obtenida");
             respuesta.setResponse(parametro);
 
-            return new Gson().toJson(respuesta);
+            return new Gson().toJson(parametro);
         } catch (Exception ex) {
             respuesta.setMessage(ex.getMessage());
             return new Gson().toJson(respuesta);
