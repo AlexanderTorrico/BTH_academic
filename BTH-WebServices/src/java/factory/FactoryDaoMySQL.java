@@ -54,5 +54,15 @@ public class FactoryDaoMySQL extends FactoryDao {
     public PagoDao getNewPagoDao() {
         return new PagoDaoMysql();
     }
+    
+    @Override
+    public indexInformacionDaoMySQL getindexInformacionDao() {
+        return new indexInformacionDaoMySQL();
+    }
+
+    @Override
+    public ProyectosDao getProyectosDao() {
+        return new ProyectosDaoMySQL();
+    }
 
 }

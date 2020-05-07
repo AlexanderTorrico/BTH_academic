@@ -27,6 +27,8 @@ public abstract class FactoryDao {
         public abstract GrupoDao getNewGrupoDao();
         public abstract PagoDao getNewPagoDao();
         public abstract MovilInfoEstudianteDao getNewMovilInfoEstudiante();
+        public abstract indexInformacionDao getindexInformacionDao();
+        public abstract ProyectosDao getProyectosDao();
        
 
 }
