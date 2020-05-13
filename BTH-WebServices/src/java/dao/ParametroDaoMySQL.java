@@ -108,7 +108,7 @@ public class ParametroDaoMySQL extends ParametroDao{
 
     @Override
     public int update(Parametro obj) throws Exception {
-                Conexion objConexion = Conexion.getOrCreate();
+        Conexion objConexion = Conexion.getOrCreate();
 
         StringBuilder query = new StringBuilder("UPDATE tblParametros SET ");
         query.append("nombre = '" + obj.getNombre()+"'");
@@ -122,4 +122,29 @@ public class ParametroDaoMySQL extends ParametroDao{
         return upd;
     }
     
+    
+    /*   Ver notas  */
+    @Override
+    public ArrayList<Parametro> getByGrupoTable(Parametro param) throws Exception {
+        ArrayList<Parametro> list = new ArrayList<>();
+        String query = "SELECT id, nombre from tblParametros " +
+            "where idGrupo = "+param.getIdGrupo()+" and tipo = '"+param.getTipo()+"' and trimestre = "+param.getTrimestre();
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                Parametro obj = new Parametro();
+
+                obj.setId(objResultSet.getInt("id"));
+
+                obj.setNombre(objResultSet.getString("nombre"));
+
+                list.add(obj);
+                
+            }
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()+" - " + query);
+        }
+        return list;
+    }
 }

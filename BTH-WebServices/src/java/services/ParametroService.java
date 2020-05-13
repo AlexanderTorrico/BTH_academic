@@ -157,4 +157,28 @@ public class ParametroService {
             return new Gson().toJson(respuesta);
         }
     }
+    
+    
+    /*  Ver notas   */
+    @Path("/showTable")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getByGroupShowTable(Parametro param) {
+        Respuesta respuesta = new Respuesta();
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        ParametroDao dao = factory.getNewParametroDao();
+
+        try {
+            ArrayList<Parametro> parametro = dao.getByGrupoTable(param);
+
+            respuesta.setSuccess(true);
+            respuesta.setMessage("lista obtenida");
+            respuesta.setResponse(parametro);
+            
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            return new Gson().toJson(respuesta);
+        }
+    }
 }

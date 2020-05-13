@@ -19,4 +19,8 @@ public abstract class ParametroDao {
     public abstract ArrayList<Parametro> getList() throws Exception;
     public abstract int delete (int id)throws Exception;
     public abstract int update (Parametro obj) throws Exception;
+    
+    
+    /*Ver nota construccion de las tablas para visualizar la nota*/
+    public abstract ArrayList<Parametro> getByGrupoTable(Parametro obj) throws Exception;
 }

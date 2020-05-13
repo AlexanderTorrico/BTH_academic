@@ -31,7 +31,9 @@ function dropdownsTrimestre() {
 function saveTrimetre(obj) {
     localStorage.setItem("trimestre", obj.dataset.id);
     if(localStorage.getItem("grupo")){
-        loadParametro();
+        if(localStorage.getItem("aaccion")!="showNote"){
+           loadParametro(); 
+        }
     }
 }
 function saveGrupo(tupla) {
@@ -39,7 +41,9 @@ function saveGrupo(tupla) {
     var txt = "Carrera: " + tupla.dataset.carrera+"      Grado: "+tupla.dataset.nivel+"°        Colegio: " + tupla.dataset.nombre;
     document.getElementById("divInfoGrupo").innerText = txt;
     if(localStorage.getItem("trimestre")){
-        loadParametro();
+        if(localStorage.getItem("aaccion")!="showNote"){
+           loadParametro(); 
+        }
     }
     
     
@@ -63,11 +67,6 @@ function dropdownsGrupo(json) {
 }
 
 
-$(".dropdown-menu a").click(function () {
-    $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-});
-
 $("#grupoDropdownTrimestre a").click(function () {
     $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
     $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
@@ -78,12 +77,9 @@ $("#grupoDropdownTrimestre a").click(function () {
 
 
 
-function loadVerNota() {
-    var html = document.getElementById("verNotaTemplate").innerHTML;
-    document.getElementById("body").innerHTML = html;
-}
-
 function loadParametro() {
+    document.getElementById("tipo").innerHTML="";
+    localStorage.removeItem("aaccion");
     var data = {
         idGrupo:localStorage.getItem("grupo"),
         trimestre:localStorage.getItem("trimestre")
@@ -165,7 +161,7 @@ function insertParam() {
             })
             .then(function (json) {
                 //console.log(json);
-                loadParametro()
+                loadParametro();
             });
 }
 
@@ -212,8 +208,7 @@ function updateParam() {
 
 function getInfoGrupoInDropdowns() {
     var data = {
-        id: 1,
-        idDocente: 2 // ----------------------------- Id del docete modificar
+        idDocente: 1 // ----------------------------- Id del docete modificar
     };
     fetch("http://localhost:"+puerto+"/bth/api/grupo/grupoInfo", {
         method: "POST",

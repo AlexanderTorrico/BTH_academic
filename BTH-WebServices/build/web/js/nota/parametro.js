@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
 });
+var puerto= "36129";
 var contacts = [
     "1: Primer Trimestre",
     "2: Segundo Trimestre",
@@ -30,7 +31,9 @@ function dropdownsTrimestre() {
 function saveTrimetre(obj) {
     localStorage.setItem("trimestre", obj.dataset.id);
     if(localStorage.getItem("grupo")){
-        loadParametro();
+        if(localStorage.getItem("aaccion")!="showNote"){
+           loadParametro(); 
+        }
     }
 }
 function saveGrupo(tupla) {
@@ -38,7 +41,9 @@ function saveGrupo(tupla) {
     var txt = "Carrera: " + tupla.dataset.carrera+"      Grado: "+tupla.dataset.nivel+"°        Colegio: " + tupla.dataset.nombre;
     document.getElementById("divInfoGrupo").innerText = txt;
     if(localStorage.getItem("trimestre")){
-        loadParametro();
+        if(localStorage.getItem("aaccion")!="showNote"){
+           loadParametro(); 
+        }
     }
     
     
@@ -62,11 +67,6 @@ function dropdownsGrupo(json) {
 }
 
 
-$(".dropdown-menu a").click(function () {
-    $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-});
-
 $("#grupoDropdownTrimestre a").click(function () {
     $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
     $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
@@ -77,19 +77,16 @@ $("#grupoDropdownTrimestre a").click(function () {
 
 
 
-function loadVerNota() {
-    var html = document.getElementById("verNotaTemplate").innerHTML;
-    document.getElementById("body").innerHTML = html;
-}
-
 function loadParametro() {
+    document.getElementById("tipo").innerHTML="";
+    localStorage.removeItem("aaccion");
     var data = {
         idGrupo:localStorage.getItem("grupo"),
         trimestre:localStorage.getItem("trimestre")
     };
     //getInfoGrupoInDropdowns();
     document.getElementById("body").innerHTML = templateParametro2();
-    fetch('http://localhost:36129/bth/api/parametro/gbg',{
+    fetch('http://localhost:'+puerto+'/bth/api/parametro/gbg',{
         method:"Post",
         body: JSON.stringify(data),
         headers: {
@@ -151,7 +148,7 @@ function insertParam() {
     };
 
     input.value = "";
-    fetch("http://localhost:36129/bth/api/parametro/i", {
+    fetch("http://localhost:"+puerto+"/bth/api/parametro/i", {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -164,13 +161,13 @@ function insertParam() {
             })
             .then(function (json) {
                 //console.log(json);
-                loadParametro()
+                loadParametro();
             });
 }
 
 function deleteParam(obj) {
     if (confirm("Seguro al eliminar el parametro")) {
-        fetch("http://localhost:36129/bth/api/parametro/eliminar/" + obj)
+        fetch("http://localhost:"+puerto+"/bth/api/parametro/eliminar/" + obj)
                 .then(function (request) {
                     return request.json();
                 })
@@ -191,7 +188,7 @@ function updateParam() {
         id: localStorage.getItem('idParametro'),
         nombre: input.value
     };
-    fetch("http://localhost:36129/bth/api/parametro/update", {
+    fetch("http://localhost:"+puerto+"/bth/api/parametro/update", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -211,10 +208,9 @@ function updateParam() {
 
 function getInfoGrupoInDropdowns() {
     var data = {
-        id: 1,
-        idDocente: 2 // ----------------------------- Id del docete modificar
+        idDocente: 1 // ----------------------------- Id del docete modificar
     };
-    fetch("http://localhost:36129/bth/api/grupo/grupoInfo", {
+    fetch("http://localhost:"+puerto+"/bth/api/grupo/grupoInfo", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
