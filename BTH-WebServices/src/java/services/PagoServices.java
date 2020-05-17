@@ -50,4 +50,27 @@ public class PagoServices {
         }
     }
     
+    @Path("/mesAPagar")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getListMesAPagar(Pago param) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        PagoDao dao = factory.getNewPagoDao();
+
+        try {
+            ArrayList<Pago> parametro = dao.getMesFaltanteAPagar(param);
+
+            respuesta.setSuccess(true);
+            respuesta.setMessage("lista obtenida");
+            respuesta.setResponse(parametro);
+
+            return new Gson().toJson(parametro);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            return new Gson().toJson(respuesta);
+        }
+    }
+    
 }

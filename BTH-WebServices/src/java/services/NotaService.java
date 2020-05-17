@@ -79,4 +79,27 @@ public class NotaService {
             return new Gson().toJson(respuesta);
         }
     }
+    
+    @Path("/getListII")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getListII(Parametro param) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        NotaDao dao = factory.getNewNotaeDao();
+
+        try {
+            ArrayList<Nota> parametro = dao.getII(param);
+
+            respuesta.setSuccess(true);
+            respuesta.setMessage("lista obtenida");
+            respuesta.setResponse(parametro);
+
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            return new Gson().toJson(respuesta);
+        }
+    }
 }

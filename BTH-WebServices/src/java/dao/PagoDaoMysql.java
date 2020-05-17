@@ -46,5 +46,30 @@ public class PagoDaoMysql extends PagoDao{
         }
         return lista;
     }
+
+    @Override
+    public ArrayList<Pago> getMesFaltanteAPagar(Pago param) throws Exception {
+         ArrayList<Pago> lista = new ArrayList<Pago>();
+
+        String query = "call sp_deudores("+param.getIdEstudiantes_grupos()+","+param.getId()+");";
+
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                Pago obj = new Pago();
+
+                obj.setNombre(objResultSet.getString("nombre"));
+
+                obj.setMes(objResultSet.getInt("meses"));
+                
+                
+                lista.add(obj);
+            }
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()+" " + query);
+        }
+        return lista;
+    }
     
 }

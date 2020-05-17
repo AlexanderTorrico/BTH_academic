@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * @author merxdev
  */
 public abstract class NotaDao {
-    
+    public abstract ArrayList<Nota> getII(Parametro param) throws Exception;
     public abstract ArrayList<Nota> get(Parametro param) throws Exception;
     public abstract int update(Nota param) throws Exception;
 }

@@ -84,6 +84,32 @@ public class NotaDaoMysql extends NotaDao{
         return upd;
     }
     
+    @Override
+    public ArrayList<Nota> getII(Parametro param) throws Exception {
+        
+        ArrayList<Nota> list = new ArrayList<>();
+        String query = "call m()";
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                Nota obj = new Nota();
+
+                obj.setId(objResultSet.getInt("id"));
+                
+                obj.setNota(objResultSet.getDouble("nota"));
+                
+                
+                list.add(obj);
+                
+            }
+        } catch (Exception ex) {
+            
+            throw new Exception(ex.getMessage()+" => " + query +ex.getMessage());
+        }
+        return list;
+    }
+    
     
     
 }

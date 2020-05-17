@@ -190,33 +190,43 @@ function updateNotaInModal(obj){
     
     document.getElementById("modal-bodySN").innerHTML = templateModalUpdateNote();
     document.getElementById("tableModalUpdateNote").innerHTML = html;
+    
 }
 
 function saveUpdateNote(){
-    
+    var tipo = document.getElementById("exampleModalScrollableTitleSN").innerText;
     var arrayNombre = [];
     var data = [];
     var json = JSON.parse(localStorage.getItem("infoNota"));
     var count = Object.keys(json).length;
-    arrayNombre.push(json[0]["id"]);
-              
-    for(var i = 1; i<count; i++){
-        if(json[0]["id"] == json[i]["id"] ){
-            break;
-        }else{
-            arrayNombre.push(json[i]["id"]);
+    
+    for(var i = 0; i<count; i++){
+        if(json[i]["parametro"] == tipo ){
+            var nameId = "idInput"+json[i]["id"];
+            var obj = {
+              "id":  json[i]["id"],
+              "nota": parseInt(document.getElementById(nameId).value)
+            };
+            data.push(obj);
         }
     }
-    console.log(arrayNombre);
-    for(a in arrayNombre){
-        var llave = "idInput"+json[a].id;
-        var obj = {
-            id:json[a].id,
-            nota:document.getElementById(llave).value
-        };
-        data.push(obj);
-    }
-    console.log(data);
+    
+    
+    fetch('http://localhost:36129/bth/api/nota/update',{
+        method:"Post",
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                llenarTableShowNota();
+                
+            });
 }
 
 

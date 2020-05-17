@@ -13,6 +13,7 @@ public class Pago {
     private int id, idEstudiantes_grupos;
     private double monto;
     private int mes;
+    private String nombre;
 
     public Pago() {
     }
@@ -55,6 +56,12 @@ public class Pago {
     public void setMes(int mes) {
         this.mes = mes;
     }
-    
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

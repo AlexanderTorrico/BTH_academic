@@ -17,4 +17,6 @@ import java.util.ArrayList;
 public abstract class PagoDao {
     
     public abstract ArrayList<MovilTrimestre> get(User param) throws Exception;
+    
+    public abstract ArrayList<Pago> getMesFaltanteAPagar(Pago param) throws Exception;
 }

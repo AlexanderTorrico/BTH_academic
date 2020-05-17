@@ -45,8 +45,6 @@ function saveGrupo(tupla) {
            loadParametro(); 
         }
     }
-    
-    
 }
 function dropdownsGrupo(json) {
     localStorage.removeItem("grupo");
