@@ -66,3 +66,55 @@ BLOCK1: begin
         end BLOCK2;
     end loop LOOP1;
 end BLOCK1;$$
+
+
+
+
+
+
+DROP PROCEDURE IF EXISTS sp_notasAnuales;
+CREATE PROCEDURE sp_notasAnuales(_idGrupo int)
+BEGIN  
+	select est.*, ifnull(nota.primer,0) as primer, ifnull(nota.segundo,0) as segundo, ifnull(nota.tercer,0) as tercero from (select e.id, concat(e.apaterno,' ',e.amaterno,' ',e.nombre) as nombre from tblEstudiantes e
+		join tblEstudiantes_grupos eg on e.id = eg.idEstudiante
+		where idGrupo = _idGrupo) est
+	left join (select x.*, y.segundo, z.tercer from (select a1.id, (a1.nota+b1.nota+c1.nota)/3 as primer from (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=1 and idGrupo =_idGrupo and tipo = 'h') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) a1
+			join (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=1 and idGrupo =_idGrupo and tipo = 'c') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) b1 on a1.id = b1.id
+			join (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=1 and idGrupo =_idGrupo and tipo = 's') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) c1 on a1.id = c1.id) x
+		join (select a1.id, (a1.nota+b1.nota+c1.nota)/3 as segundo from (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=2 and idGrupo =_idGrupo and tipo = 'h') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) a1
+			join (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=2 and idGrupo =_idGrupo and tipo = 'c') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) b1 on a1.id = b1.id
+			join (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=2 and idGrupo =_idGrupo and tipo = 's') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) c1 on a1.id = c1.id) y on x.id = y.id
+		join (select a1.id, (a1.nota+b1.nota+c1.nota)/3 as tercer from (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=3 and idGrupo =_idGrupo and tipo = 'h') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) a1
+			join (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=3 and idGrupo =_idGrupo and tipo = 'c') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) b1 on a1.id = b1.id
+			join (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+							where trimestre=3 and idGrupo =_idGrupo and tipo = 's') a
+				join tblnotas n on n.idParametro_grupo = a.id
+				group by n.idEstudiante_grupo) c1 on a1.id = c1.id) z on x.id = z.id) nota on est.id = nota.id
+	order by nombre;
+
+END $$
+

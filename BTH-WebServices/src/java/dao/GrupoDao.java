@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dto.InformacionesGrupo;
 import dto.infoGrupos;
 import java.util.ArrayList;
 
@@ -14,4 +15,6 @@ import java.util.ArrayList;
  */
 public abstract class GrupoDao {
     public abstract ArrayList<infoGrupos> grupoInfo(infoGrupos obj)throws Exception;
+    public abstract ArrayList<InformacionesGrupo> docenteWebGrupos(InformacionesGrupo param) throws Exception;
+    public abstract ArrayList<InformacionesGrupo> docenteWebHorario(InformacionesGrupo param) throws Exception;
 }

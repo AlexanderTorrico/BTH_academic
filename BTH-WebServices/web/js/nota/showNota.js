@@ -18,7 +18,8 @@ var puerto= "36129";
 var contacts = [
     "Haber",
     "Hacer",
-    "Saber"
+    "Saber",
+    "Final"
 ];
 var rubrica = [
     "h",
@@ -53,9 +54,14 @@ $("#grupoDropdownTipo a").click(function () {
 
 function saveTipo(obj) {
     localStorage.setItem("tipo", rubrica[obj]);
+   
     
-    createTableShowNota();
     if(localStorage.getItem("grupo") && localStorage.getItem("trimestre")){
+        if(obj==3){
+            showNoteTrimestre();
+        }else{
+            createTableShowNota();
+        }
         
     }
 }
@@ -82,10 +88,9 @@ function createTableShowNota() {
                 return request.json();
             })
             .then(function (json) {
-                //console.log(json);
                 if(json["success"]){
                     json = json["response"];
-                    console.log(json);
+
                     var html = '<th scope="col">#</th>';
                     html+= '<th scope="col">Nombre completo</th>';
                     document.getElementById("body").innerHTML = templateTabla();
@@ -227,6 +232,65 @@ function saveUpdateNote(){
                 llenarTableShowNota();
                 
             });
+}
+
+
+function showNoteTrimestre(){
+    var data = {
+        id:1
+    };
+    fetch('http://localhost:36129/bth/api/nota/notatrimestral',{
+        method:"Post",
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                if(myJson["success"]){
+                    var trimestre =["Primer","Segundo","Tercero"];
+                    myJson = myJson["response"];
+                    
+                    var html = '<th scope="col">#</th>';
+                    html+= '<th scope="col">Nombre completo</th>';
+                    document.getElementById("body").innerHTML = templateTabla();
+                    for(i in trimestre){
+                        html+= ' <th scope="col" class="text-center">'+trimestre[i]+'<br>Trimestre</th> ';
+                    }
+                    html+= '<th scope="col">Nota<br>Final</th>';
+                    document.getElementById("tablaHeadShowNota").innerHTML = html;
+                    
+                    
+                    llenarTableShowNotaFinal(myJson);
+                }else{
+                    alert("Error al traer los datos");
+                }
+                
+            });
+}
+
+function llenarTableShowNotaFinal(json) {
+    
+    var html="";
+    var count = 1;
+    for(i in json){
+        var nota = "";
+        var nombre="";
+        var final = (json[i]["primer"]+json[i]["segundo"]+json[i]["tercer"])/3;
+        nombre = '<tr><th scope="row">'+count+'</th><td>'+json[i]["nombre"]+'</td>';
+        nota= '<td class="text-center">'+json[i]["primer"].toFixed(2)+'</td>';
+        nota+= '<td class="text-center">'+json[i]["segundo"].toFixed(2)+'</td>';
+        nota+= '<td class="text-center">'+json[i]["tercer"].toFixed(2)+'</td>';
+        nota+= '<td class="text-center">'+final.toFixed(0)+'</td>';
+        count++;
+        html+=nombre+nota;
+    }
+    document.getElementById("tablaBodyShowNota").innerHTML = html+"</tr>";
+
 }
 
 

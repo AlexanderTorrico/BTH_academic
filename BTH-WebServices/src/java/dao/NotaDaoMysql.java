@@ -7,6 +7,7 @@ package dao;
 
 import dal.Conexion;
 import dto.Nota;
+import dto.NotaTrimestral;
 import dto.Parametro;
 import dto.infoGrupos;
 import java.sql.ResultSet;
@@ -109,7 +110,33 @@ public class NotaDaoMysql extends NotaDao{
         }
         return list;
     }
-    
+
+    @Override
+    public ArrayList<NotaTrimestral> notaTrimestral(NotaTrimestral param) throws Exception {
+        ArrayList<NotaTrimestral> list = new ArrayList<>();
+        String query = "call sp_notasAnuales("+param.getId()+");";
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                NotaTrimestral obj = new NotaTrimestral();
+
+                obj.setId(objResultSet.getInt("id"));
+                obj.setNombre(objResultSet.getString("nombre"));
+                obj.setPrimer(objResultSet.getDouble("primer"));
+                obj.setSegundo(objResultSet.getDouble("segundo"));
+                obj.setTercer(objResultSet.getDouble("tercero"));
+                
+                
+                list.add(obj);
+                
+            }
+        } catch (Exception ex) {
+            
+            throw new Exception(ex.getMessage()+" => " + query +ex.getMessage());
+        }
+        return list;
+    }
     
     
 }

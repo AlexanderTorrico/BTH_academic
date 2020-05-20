@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import dao.NotaDao;
 import dao.ParametroDao;
 import dto.Nota;
+import dto.NotaTrimestral;
 import dto.Parametro;
 import factory.FactoryDao;
 import java.util.ArrayList;
@@ -91,6 +92,29 @@ public class NotaService {
 
         try {
             ArrayList<Nota> parametro = dao.getII(param);
+
+            respuesta.setSuccess(true);
+            respuesta.setMessage("lista obtenida");
+            respuesta.setResponse(parametro);
+
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            return new Gson().toJson(respuesta);
+        }
+    }
+    
+    @Path("/notatrimestral")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getNotaTrimestral(NotaTrimestral param) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        NotaDao dao = factory.getNewNotaeDao();
+
+        try {
+            ArrayList<NotaTrimestral> parametro = dao.notaTrimestral(param);
 
             respuesta.setSuccess(true);
             respuesta.setMessage("lista obtenida");
