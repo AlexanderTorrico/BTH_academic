@@ -89,14 +89,16 @@ public class GrupoDaoMysql extends GrupoDao{
     @Override
     public ArrayList<InformacionesGrupo> docenteWebHorario(InformacionesGrupo param) throws Exception {
         ArrayList<InformacionesGrupo> list = new ArrayList<>();
-        String query = "select dia, inicio, fin from tbldias d " +
-"join tblHoras h on d.idHora = h.id " +
-"where idGrupo = "+param.getId();
+        String query = "select idGrupo, dia, inicio, fin from tbldias d " +
+            "join tblGrupos g on g.id = d.idGrupo " +
+            "join tblHoras h on d.idHora = h.id " +
+            "where idDocente = "+param.getId();
         try {
             Conexion objConexion = Conexion.getOrCreate();
             ResultSet objResultSet = objConexion.ejecutar(query);
             while (objResultSet.next()) {
                 InformacionesGrupo obj = new InformacionesGrupo();
+                obj.setId(objResultSet.getInt("idGrupo"));
                 String[] i = objResultSet.getTime("inicio").toString().split(":");
                 String[] f = objResultSet.getTime("fin").toString().split(":");
                 obj.setDia(textDia(objResultSet.getInt("dia")));

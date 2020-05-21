@@ -91,12 +91,29 @@ public class ParametroDaoMySQL extends ParametroDao{
     
     @Override
     public int delete(int id) throws Exception {
+        deleteEstudiantesGrupos(id);
         Conexion objConexion = Conexion.getOrCreate();
         StringBuilder query = new StringBuilder("DELETE FROM tblParametros ");
         int i = 0;
         try {
 
             query.append("WHERE id = " + id + ";");
+            i = objConexion.ejecutarSimple(query.toString());
+            objConexion.desconectar();
+            return i;
+        } catch (Exception e) {
+            objConexion.desconectar();
+            return i;
+        }
+    }
+    
+    public int deleteEstudiantesGrupos(int id) {
+        Conexion objConexion = Conexion.getOrCreate();
+        StringBuilder query = new StringBuilder("DELETE FROM tblNotas ");
+        int i = 0;
+        try {
+
+            query.append("WHERE idParametro_grupo = " + id + ";");
             i = objConexion.ejecutarSimple(query.toString());
             objConexion.desconectar();
             return i;

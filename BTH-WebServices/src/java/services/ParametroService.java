@@ -107,7 +107,7 @@ public class ParametroService {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String eliminarCancion(@PathParam("id") int id) { // nicolino, 1234
+    public String eliminarCancion(@PathParam("id") int id) {
         Respuesta respuesta = new Respuesta();
 
         FactoryDao factory = FactoryDao.getFactoryInstance();

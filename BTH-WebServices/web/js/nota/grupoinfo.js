@@ -28,47 +28,63 @@ function getGrupo() {
                     array.push(json[i].id);
                     var grupo = json[i].sigla + "-" + json[i].id + "." + json[i].idGestion;
 
-                    html += templateCard(json[i].carrera, json[i].colegio, json[i].nivel, grupo, "grupo-" + json[i].id);
+                    html += templateCard(json[i].carrera, json[i].colegio, json[i].nivel, grupo, json[i].id);
                 }
 
                 document.getElementById("body").innerHTML = html;
 
-                getGrupoHorario(array);
+                getGrupoHorario();
             });
 }
 
-function getGrupoHorario(array) {
-    var num = 1;
-    for (var n in array) {
-        var num = 1;
-        alert(num);
-        var data = {
-            id:num  // ----------------------------- Id del docete modificar
-        };
-        fetch("http://localhost:36129/bth/api/grupo/horario", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                'Accept': 'application/json, text/plain',
-                'Content-Type': 'application/json;charset=UTF-8'
-            }
-        })
-                .then(function (request) {
-                    return request.json();
-                })
-                .then(function (json) {
-                    var html = "";
-                    json = json["response"];
-                    for (var i in json) {
-                        html += '<li class="list-item col-4 border-top py-2">' + json[i].dia + '</li>';
-                        html += '<li class="list-item col-4 border-top py-2">' + json[i].inicio + '</li>';
-                        html += '<li class="list-item col-4 border-top py-2">' + json[i].fin + '</li>';
-                    }
-                    document.getElementById("grupo-" + num).innerHTML = html;
-                });
-    }
+function getGrupoHorario() {
+   
+    var data = {
+        id:1  // ----------------------------- Id del docete modificar
+    };
+    fetch("http://localhost:36129/bth/api/grupo/horario", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
+            .then(function (request) {
+                return request.json();
+            })
+            .then(function (json) {
+                json = json["response"];
+                var html = '';
+                
+                //var html = "";
+                for (var i in json) {
+                    
+                    html += '<li class="list-item col-4 border-top py-2">' + json[i].dia + '</li>';
+                    html += '<li class="list-item col-4 border-top py-2">' + json[i].inicio + '</li>';
+                    html += '<li class="list-item col-4 border-top py-2">' + json[i].fin + '</li>';
+                
+                    document.getElementById("grupo-"+json[i].id).innerHTML= document.getElementById("grupo-"+json[i].id).innerHTML+html;
+                    html="";
+                }
+                
+                
+
+            });
+
 }
 
+function save_NotaidGrupo(id){
+    document.location.href = "/bth/nota.html";
+    localStorage.setItem("grupo",id);
+    localStorage.setItem("aaccion","showNote");
+    
+}
+
+function save_DeudaidGrupo(id){
+    document.location.href = "/bth/mensualidadesShowDocente.html";
+    localStorage.setItem("grupo",id);
+}
 
 
 
@@ -85,7 +101,7 @@ function templateCard(carrera, colegio, nivel, grupo, id) {
             '                           </div>  ' +
             '<h5 class="card-title text-center">Horario</h5>' +
             '   <div class="col-12 container">  ' +
-            '                               <ul id="' + id + '" class="list-unstyled row">  ' +
+            '                               <ul id="grupo-' + id + '" class="list-unstyled row">  ' +
             '                                   <li class="list-item col-4 border-top py-2"><strong>Dia</strong></li>  ' +
             '                                   <li class="list-item col-4 border-top py-2"><strong>Inicio</strong></li>  ' +
             '                                   <li class="list-item col-4 border-top py-2"><strong>Fin</strong></li>  ' +
@@ -93,7 +109,8 @@ function templateCard(carrera, colegio, nivel, grupo, id) {
             '                               </ul>  ' +
             '                          </div>  ' +
             '                           <br>  ' +
-            '                           <a href="#" class="btn btn-primary">Nota</a>  ' +
+            '                           <a href="#" class="btn btn-primary" onClick="save_NotaidGrupo('+id+')">Nota</a>  ' +
+            '                           <a href="#" class="btn btn-primary" onClick="save_DeudaidGrupo('+id+')">Deuda</a>  ' +
             '                           <a href="#" class="btn btn-primary">Asistencia</a>  ' +
             '                       </div>  ' +
             '                  </div>  ';

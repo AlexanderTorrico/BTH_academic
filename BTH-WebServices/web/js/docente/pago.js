@@ -1,6 +1,7 @@
 $(document).ready(function () {
-    loadListEstudents();
+    
 });
+loadListEstudents();
 
 $(function () {
     
@@ -19,7 +20,7 @@ $('.popover-dismiss').popover({
 function loadListEstudents(){
     
     var data = {
-        idEstudiantes_grupos:1,
+        idEstudiantes_grupos:localStorage.getItem("grupo"),
         id:20
     };
     //getInfoGrupoInDropdowns();
@@ -36,6 +37,7 @@ function loadListEstudents(){
                 return response.json();
             })
             .then(function (myJson) {
+                console.log("myjsonsdfghjk,");
                 var count = Object.keys(myJson).length;;
                 var html = templeteItemTitleDeudores();
                 for(var i = 1; i<count;i++){

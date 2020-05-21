@@ -47,7 +47,7 @@ function saveGrupo(tupla) {
     }
 }
 function dropdownsGrupo(json) {
-    localStorage.removeItem("grupo");
+    
     
     var menuHtml = '   <div class="dropdown">  ' +
             '                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonGrupo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">  ' +
