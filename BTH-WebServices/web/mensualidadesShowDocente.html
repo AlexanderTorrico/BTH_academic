@@ -20,22 +20,25 @@
                 <img src="imagenes/logo_1.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 Bachillerato Tecnico Humanistico
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse float-right" id="navbarNav">
-                <ul class="navbar-nav" >
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Asistencias<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" onClick="grupo()">Grupo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Notas</a>
+                        <a class="nav-link" href="#">Editar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Cerrar seccion</a>
+                        <a class="nav-link" onClick="cerrar()">Cerrar sesion</a>
                     </li>
                 </ul>
+                <span id="usernamedocente" class="navbar-text">
+                    Doc: Nombre persona
+                </span>
             </div>
         </nav>
 
@@ -82,5 +85,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     <script src="js/docente/pago.js"></script>
+    <script src="js/nota/header.js"></script>
     </body>
 </html>
