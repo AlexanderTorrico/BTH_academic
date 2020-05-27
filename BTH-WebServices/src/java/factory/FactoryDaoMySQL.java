@@ -75,4 +75,9 @@ public class FactoryDaoMySQL extends FactoryDao {
         return new NotaDaoMysql();
     }
 
+    @Override
+    public LoginDao getNewLoginDao() {
+        return new LoginDaoMysql();
+    }
+
 }

@@ -7,9 +7,9 @@ getGrupo();
 
 function getGrupo() {
     var data = {
-        id: 1 // ----------------------------- Id del docete modificar
+        id: localStorage.getItem("idDocente")
     };
-    fetch("http://localhost:36129/bth/api/grupo/grupo", {
+    fetch("/bth/api/grupo/grupo", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -40,9 +40,9 @@ function getGrupo() {
 function getGrupoHorario() {
    
     var data = {
-        id:1  // ----------------------------- Id del docete modificar
+        id:localStorage.getItem("idDocente")
     };
-    fetch("http://localhost:36129/bth/api/grupo/horario", {
+    fetch("/bth/api/grupo/horario", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

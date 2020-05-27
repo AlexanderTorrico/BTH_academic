@@ -42,5 +42,7 @@ public abstract class FactoryDao {
     public abstract EstudianteDao getNewEstudianteDao();
     
     public abstract NotaDao getNewNotaeDao();
+    
+    public abstract LoginDao getNewLoginDao();
 
 }
