@@ -6,7 +6,10 @@
 package consola;
 
 import dao.ColegioDao;
+import dao.PagoDao;
 import dto.Colegio;
+import dto.Pago;
+import dto.Search;
 import factory.FactoryDao;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
         FactoryDao factory = FactoryDao.getFactoryInstance();
-        ColegioDao dao = factory.getNewColegioDao();
+        PagoDao dao = factory.getNewPagoDao();
 
         // Listar datos de una tabla
 //        List<Genero> generos = dao.getList();
@@ -29,13 +32,12 @@ public class Main {
 //        }
 //        
 //         Insertando un registro a la tabla
-//        Colegio objColegio = new Colegio();
-//        objColegio.setNombre("MARCELO1");
-//        objColegio.setSigep("ASD");
-//        objColegio.setDirector("asdasd");
-//        objColegio.setDireccion("asd");
-//        objColegio.setTelefono("32132");
-//        objColegio.setEsModulo(1);
+//        Pago objColegio = new Pago();
+//        objColegio.setMonto(15.6);
+//        objColegio.setMes(8);
+//        objColegio.setFecha("20260324");
+//        objColegio.setIdEstudiantes_grupos(1);
+//        
 //        int generoId = 0;
 //        try {
 //            generoId = dao.insert(objColegio);
@@ -44,9 +46,9 @@ public class Main {
 //        }
 //        
         // Obteniendo un registro de la base de datos
-//        Colegio objCol = new Colegio();
-//        objCol = dao.get(generoId);
-//        System.out.println(objCol.toString());
+        Search objCol = new Search();
+        objCol = dao.getEstudent("110");
+        System.out.println(objCol.getCarrera());
         
 //        objGenero.setNombreGenero("Musica Romantica");
 //        

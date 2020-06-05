@@ -13,6 +13,7 @@ public class Pago {
     private int id, idEstudiantes_grupos;
     private double monto;
     private int mes;
+    private String fecha;
     private String nombre;
 
     public Pago() {
@@ -64,4 +65,13 @@ public class Pago {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
 }

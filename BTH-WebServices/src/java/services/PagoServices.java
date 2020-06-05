@@ -11,12 +11,15 @@ import dao.ParametroDao;
 import dto.MovilTrimestre;
 import dto.Pago;
 import dto.Parametro;
+import dto.Search;
 import dto.User;
 import factory.FactoryDao;
 import java.util.ArrayList;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -26,7 +29,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("pago")
 public class PagoServices {
-    
+
     @Path("/byGroup")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -49,7 +52,7 @@ public class PagoServices {
             return new Gson().toJson(respuesta);
         }
     }
-    
+
     @Path("/mesAPagar")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -72,5 +75,42 @@ public class PagoServices {
             return new Gson().toJson(respuesta);
         }
     }
-    
+
+    @Path("/{ci}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String obtener(@PathParam("ci") String ci) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        PagoDao dao = factory.getNewPagoDao();
+        Search estudiante = dao.getEstudent(ci);
+        respuesta.setSuccess(true);
+        respuesta.setMessage("el estudiante");
+        respuesta.setResponse(estudiante);
+        return new Gson().toJson(respuesta);
+    }
+      @Path("registrar")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String registro(Pago param) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        PagoDao dao = factory.getNewPagoDao();
+       
+        try {
+            int idGenerado = dao.insert(param);
+            param.setId(idGenerado);
+            respuesta.setSuccess(true);
+            respuesta.setMessage("pago exitoso");
+            respuesta.setResponse(param);
+        } catch (Exception ex) {
+            respuesta.setMessage("pago fallido");
+        }
+
+        return new Gson().toJson(respuesta);
+    }
+
 }
