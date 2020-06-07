@@ -17,9 +17,9 @@ insert into tblCarreras values(default, 'Construccion Civil','CCL','Carrera de e
 insert into tblCarreras values(default, 'Sistemas Informaticos Redes Computacionales','SIR','Carrera de ejemplo esto se cambiara despues','fjasklfjasld/fsadfds/fasfsa');
 insert into tblCarreras values(default, 'Gastronomia','Gas','Carrera de ejemplo esto se cambiara despues','fjasklfjasld/fsadfds/fasfsa');
 insert into tblCarreras values(default, 'Mecanica','Mec','Carrera de ejemplo esto se cambiara despues','fjasklfjasld/fsadfds/fasfsa');	
-
-insert into tblDocentes values(default,'Alan','Gandarilla','Mauro','docente@gmail.com','Doc','123456',1);
-insert into tblDocentes values(default,'Noelia','Gandarilla','Mauro','docente@gmail.com','Doc','123456',1);
+																							  
+insert into tblDocentes values(default,'Alan','Gandarilla','Mauro','docente@gmail.com','Doc','16DC65E18E123DA36C11466AACF3965A',1);
+insert into tblDocentes values(default,'Noelia','Gandarilla','Mauro','docente@gmail.com','Doc','16DC65E18E123DA36C11466AACF3965A',1);
 
 insert into tblGestiones values(DEFAULT, 4);
 
@@ -72,29 +72,6 @@ insert into tblNotas values(default,49,7,2);
 insert into tblNotas values(default,100,8,2);
 
 
-DELIMITER $$
 
-DROP FUNCTION IF EXISTS fn_changePassword;
-CREATE FUNCTION fn_changePassword(_email varchar(50), _sha text, _tipo varchar(1), _pass text)
-RETURNS varchar(50)
-BEGIN
-    declare v_date varchar(50);
-    set v_date ="null";
-
-    SELECT t.email  into v_date from tblTokens t
-        WHERE t.email = _email and t.sha = _sha;
-
-    if v_date != 'null' then
-        if _tipo = 'c' then
-            delete from tblTokens where email = v_date;
-            UPDATE tblColegios
-            SET contrasenia=hex(aes_encrypt(_pass,'COL')) WHERE correo=_email;
-        
-        end if;
-
-    end if;
-
-    return v_date;
-END$$
 
 
