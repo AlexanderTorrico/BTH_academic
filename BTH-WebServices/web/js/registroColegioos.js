@@ -27,23 +27,19 @@ function registrarColegio() {
     obj.username = username;
     obj.contrasenia = contrasena;
 
-     fetch("api/colegio/registro", {
-        method: 'POST',
-        body: JSON.stringify(obj),
+    jQuery.ajax({
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json;charset=UTF-8'
-        }
-    }).then(function (request) {
-        //console.log(request);
-        return request.json();
-    })
-            .then(function (json) {
-                //console.log(json);
-                procesarRegistro(json)
-            });
-
+            'Content-Type': 'application/json'
+        },
+        'type': 'POST',
+        'url': 'api/colegio/registro',
+        'data': JSON.stringify(obj), // lo que se envia
+        'dataType': 'json', // lo que se recibe 
+        'success': procesarRegistro
+    });
 }
+
 function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;

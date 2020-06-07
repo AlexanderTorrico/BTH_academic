@@ -40,9 +40,13 @@ public abstract class FactoryDao {
     public abstract ProyectosDao getProyectosDao();
 
     public abstract EstudianteDao getNewEstudianteDao();
-    
+
     public abstract NotaDao getNewNotaeDao();
-    
+
     public abstract LoginDao getNewLoginDao();
+
+    public abstract CarreraDao getNewCarreraDao();
+
+    public abstract GruposDao getNewGruposDao();
 
 }

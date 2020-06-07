@@ -80,4 +80,14 @@ public class FactoryDaoMySQL extends FactoryDao {
         return new LoginDaoMysql();
     }
 
+    @Override
+    public CarreraDao getNewCarreraDao() {
+        return new CarreraDaoMySQL();
+    }
+
+    @Override
+    public GruposDao getNewGruposDao() {
+       return new GruposDaoMySQL();
+    }
+
 }

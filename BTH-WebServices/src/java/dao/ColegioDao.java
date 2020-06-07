@@ -12,7 +12,7 @@ public abstract class ColegioDao {
 
     public abstract int insert(Colegio obj) throws Exception;
 
-    public abstract void update(Colegio obj) throws Exception;
+    public abstract int update(Colegio obj) throws Exception;
 
     public abstract void ValidarCuenta(Colegio obj) throws Exception;
 
@@ -25,5 +25,5 @@ public abstract class ColegioDao {
     public abstract Colegio get(int id);
 
     public abstract Colegio get(String username, String correo);
-
+   
 }

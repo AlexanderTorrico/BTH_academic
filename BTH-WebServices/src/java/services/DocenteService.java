@@ -11,6 +11,7 @@ import dao.DocenteDao;
 import dto.Colegio;
 import dto.Docente;
 import factory.FactoryDao;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
@@ -88,5 +89,25 @@ public class DocenteService {
         
         return new Gson().toJson(respuesta);
     }
+    
+    @Path("/get")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String listar() {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        DocenteDao dao = factory.getNewDocenteDao();
+
+        ArrayList<Docente> docente = dao.getList();
+
+        respuesta.setSuccess(true);
+        respuesta.setMessage("lista de docentes");
+        respuesta.setResponse(docente);
+
+        return new Gson().toJson(respuesta);
+    }
+    
+    
 }
 // LOGIN AUTENTICACION

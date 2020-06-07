@@ -7,6 +7,8 @@ import dal.Conexion;
 import dto.Docente;
 import java.util.ArrayList;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,7 +50,35 @@ public class DocenteDaoMySQL extends DocenteDao {
 
     @Override
     public ArrayList<Docente> getList() {
-        return null;
+        ArrayList<Docente> lista = new ArrayList<Docente>();
+
+        String query = "select * from tbldocentes";
+
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                Docente obj = new Docente();
+
+                obj.setId(objResultSet.getInt("id"));
+                obj.setNombre(objResultSet.getString("nombre"));
+                obj.setApaterno(objResultSet.getString("aPaterno"));
+                obj.setAmaterno(objResultSet.getString("aMaterno"));
+                obj.setCorreo(objResultSet.getString("correo"));
+                obj.setUsername(objResultSet.getString("username"));
+                obj.setContrasenia(objResultSet.getString("contrasenia"));
+                obj.setEstado(objResultSet.getInt("estado"));
+
+                lista.add(obj);
+            }
+        } catch (Exception ex) {
+            try {
+                throw new Exception("El registro no pudo ser obtenido " + query);
+            } catch (Exception ex1) {
+                Logger.getLogger(CarreraDaoMySQL.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        return lista;
     }
 
     @Override
@@ -101,8 +131,8 @@ public class DocenteDaoMySQL extends DocenteDao {
     @Override
     public void ValidarCuenta(Docente obj) throws Exception {
         SendEmail enviarCorreo = new SendEmail();
-        MessageCorreo correo = new MessageCorreo(obj.getCorreo(), obj.getUsername(), obj.getId(), "VERIFICAR CUENTA","docente");
-        enviarCorreo.SendEmail(correo.getCorreo(), correo.getAsunto(),correo.getVerificacion());
+        MessageCorreo correo = new MessageCorreo(obj.getCorreo(), obj.getUsername(), obj.getId(), "VERIFICAR CUENTA", "docente");
+        enviarCorreo.SendEmail(correo.getCorreo(), correo.getAsunto(), correo.getVerificacion());
     }
 
     // se actualiza el estado de la cuenta una vez confirmada la verificacion
@@ -110,7 +140,7 @@ public class DocenteDaoMySQL extends DocenteDao {
     public void ActivarCuenta(String username) throws Exception {
         Conexion objConexion = Conexion.getOrCreate();
 
-        StringBuilder query = new StringBuilder("UPDATE tbldocentes SET estado = 1 WHERE username = '"+username+"'");
+        StringBuilder query = new StringBuilder("UPDATE tbldocentes SET estado = 1 WHERE username = '" + username + "'");
         int upd = objConexion.ejecutarSimple(query.toString());
         if (upd == 0) {
             throw new Exception("El registro no pudo ser actualizado");
@@ -118,7 +148,5 @@ public class DocenteDaoMySQL extends DocenteDao {
 
         objConexion.desconectar();
     }
-
-  
 
 }

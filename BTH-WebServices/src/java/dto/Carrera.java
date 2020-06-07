@@ -10,53 +10,55 @@ package dto;
  * @author carlos clavijo
  */
 public class Carrera {
-    int id;
-    String nombre;
-    String sigla;
-    String descripcion;
-    String img;
+    private int Id;
+    private String Nombre;
+    private String Sigla;
+    private String Descripcion;
+    private String Img;
 
     public Carrera() {
     }
-    
+
     public int getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public String getNombre() {
-        return nombre;
+        return Nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
 
     public String getSigla() {
-        return sigla;
+        return Sigla;
     }
 
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
+    public void setSigla(String Sigla) {
+        this.Sigla = Sigla;
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return Descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
     }
 
     public String getImg() {
-        return img;
+        return Img;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImg(String Img) {
+        this.Img = Img;
     }
+    
+   
     
 }

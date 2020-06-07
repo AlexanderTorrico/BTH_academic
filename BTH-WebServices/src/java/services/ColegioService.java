@@ -9,12 +9,15 @@ import com.google.gson.Gson;
 import dao.ColegioDao;
 import dto.Colegio;
 import factory.FactoryDao;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -66,7 +69,7 @@ public class ColegioService {
 
         return new Gson().toJson(respuesta);
     }
-    
+
     @Path("/{token}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -77,15 +80,111 @@ public class ColegioService {
         ColegioDao dao = factory.getNewColegioDao();
         byte[] decodedBytes = Base64.getDecoder().decode(tokenid);
         String desencriptado = new String(decodedBytes);
-       
-         try {
+
+        try {
             dao.ActivarCuenta(desencriptado);
             respuesta.setSuccess(true);
             respuesta.setMessage("cancion modificada!");
         } catch (Exception ex) {
             respuesta.setMessage("ascascs");
         }
-        
+
+        return new Gson().toJson(respuesta);
+    }
+
+    @Path("/")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String update(Colegio obj) { // nicolino, 1234
+        Respuesta respuesta = new Respuesta();
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        ColegioDao dao = factory.getNewColegioDao();
+        int i = 0;
+        try {
+            i = dao.update(obj);
+            respuesta.setSuccess(true);
+            respuesta.setResponse(i);
+            if (i == 0) {
+                respuesta.setMessage("Sin datos a actualizar");
+            } else {
+                respuesta.setMessage("Dato actualizado");
+            }
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            respuesta.setResponse(i);
+            return new Gson().toJson(respuesta);
+        }
+    }
+
+    @Path("/get")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+
+    public String listar() {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        ColegioDao dao = factory.getNewColegioDao();
+
+        ArrayList<Colegio> carrera = dao.getList();
+
+        respuesta.setSuccess(true);
+        respuesta.setMessage("lista de colegio");
+        respuesta.setResponse(carrera);
+
+        return new Gson().toJson(respuesta);
+    }
+
+    @Path("/{id}")
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String eliminarColegio(@PathParam("id") int id) {// nicolino, 1234
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        ColegioDao dao = factory.getNewColegioDao();
+
+        try {
+            dao.delete(id);
+            respuesta.setSuccess(true);
+            respuesta.setMessage("Colegio eliminada!");
+        } catch (Exception ex) {
+            respuesta.setMessage("hubo un error al eliminar el colegio");
+        }
+
+        return new Gson().toJson(respuesta);
+    }
+
+    @Path("/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String getColegio(@PathParam("id") int id) { // nicolino, 1234
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+
+        ColegioDao carrera = factory.getNewColegioDao();
+        try {
+            Colegio ob = carrera.get(id);
+            if (ob != null) {
+
+                respuesta.setSuccess(true);
+                respuesta.setMessage("COLEGIO Obtenida");
+                respuesta.setResponse(ob);
+                return new Gson().toJson(respuesta);
+
+            } else {
+                respuesta.setMessage("no se obtenio ninguna COLEGIO");
+            }
+
+        } catch (Exception ex) {
+            respuesta.setSuccess(true);
+            respuesta.setMessage("Ocurrio un error" + ex.getMessage());
+        }
         return new Gson().toJson(respuesta);
     }
 
