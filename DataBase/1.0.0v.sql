@@ -159,10 +159,10 @@ create table tblParametros(
 create table tblNotas(
 	id int primary key auto_increment,
 	nota int not null,
-	idEstudiantes_grupos int not null,
-	idParametro int not null,
-	foreign key (idEstudiantes_grupos) references tblEstudiantes_grupos(id),
-	foreign key (idParametro) references tblParametros(id)
+	idEstudiante_grupo int not null,
+	idParametro_grupo int not null,
+	foreign key (idEstudiante_grupo) references tblEstudiantes_grupos(id),
+	foreign key (idParametro_grupo) references tblParametros(id)
 );
 
 create table tblTokens(

@@ -11,6 +11,30 @@ ALTER TABLE tblNotas modify column nota DOUBLE;
 
 
 DELIMITER $$
+
+DROP FUNCTION IF EXISTS fn_changePassword;
+CREATE FUNCTION fn_changePassword(_email varchar(50), _sha text, _tipo varchar(1), _pass text)
+RETURNS varchar(50)
+BEGIN
+    declare v_date varchar(50);
+    set v_date ="null";
+
+    SELECT t.email  into v_date from tblTokens t
+        WHERE t.email = _email and t.sha = _sha;
+
+    if v_date != 'null' then
+        if _tipo = 'c' then
+            delete from tblTokens where email = v_date;
+            UPDATE tblColegios
+            SET contrasenia=hex(aes_encrypt(_pass,'COL')) WHERE correo=_email;
+        
+        end if;
+
+    end if;
+
+    return v_date;
+END$$
+
 DROP procedure IF EXISTS sp_cursorInsertNote;
 CREATE procedure sp_cursorInsertNote(_tipo varchar(1), _trimestre int, _idGrupo int)
 BLOCK1: begin
