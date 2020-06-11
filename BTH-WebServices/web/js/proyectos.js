@@ -7,7 +7,7 @@ $(document).ready(function () {
         $("#cerrarSecion-btn").show();
         $('#cambiContracena').show();
         $("#btnCrearProyecto").show();
-        
+
         $(".opEditarProyecto").show();
         $(".opEliminarProyecto").show();
         $('#cambiContracena').attr('href', 'changePassword.html?id=' + us.id);
@@ -49,14 +49,14 @@ function getList(id) {
     });
 }
 function procesarList(respuesta) {
-
+    console.log(respuesta);
     var html = '';
     $.each(respuesta.response, function (i, obj) {
         html += '<tr>';
         html += '<td>' + obj.nombre + '</td>';
         if (localStorage.getItem('objUsuario')) {
-        html += "<td><button type='button' data-toggle='modal' data-target='#exampleModalProyecto' onclick='actualizar(" + obj.id + ")' class='btn btn-primary'>Editar</button></td>";
-        html += "<td><button type='button' onclick='eliminar(" + obj.id + ")' class='btn btn-danger'>Eliminar</button></td>";
+            html += "<td><button type='button' data-toggle='modal' data-target='#exampleModalProyecto' onclick='actualizar(" + obj.id + ")' class='btn btn-primary'>Editar</button></td>";
+            html += "<td><button type='button' onclick='eliminar(" + obj.id + ")' class='btn btn-danger'>Eliminar</button></td>";
         }
         html += '<td>' + obj.nombreCarrera + '</td>';
         html += '</tr>';
@@ -85,8 +85,7 @@ function insert() {
     obj.nombre = nombre;
     obj.descripcion = descripcion;
     obj.idCarrera = getParameterByName('id');
-
-    if (idProyecto !== 0) {
+    if (idProyecto != 0) {
         obj.id = idProyecto;
         jQuery.ajax({
             headers: {
@@ -100,23 +99,22 @@ function insert() {
             'success': procesarRegistro
         });
         return;
+    } else {
+
+        jQuery.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'type': 'POST',
+            'url': 'api/proyectos/',
+            'data': JSON.stringify(obj), // lo que se envia
+            'dataType': 'json', // lo que se recibe 
+            'success': procesarRegistro
+        });
     }
-
-    jQuery.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        'type': 'POST',
-        'url': 'api/proyectos/',
-        'data': JSON.stringify(obj), // lo que se envia
-        'dataType': 'json', // lo que se recibe 
-        'success': procesarRegistro
-    });
-
 }
 function procesarRegistro(respuesta) {
-    alert(respuesta.message);
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;
         location.reload();
@@ -158,7 +156,7 @@ function eliminar(id) {
 }
 function mensajeEstado(respuesta) {
     alert(respuesta.message);
-    location.reload();
+    getList(getParameterByName('id'));
 }
 
 function getParameterByName(name) {

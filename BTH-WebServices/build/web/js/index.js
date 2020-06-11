@@ -29,6 +29,7 @@ $(document).ready(function() {
 });
 
 function procesarIndex(respuesta) {
+    console.log(respuesta);
     if (respuesta.success) {
         var html = "";
         html += "<br><div class='container main-container'>";
@@ -39,11 +40,11 @@ function procesarIndex(respuesta) {
             html += "<div class='card'> ";
             //html += "<img class='card-img-top' src='imagenes/imagen1.jpg' alt='card image cap'>";
             html += "<div class='card-body'>";
-            html += "<h5 class='card-title'>" + obj.nombre + " " + "(" + obj.sigla + ")" + "</h5>";
-            html += "<p class='card-text'>" + obj.descripcion + "</p>";
+            html += "<h5 class='card-title'>" + obj.Nombre + " " + "(" + obj.Sigla + ")" + "</h5>";
+            html += "<p class='card-text'>" + obj.Descripcion + "</p>";
             html += "<div class='justify-content-lg-between d-flex'>"
-            html += "<a href='http://localhost:8080/bth/proyectos.html?id="+obj.id+"&nombre="+obj.nombre+"' class='btn btn-outline-info'>" + "Sus proyectos" + "</a>";
-            html += "<a href='#' data-toggle='modal' data-target='#exampleModal' onclick='encontrarInformacion(" + obj.id + ")' class='btn btn-primary'>" + "Informacion" + "</a>";
+            html += "<a href='http://localhost:8080/bth/proyectos.html?id="+obj.Id+"&nombre="+obj.Nombre+"' class='btn btn-outline-info'>" + "Sus proyectos" + "</a>";
+            html += "<a href='#' data-toggle='modal' data-target='#exampleModal' onclick='encontrarInformacion(" + obj.Id + ")' class='btn btn-primary'>" + "Informacion" + "</a>";
             html += "</div></div></div><br>";
         });
         html += "</div></div></div>";
@@ -65,6 +66,7 @@ function encontrarInformacion(id) {
 function modalInformacion(respuesta) {
     var html = "";
     var contenido = "";
+    console.log(respuesta);
     if(respuesta.success) {
         $.each(respuesta.response, function (i, obj) {
             contenido += "<strong>"+obj.titulo+"</strong>";
