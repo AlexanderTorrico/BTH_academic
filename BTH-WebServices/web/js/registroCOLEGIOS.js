@@ -1,3 +1,6 @@
+$(document).ready(function () {
+
+});
 
 function registrarColegio() {
     var usuario = $("#nombre").val();
@@ -44,6 +47,8 @@ function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;
         localStorage.setItem('objUsuario', JSON.stringify(usuario));
+        limpiarDatosColegio();
+        getListadoColegio();
         //  alert("su registro fu exitoso. se le envio un mensaje a su correo para verificar su cuenta");
 //        $(location).attr('href', 'index.html');
     } else {
@@ -145,12 +150,12 @@ function editarColegio() {
         alert("debe ingresar el nombre de usuario");
         return;
     }
-    
+
     if (!sigep) {
         alert("debe ingresar el nombre de usuario");
         return;
     }
-    
+
     if (!director) {
         alert("debe ingresar el nombre de usuario");
         return;
@@ -163,13 +168,11 @@ function editarColegio() {
         alert("debe ingresar el nombre de usuario");
         return;
     }
-     if (!esmodulo) {
+    if (!esmodulo) {
         alert("debe ingresar el nombre de usuario");
         return;
     }
 
-
-    alert(idColegio);
     var obj = new Object();
     obj.nombre = nombre;
     obj.sigep = sigep;

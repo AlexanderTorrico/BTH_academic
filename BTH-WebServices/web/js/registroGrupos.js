@@ -134,19 +134,19 @@ function registrarGrupos() {
         alert('debe selecionar un Docente');
         return;
     }
-     if (!costo) {
+    if (!costo) {
         alert("debe ingresar el costo");
         return;
     }
-     if (inicio == 0) {
+    if (inicio == 0) {
         alert('debe selecionar una fecha inicio');
         return;
     }
-      if (fin == 0) {
+    if (fin == 0) {
         alert('debe selecionar una fecha fin');
         return;
     }
-    
+
 
     var obj = new Object();
     obj.nivel = nivel;
@@ -175,8 +175,10 @@ function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;
         localStorage.setItem('objUsuario', JSON.stringify(usuario));
-        alert("su registro fu exitoso. se le envio un mensaje a su correo para verificar su cuenta");
-//        $(location).attr('href', 'index.html');
+        alert("El grupo fue registrado");
+        limpiarDatosGrupos();
+        getListadoGrupos();
+        // $(location).attr('href', 'index.html');
     } else {
         console.log(respuesta);
         alert(respuesta.message);

@@ -1,9 +1,7 @@
 $(document).ready(function () {
 
 });
-function saludo() {
-    alert("qwertyu");
-}
+
 function abrirModal() {
     $("#CreateCursoModal").modal("show");
 }
@@ -12,7 +10,7 @@ function registrarCarrera() {
     var sigla = $("#sigla").val();
     var descripcion = $("#descripcion").val();
     var img = $("#img").val();
-    if(img == 0){
+    if (img == 0) {
         alert('selecione una opcione')
         return;
     }
@@ -22,22 +20,22 @@ function registrarCarrera() {
     obj.descripcion = descripcion;
     obj.img = img;
 
-    if (nombre =="") {
+    if (nombre == "") {
         alert("debe ingresar el nombre de Carrera");
         return;
     }
-    
-    if (sigla =="") {
+
+    if (sigla == "") {
         alert("debe ingresar la sigla de Carrera");
         return;
     }
-    
-    if (descripcion =="") {
+
+    if (descripcion == "") {
         alert("debe ingresar la descripcion de Carrera");
         return;
     }
-    
-    if (img =="") {
+
+    if (img == "") {
         alert("debe ingresar la area de Carrera");
         return;
     }
@@ -69,6 +67,7 @@ function procesarRegistro(respuesta) {
         getListadoCarreras();
 //        $(location).attr('href', 'index.html');
     } else {
+        console.log(respuesta);
         alert(respuesta.message);
     }
 }
@@ -140,9 +139,9 @@ function editarCarrera() {
     var descripcion = $("#descripcionCarrera").val();
     var img = $("#imgCarrera").val();
 
-    if(img == 0){
-            alert('selecione una opcione')
-            return;
+    if (img == 0) {
+        alert('selecione una opcione')
+        return;
     }
     // validar que no esten vacios
     if (!nombre) {
