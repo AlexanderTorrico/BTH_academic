@@ -48,5 +48,7 @@ public abstract class FactoryDao {
     public abstract CarreraDao getNewCarreraDao();
 
     public abstract GruposDao getNewGruposDao();
+	
+	public abstract AsistenciaDao getNewAsistenciaDao();
 
 }

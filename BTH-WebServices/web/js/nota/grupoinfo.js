@@ -86,6 +86,11 @@ function save_DeudaidGrupo(id){
     localStorage.setItem("grupo",id);
 }
 
+function save_Assistances(id){
+    document.location.href = "/bth/asistenciaDocente.html";
+    localStorage.setItem("grupo",id);
+}
+
 
 
 function templateCard(carrera, colegio, nivel, grupo, id) {
@@ -111,7 +116,7 @@ function templateCard(carrera, colegio, nivel, grupo, id) {
             '                           <br>  ' +
             '                           <a href="#" class="btn btn-primary" onClick="save_NotaidGrupo('+id+')">Nota</a>  ' +
             '                           <a href="#" class="btn btn-primary" onClick="save_DeudaidGrupo('+id+')">Deuda</a>  ' +
-            '                           <a href="#" class="btn btn-primary">Asistencia</a>  ' +
+            '                           <a href="#" class="btn btn-primary" onClick="save_Assistances('+id+')">Asistencia</a>  ' +
             '                       </div>  ' +
             '                  </div>  ';
 }

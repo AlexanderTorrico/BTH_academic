@@ -89,5 +89,10 @@ public class FactoryDaoMySQL extends FactoryDao {
     public GruposDao getNewGruposDao() {
        return new GruposDaoMySQL();
     }
+	
+    @Override
+    public AsistenciaDao getNewAsistenciaDao() {
+        return new AsistenciaDaoMysql();
+    }
 
 }
