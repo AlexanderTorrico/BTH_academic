@@ -8,7 +8,9 @@ ALTER TABLE tblNotas ADD CONSTRAINT tblnotas_ibfk_2 FOREIGN KEY (idParametro_gru
 ALTER TABLE tblNotas modify column nota DOUBLE;
 
 
+alter table tblproyectos add estado boolean
 
+alter table tblproyectos drop foreign key 'tblproyectos_ibfk_1'
 
 DELIMITER $$
 

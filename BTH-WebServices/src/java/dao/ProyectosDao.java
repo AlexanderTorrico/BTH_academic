@@ -27,4 +27,11 @@ public abstract class ProyectosDao {
     public abstract int update(Proyectos proyecto);
     public abstract Proyectos get(int id);
 
+    public abstract ArrayList<Proyectos> getListByGroup(Proyectos proyecto)throws Exception;
+    
+    public abstract ArrayList<Proyectos> getListByGroupEstado(Proyectos proyecto)throws Exception;
+    
+    public abstract String deleteProyectAndPartaker(Proyectos proyecto)throws Exception;
+    
+    public abstract String isActive(Proyectos proyecto)throws Exception;
 }

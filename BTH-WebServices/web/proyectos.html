@@ -1,29 +1,200 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Proyectos</title>
-        <meta charset="utf-8">
-        <LINK REL="StyleSheet" HREF="css/estilo.css" TYPE="text/css" MEDIA=screen> 
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">  
+        <title>B T H</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--===============================================================================================-->
         <link rel="icon" type="image/png" href="https://cdn.saaspass.com/a52e2205866340ea/authenticators/gitlab_128.png"/>
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!--===============================================================================================-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/fontello.css" >
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     </head>
     <body >
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="imagenes/logo_1.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Bachillerato Tecnico Humanistico
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" onClick="grupo()">Grupo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Editar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onClick="cerrar()">Cerrar sesion</a>
+                    </li>
+                </ul>
+                <span id="usernamedocente" class="navbar-text">
+                    Doc: Nombre persona
+                </span>
+            </div>
+        </nav>
         <br>
         <div class="container" >
-            
+
             <h2 id="tituloProyecto"></h2>
             <br>
-            <input id="btnCrearProyecto" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalProyecto" value="Crear Proyecto" >
+
+            <input id="btnCreatProyecto" type="button" class="btn btn-primary col-3" onclick="addFormCreateProyect()" value="Crear royectos" >
+            <input id="btnGetProyecto" type="button" class="btn btn-primary col-3" onclick="getListByGroup()" data-toggle="modal" data-target="#exampleModalProyecto" value="Ver Proyectos" >
             <br>
             <br>
-            <table class="table" id="tabla">
+
+            <div id="cuerpo">
+                <div class="card col-12">
+                    <div class="row no-gutters">
+                        <div class="col-md-3">
+                            <img src="imagenes/imagen4.jpg" class="card-img" alt="...">
+                        </div>
+                        <div class="col-5">
+                            <div class="card-body">
+                                <h5 class="card-title">Nombre__</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-muted"><b>Carrera: </b>Construccion civil</small></p>
+                                <p class="card-text"><small class="text-muted"><b>Colegio: </b>Juan Pablo II</small></p>
+                            </div>
+                        </div>
+
+                        <div class="col-3 offset-1">
+                            <div class="card-body">
+                                <h5>Participantes</h5>
+                                <div id="idParticipantes">
+                                    <ul>
+
+                                        <li> primavera</li>
+                                        <li> verano </li>
+                                        <li> otoño </li>
+                                        <li> invierno </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="m-3" style ="position: absolute; bottom: 0;right:0;">
+                                <a class="btn btn-warning" href="#">Editar</a>
+                                <a class="btn btn-danger" href="#">Eliminar</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Button trigger modal -->
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">El proyecto se a guardado correptamente</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Agregue los participantes del proyecto
+                            <br><br>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Nombre completo</th>
+                                        <th scope="col">Añadir</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="tblModalParticipantes">
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>Mark</td>
+                                        <td><input type="checkbox" aria-label="Checkbox for following text input"></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>Jacob</td>
+                                        <td><input type="checkbox" aria-label="Checkbox for following text input"></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td><input type="checkbox" aria-label="Checkbox for following text input"></td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary" onclick="checkSelected()" data-dismiss="modal">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <br><br><br>
+            <script type='text/javascript'>
+                function encodeImageFileAsURL() {
+
+                    var filesSelected = document.getElementById("inputFileToLoad").files;
+                    if (filesSelected.length > 0) {
+                        var fileToLoad = filesSelected[0];
+
+                        var fileReader = new FileReader();
+
+                        fileReader.onload = function (fileLoadedEvent) {
+                            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+                            var newImage = document.createElement('img');
+                            newImage.src = srcData;
+
+                            document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                            //alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                            //service(document.getElementById("imgTest").innerHTML);
+                            console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                        };
+                        fileReader.readAsDataURL(fileToLoad);
+                    }
+                }
+
+
+                function service(base) {
+                    var data = {
+                        nombre: base
+                    };
+                    fetch("/bth/api/proyect/recibido", {
+                        method: "POST",
+                        body: JSON.stringify(data),
+                        headers: {
+                            'Accept': 'application/json, text/plain',
+                            'Content-Type': 'application/json;charset=UTF-8'
+                        }
+                    })
+                            .then(function (request) {
+                                return request.json();
+                            })
+                            .then(function (json) {
+                                console.log(json["response"]);
+                            });
+                }
+
+            </script>
+            <!--table class="table" id="tabla">
                 <thead class="thead-dark">
                     <tr>
                         <th>Nombre Proyecto</th>
@@ -36,45 +207,21 @@
 
                 </tbody>
             </table>
-            <div id="mensajeTabla" style="font-size: 20px; text-align: center"></div><br>
-            <div class="modal fade" id="exampleModalProyecto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Proyecto</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="contenidoModal">
-                            <div id="formProyecto">
-                                <input type="hidden" value="0" id="idProyecto">
-                                <div class="form-group">
-                                    <label for="nombreProyecto">Nombre del Proyecto:</label>
-                                    <input class="form-control" placeholder="Nombre del Proyecto" id="nombreProyecto">
-                                </div>
-                                <div class="form-group">
-                                    <label for="descripcionProyecto">Descripccion del Proyecto:</label>
-                                    <input class="form-control" placeholder="Descripccion del Proyecto" id="descripcionProyecto">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                            <button type="button" onclick="insert()" class="btn btn-primary">Guardar</button>  
-                        </div>
-                    </div>
-                </div>
- z           </div>
+            <div id="mensajeTabla" style="font-size: 20px; text-align: center"></div><br-->
+
+
         </div>
-        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="js/proyectos.js" type="text/javascript"></script>
+        <script src="js/nota/header.js"></script>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="js/nota/proyectCreat.js" type="text/javascript"></script>
         <script>
-            $('#myModal').on('shown.bs.modal', function () {
-                $('#myInput').trigger('focus')
-            })
+                $('#myModal').on('shown.bs.modal', function () {
+                    $('#myInput').trigger('focus')
+                })
         </script>
     </body>
 </html>

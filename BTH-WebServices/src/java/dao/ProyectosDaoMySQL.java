@@ -163,5 +163,123 @@ public class ProyectosDaoMySQL extends ProyectosDao {
 
         return null;
     }
+    
+    @Override
+    public ArrayList<Proyectos> getListByGroup(Proyectos proyecto)throws Exception {
+        ArrayList<Proyectos> list = new ArrayList<>();
+        Conexion objConexion = Conexion.getOrCreate();
+        String query = "select p.*, g.idGestion, c.nombre as colegio, ca.nombre as carrera from tblproyectos p\n" +
+        "join tblgrupos g on p.idcarrera = g.id\n" +
+        "join tblcolegios c on c.id = g.idColegio\n" +
+        "join tblcarreras ca on ca.id = g.idcarrera\n" +
+        "join tblDocentes d on d.id = g.idDocente\n" +
+        "where d.id ="+proyecto.getId()+" and g.idGestion = "+proyecto.getIdgestion();
+        try {
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                String auxImg = objResultSet.getString("imgJson");
+                if(auxImg==null){
+                    auxImg = "0";
+                }else if(auxImg.isEmpty()){
+                    auxImg = "0";
+                }else{
+                    auxImg = objResultSet.getString("imgJson");
+                }
+                Proyectos obj = new Proyectos();
+                obj.setId(objResultSet.getInt("id"));
+                obj.setNombre(objResultSet.getString("nombre"));
+                obj.setDescripcion(objResultSet.getString("descripcion"));
+                obj.setImg(auxImg);
+                obj.setNombreCarrera(objResultSet.getString("carrera"));
+                obj.setNombreColegio(objResultSet.getString("colegio"));
+                obj.setEstado(objResultSet.getBoolean("estado"));
+
+                list.add(obj);
+            }
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
+        return list;
+    }
+
+    @Override
+    public String deleteProyectAndPartaker(Proyectos proyecto) throws Exception {
+        Conexion objConexion = Conexion.getOrCreate();
+        StringBuilder queryParticipante = new StringBuilder("delete from tblparticipantes where idProyecto = "+proyecto.getId());
+        StringBuilder queryProyecto = new StringBuilder("delete from tblproyectos where id = "+proyecto.getId());
+        int i = 0;
+        try {
+
+            
+            objConexion.ejecutarSimple(queryParticipante.toString());
+            objConexion.ejecutarSimple(queryProyecto.toString());
+            
+            
+            objConexion.desconectar();
+            return "Proyecto eliminado";
+        } catch (Exception e) {
+            objConexion.desconectar();
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public String isActive(Proyectos proyecto) throws Exception {
+        Conexion objConexion = Conexion.getOrCreate();
+        StringBuilder query = new StringBuilder("update tblproyectos set estado = "+proyecto.isEstado()+" where id ="+proyecto.getId());
+        
+        int i = 0;
+        try {
+
+            
+            objConexion.ejecutarSimple(query.toString());
+            
+            
+            
+            objConexion.desconectar();
+            return "Proyecto actualizado"+query.toString();
+        } catch (Exception e) {
+            objConexion.desconectar();
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public ArrayList<Proyectos> getListByGroupEstado(Proyectos proyecto) throws Exception {
+        ArrayList<Proyectos> list = new ArrayList<>();
+        Conexion objConexion = Conexion.getOrCreate();
+        String query = "select p.*, g.idGestion, c.nombre as colegio, ca.nombre as carrera from tblproyectos p\n" +
+            "join tblgrupos g on p.idcarrera = g.id\n" +
+            "join tblcolegios c on c.id = g.idColegio\n" +
+            "join tblcarreras ca on ca.id = g.idcarrera\n" +
+            "join tblDocentes d on d.id = g.idDocente\n" +
+            "where ca.id ="+proyecto.getId()+" and g.idGestion = "+proyecto.getIdgestion()+" and p.estado = true;";
+        try {
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                String auxImg = objResultSet.getString("imgJson");
+                if(auxImg==null){
+                    auxImg = "0";
+                }else if(auxImg.isEmpty()){
+                    auxImg = "0";
+                }else{
+                    auxImg = objResultSet.getString("imgJson");
+                }
+                Proyectos obj = new Proyectos();
+                obj.setId(objResultSet.getInt("id"));
+                obj.setNombre(objResultSet.getString("nombre"));
+                obj.setDescripcion(objResultSet.getString("descripcion"));
+                obj.setImg(auxImg);
+                obj.setNombreCarrera(objResultSet.getString("carrera"));
+                obj.setNombreColegio(objResultSet.getString("colegio"));
+                obj.setEstado(objResultSet.getBoolean("estado"));
+
+                list.add(obj);
+            }
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage());
+        }
+        return list;
+    }
 
 }

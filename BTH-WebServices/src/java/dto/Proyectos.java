@@ -14,8 +14,11 @@ public class Proyectos {
     String nombre;
     String descripcion;
     String img;
-    int idCarrera;
+    int idCarrera, idgestion;
     String nombreCarrera;
+    String nombreColegio;
+    boolean estado;
+    
     public Proyectos() {
     }
 
@@ -67,5 +70,31 @@ public class Proyectos {
     public void setIdCarrera(int idCarrera) {
         this.idCarrera = idCarrera;
     }
+
+    public int getIdgestion() {
+        return idgestion;
+    }
+
+    public void setIdgestion(int idgestion) {
+        this.idgestion = idgestion;
+    }
+
+    public String getNombreColegio() {
+        return nombreColegio;
+    }
+
+    public void setNombreColegio(String nombreColegio) {
+        this.nombreColegio = nombreColegio;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    
     
 }

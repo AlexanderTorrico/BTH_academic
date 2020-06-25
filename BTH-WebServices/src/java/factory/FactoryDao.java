@@ -50,5 +50,7 @@ public abstract class FactoryDao {
     public abstract GruposDao getNewGruposDao();
 	
 	public abstract AsistenciaDao getNewAsistenciaDao();
+        
+    public abstract ParticipantesDao getNewParticipanteDao();
 
 }

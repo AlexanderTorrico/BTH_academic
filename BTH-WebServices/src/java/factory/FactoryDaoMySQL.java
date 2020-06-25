@@ -94,5 +94,9 @@ public class FactoryDaoMySQL extends FactoryDao {
     public AsistenciaDao getNewAsistenciaDao() {
         return new AsistenciaDaoMysql();
     }
-
+    
+    @Override
+    public ParticipantesDao getNewParticipanteDao() {
+        return new ParticipantesDaoMysql();
+    }
 }
