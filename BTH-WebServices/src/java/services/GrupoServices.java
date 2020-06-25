@@ -8,6 +8,8 @@ package services;
 import com.google.gson.Gson;
 import dao.GrupoDao;
 import dao.ParametroDao;
+import dto.Estudiante;
+import dto.Grupos;
 import dto.InformacionesGrupo;
 import dto.Parametro;
 import dto.infoGrupos;
@@ -85,6 +87,29 @@ public class GrupoServices {
 
         try {
             ArrayList<InformacionesGrupo> parametro = dao.docenteWebHorario(param);
+
+            respuesta.setSuccess(true);
+            respuesta.setMessage("lista obtenida");
+            respuesta.setResponse(parametro);
+
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            return new Gson().toJson(respuesta);
+        }
+    }
+    
+    @Path("/list/")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getListByGroup(Grupos param) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        GrupoDao dao = factory.getNewGrupoDao();
+
+        try {
+            ArrayList<Estudiante> parametro = dao.listByGroup(param);
 
             respuesta.setSuccess(true);
             respuesta.setMessage("lista obtenida");

@@ -6,6 +6,8 @@
 package dao;
 
 import dal.Conexion;
+import dto.Estudiante;
+import dto.Grupos;
 import dto.InformacionesGrupo;
 import dto.Parametro;
 import dto.infoGrupos;
@@ -133,5 +135,38 @@ public class GrupoDaoMysql extends GrupoDao{
         } else{
             return "Domingo,";
         }
+    }
+
+    @Override
+    public ArrayList<Estudiante> listByGroup(Grupos param) throws Exception {
+        ArrayList<Estudiante> list = new ArrayList<>();
+        String query = "select * from tblEstudiantes e\n"
+                + "join (\n"
+                + "select * from tblestudiantes_grupos\n"
+                + "where idGrupo = "+param.getId()+") a on e.id = a.idEstudiante";
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                Estudiante obj = new Estudiante();
+
+                obj.setId(objResultSet.getInt("id"));
+
+                obj.setNombre(objResultSet.getString("nombre"));
+
+                obj.setApaterno(objResultSet.getString("aPaterno"));
+
+                obj.setAmaterno(objResultSet.getString("aMaterno"));
+
+                obj.setIdCarrera(objResultSet.getInt("idCarrera"));
+
+                
+                list.add(obj);
+
+            }
+        } catch (Exception ex) {
+            throw new Exception("El registro no pudo ser obtenido " + query + ex.getMessage());
+        }
+        return list;
     }
 }
