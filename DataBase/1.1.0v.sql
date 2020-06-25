@@ -19,7 +19,7 @@ insert into tblCarreras values(default, 'Gastronomia','Gas','Carrera de ejemplo 
 insert into tblCarreras values(default, 'Mecanica','Mec','Carrera de ejemplo esto se cambiara despues','fjasklfjasld/fsadfds/fasfsa');	
 																							  
 insert into tblDocentes values(default,'Alan','Gandarilla','Mauro','docente@gmail.com','Doc','16DC65E18E123DA36C11466AACF3965A',1);
-insert into tblDocentes values(default,'Noelia','Gandarilla','Mauro','docente@gmail.com','Doc','16DC65E18E123DA36C11466AACF3965A',1);
+insert into tblDocentes values(default,'Noelia','Gandarilla','Mauro','docente@gmail.com','Dos','16DC65E18E123DA36C11466AACF3965A',1);
 
 insert into tblGestiones values(DEFAULT, 4);
 
