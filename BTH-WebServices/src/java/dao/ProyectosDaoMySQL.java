@@ -97,11 +97,13 @@ public class ProyectosDaoMySQL extends ProyectosDao {
     public int insert(Proyectos proyecto) {
         Conexion objConexion = Conexion.getOrCreate();
         int id = 0;
-        StringBuilder query = new StringBuilder("INSERT INTO tblproyectos (id, nombre, descripcion, idCarrera) VALUES (");
+        StringBuilder query = new StringBuilder("INSERT INTO tblproyectos VALUES (");
         query.append("default,");
         query.append("'" + proyecto.getNombre() + "',");
-        query.append("'" + proyecto.getDescripcion() + "',");;
+        query.append("'" + proyecto.getDescripcion() + "',");
+        query.append("'" + proyecto.getImg() + "',");
         query.append(proyecto.getIdCarrera());
+        query.append(","+"false");
         query.append(")");
         id = objConexion.ejecutarInsert(query.toString());
         if (id == 0) {
