@@ -56,9 +56,12 @@ function templateitemColegios(numero, nombre, sigep, director, direccion, telefo
             '                                               <td>' + username + '</td>  ' +
             '                                               <td>' + estado + '</td>  ' +
             '                                               <td>  ' +
-            '                                               <a href="#" data-toggle="modal" data-target="#modalColegio" onclick=informacion(' + id + ')><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarColegio(' + id + '))><i class="fas fa-trash-alt"></i></a>  ' +
+            '                                               <a href="#" data-toggle="modal" data-target="#modalColegio" onclick=informacion(' + id + ')><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarColegio(' + id + '))><i class="fas fa-trash-alt"></i></a> | <a href="#" onclick="abrirVentana(' + id +')" ><i class="fas fa-eye"></i></a>  ' +
             '                                               </td>  ' +
             '                                          </tr>  ';
 }
-
+function abrirVentana(id) {
+    window.location="PerfilColegio.html?id=" + id;
+    
+}
 

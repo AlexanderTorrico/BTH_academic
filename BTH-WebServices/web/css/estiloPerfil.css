@@ -1,0 +1,71 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 18-06-2020, 20:01:27
+    Author     : Carlos Clavijo
+*/
+
+#contenido {
+    width: 80%;
+    height: 70%;
+    margin-top: 5%;
+    margin-left: 10%;
+    border: 1px solid black;
+    float: left;
+}
+
+#divImagen {
+    margin-top: 2%;
+    margin-left: 2%;
+    width: 20%;
+    height: 200px;
+    float: left;
+}
+
+#cambiarFoto {
+    margin-top: 5%;
+}
+
+#imgPerfil {
+    width: 100%;
+    height: 100%;
+}
+
+#informacion {
+    float: left;
+    width: 70%;
+    margin-left: 5%;
+    margin-top: 2%;
+    display: table;
+}
+
+.label {
+    float: left;
+    display: inline-block;
+    width: 100px;
+}
+
+.botones {
+    float: left;
+    margin-left: 27%;
+    margin-top: 1.5%;
+    padding-bottom: 3%;
+}
+
+input[type="text"] {
+    float: left;
+    display: none;
+}
+
+.rowInfo {
+    width: 60%;
+    float: left;
+    display: block;
+}
+
+.editBtn {
+    float: left;
+}
