@@ -176,19 +176,19 @@ function getListByGroup() {
 
 function saveProyect() {
     if (document.getElementById("idname").value == "") {
-        alert("El proyecto deve tener un nombre");
+        alert("El proyecto debe tener un nombre");
         return;
     }
     if (document.getElementById("iddescript").value == "") {
-        alert("El proyecto deve tener una breve descripcion");
+        alert("El proyecto debe tener una breve descripción");
         return;
     }
     if (document.getElementById("iddescript").value == "") {
-        alert("El proyecto deve tener una breve descripcion");
+        alert("El proyecto debe tener una breve descripción");
         return;
     }
     if (!localStorage.getItem("grupo")) {
-        alert("Deves seleccionar un grupo para añadir participantes");
+        alert("Debes seleccionar un grupo para añadir participantes");
         return;
     }
 
@@ -275,7 +275,7 @@ function checkSelected() {
             })
             .then(function (json) {
 
-                alert("Se an añadido participantes al proyecto");
+                alert("Se han añadido participantes al proyecto");
                 getListByGroup();
             });
 

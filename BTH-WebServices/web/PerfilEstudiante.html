@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Perfil ColegioNombre</title>
+        <title>Perfil EstudianteNombre</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="https://cdn.saaspass.com/a52e2205866340ea/authenticators/gitlab_128.png"/>
@@ -10,7 +10,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="#">
                 <img src="imagenes/logo_1.png" width="30" height="30" class="d-inline-block align-top" alt="">
                 <p>BTH<p>
             </a>
@@ -46,40 +46,39 @@
             <div id="informacion">
                 <div class="rowInfo">
                     <p class="label">Nombre:</p>
-                    <p class="pInfo pColegioInfo" id="nombreColegio"></p>
-                    <input type="text" id="editNombreColegio">
+                    <p class="pInfo pEstudianteInfo" id="nombreEstudiante"></p>
+                    <input type="text" id="editNombreEstudiante">
                 </div>
                 <div class="rowInfo">
-                    <p class="label">Sigep:</p>
-                    <p class="pInfo pColegioInfo" id="sigepColegio" ></p>
-                    <input type="text" id="editSigepColegio">
-                </div>
-                <div class="rowInfo">
-                    <p class="label">Director:</p>
-                    <p class="pInfo pColegioInfo" id="directorColegio" ></p>
-                    <input type="text" id="editDirectorColegio">
+                    <p class="label">Género:</p>
+                    <p class="pInfo pEstudianteInfo" id="generoEstudiante"></p>
+                    <input type="text" id="editGeneroEstudiante">
                 </div>
                 <div class="rowInfo">
                     <p class="label">Teléfono:</p>
-                    <p class="pInfo pColegioInfo" id="telefonoColegio"></p>
-                    <input type="text" id="editTelefonoColegio">
+                    <p class="pInfo pEstudianteInfo" id="telefonoEstudiante"></p>
+                    <input type="text" id="editTelefonoEstudiante">
                 </div>
                 <div class="rowInfo">
-                    <p class="label">Dirección:</p>
-                    <p class="pInfo pColegioInfo" id="direccionColegio"></p>
-                    <input type="text" id="editDireccionColegio">
+                    <p class="label">Fecha Nac:</p>
+                    <p class="pInfo pEstudianteInfo" id="fechaNacEstudiante"></p>
+                    <input type="text" id="editFechaNacEstudiante">
+                </div>
+                <div class="rowInfo">
+                    <p class="label">Colegio:</p>
+                    <p class="pInfo pEstudianteInfo" id="colegioEstudiante"></p>
+                    <input type="text" id="editColegioEstudiante">
                 </div>
             </div>
             <div class="botones">
-                <button type="button" class="btn btn-info" id="botonVolver" onclick="window.location.href = 'ColegiosR.html';">Volver</button>
+                <button type="button" class="btn btn-info" id="botonVolver" onclick="window.location.href = 'regEstudiante.html';">Volver</button>
                 <button type="button" class="btn btn-info" id="botonProyectos" onclick="window.location.href = 'proyectos.html';">Ver Proyectos</button>
-                <button type="button" class="btn btn-info" id="botonCarreras">Ver Carreras</button>
                 <button type="button" class="btn btn-dark" id="botonEditar" onclick="editar()">Editar</button>
             </div>
         </div>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="js/PerfilColegio.js"></script>
+        <script src="js/PerfilEstudiante.js"></script>
     </body>
 </html>

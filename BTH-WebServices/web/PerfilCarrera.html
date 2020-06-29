@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Perfil ColegioNombre</title>
+        <title>Perfil CarreraNombre</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" type="image/png" href="https://cdn.saaspass.com/a52e2205866340ea/authenticators/gitlab_128.png"/>
@@ -39,47 +39,41 @@
         </nav>
         <div id="contenido">
             <div id="divImagen"> 
-                <img id="imgPerfil" src="">
+                <img id="imgPerfil">
                 <input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;">
                 <label for="file" style="cursor: pointer;" class="btn-dark" id="cambiarFoto">Cambiar foto</label>
             </div>
             <div id="informacion">
                 <div class="rowInfo">
                     <p class="label">Nombre:</p>
-                    <p class="pInfo pColegioInfo" id="nombreColegio"></p>
-                    <input type="text" id="editNombreColegio">
+                    <p class="pInfo pCarreraInfo" id="nombreCarrera">Lorem Pichi</p>
+                    <input type="text" id="editNombreCarrera">
                 </div>
                 <div class="rowInfo">
-                    <p class="label">Sigep:</p>
-                    <p class="pInfo pColegioInfo" id="sigepColegio" ></p>
-                    <input type="text" id="editSigepColegio">
+                    <p class="label">Sigla:</p>
+                    <p class="pInfo pCarreraInfo" id="siglasCarrera">Lorem Ipsum</p>
+                    <input type="text" id="editSiglasCarrera">
                 </div>
                 <div class="rowInfo">
-                    <p class="label">Director:</p>
-                    <p class="pInfo pColegioInfo" id="directorColegio" ></p>
-                    <input type="text" id="editDirectorColegio">
+                    <p class="label">Jefe de Carrera:</p>
+                    <p class="pInfo pCarreraInfo" id="jefeCarrera">Lorem Ipsum</p>
+                    <input type="text" id="editJefeCarrera">
                 </div>
                 <div class="rowInfo">
-                    <p class="label">Teléfono:</p>
-                    <p class="pInfo pColegioInfo" id="telefonoColegio"></p>
-                    <input type="text" id="editTelefonoColegio">
-                </div>
-                <div class="rowInfo">
-                    <p class="label">Dirección:</p>
-                    <p class="pInfo pColegioInfo" id="direccionColegio"></p>
-                    <input type="text" id="editDireccionColegio">
+                    <p class="label">Descripcion</p>
+                    <p class="pInfo pCarreraInfo" id="descripcionCarrera">Lorem Ipsum</p>
+                    <input type="text" id="editDescripcionCarrera">
                 </div>
             </div>
             <div class="botones">
-                <button type="button" class="btn btn-info" id="botonVolver" onclick="window.location.href = 'ColegiosR.html';">Volver</button>
+                <button type="button" class="btn btn-info" id="botonVolver" onclick="window.location.href = 'carrera.html';">Volver</button>
                 <button type="button" class="btn btn-info" id="botonProyectos" onclick="window.location.href = 'proyectos.html';">Ver Proyectos</button>
-                <button type="button" class="btn btn-info" id="botonCarreras">Ver Carreras</button>
                 <button type="button" class="btn btn-dark" id="botonEditar" onclick="editar()">Editar</button>
             </div>
         </div>
         <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="js/PerfilColegio.js"></script>
+        <script src="js/PerfilCarrera.js"></script>
     </body>
 </html>

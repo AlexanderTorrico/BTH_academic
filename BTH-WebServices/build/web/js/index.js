@@ -43,7 +43,7 @@ function procesarIndex(respuesta) {
             html += "<h5 class='card-title'>" + obj.Nombre + " " + "(" + obj.Sigla + ")" + "</h5>";
             html += "<p class='card-text'>" + obj.Descripcion + "</p>";
             html += "<div class='justify-content-lg-between d-flex'>"
-            html += "<a href='http://localhost:8080/bth/proyectos.html?id="+obj.Id+"&nombre="+obj.Nombre+"' class='btn btn-outline-info'>" + "Sus proyectos" + "</a>";
+            html += "<a onClick='o("+obj.Id+")' class='btn btn-outline-info'>" + "Sus proyectos" + "</a>";
             html += "<a href='#' data-toggle='modal' data-target='#exampleModal' onclick='encontrarInformacion(" + obj.Id + ")' class='btn btn-primary'>" + "Informacion" + "</a>";
             html += "</div></div></div><br>";
         });
@@ -51,6 +51,11 @@ function procesarIndex(respuesta) {
         $("#contenedor-carreras").html(html);
     } else {
     }
+}
+
+function o(id){
+    localStorage.setItem("carrera",id);
+    location.href="/bth/homeProyect.html";
 }
 function encontrarInformacion(id) {
     jQuery.ajax({

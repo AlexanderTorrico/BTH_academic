@@ -33,13 +33,13 @@ function editarInformacion() {
     txtDirector.style.display = "block";
     txtTelefono.style.display = "block";
     txtDireccion.style.display = "block";
-    x = false;
     btnTexto.textContent = "Guardar";
     txtNombre.value = lblNombre.textContent;
     txtSigep.value = lblSigep.textContent;
     txtDirector.value = lblDirector.textContent;
     txtTelefono.value = lblTelefono.textContent;
     txtDireccion.value = lblDireccion.textContent;
+    x = false;
 }
 
 function guardarInformacion() {
@@ -53,13 +53,8 @@ function guardarInformacion() {
     txtDirector.style.display = "none";
     txtTelefono.style.display = "none";
     txtDireccion.style.display = "none";
-    x = true;
     btnTexto.textContent = "Editar";
-    txtNombre.innerHTML = lblNombre.value;
-    txtSigep.innerHTML = lblSigep.value;
-    txtDirector.innerHTML = lblDirector.value;
-    txtTelefono.innerHTML = lblTelefono.value;
-    txtDireccion.innerHTML = lblDireccion.value;
+    x = true;
 }
 
 var loadFile = function (event) {

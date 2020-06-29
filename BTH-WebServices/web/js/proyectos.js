@@ -78,7 +78,7 @@ function insert() {
     var idProyecto = $("#idProyecto").val();
     var descripcion = $("#descripcionProyecto").val();
     if (nombre.trim() === '' || descripcion.trim() === '') {
-        alert('complete los datos');
+        alert('Complete los datos');
         return;
     }
     var obj = new Object();
@@ -118,7 +118,7 @@ function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;
         location.reload();
-        alert("se realizo exitosamente la operacion!!!");
+        alert("Se realizó exitosamente la operación");
     } else {
         alert(respuesta.message);
     }
@@ -142,7 +142,7 @@ function procesarActualizacion(respuesta) {
     $("#descripcionProyecto").val(obj.descripcion);
 }
 function eliminar(id) {
-    if (confirm("Estas seguro que desea Eliminarlo")) {
+    if (confirm("Está seguro que desea eliminarlo")) {
         jQuery.ajax({
             headers: {
                 'Accept': 'application/json',
