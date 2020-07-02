@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Reportes</title>
+        <!--importamos estos script para la funcionalidad de herramientas  -->
+        <!--JQUERY: Es una librerÃ¬a de JavaScript, permite agregar interactividad a un sitio web sin tener 
+            conocimientos del lenguaje-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Los iconos tipo Solid de Fontawesome-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+        <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+        <link href="css/user-form.css" rel="stylesheet" type="text/css"/>
+        <!-- Nuestro css-->
+        <link rel="stylesheet" type="text/css" href="css/user-form.css" th:href="@{/css/user-form.css}">
+        <!-- DATA TABLE -->
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+
+
+    </head>
+
+    <body>
+        <!--inicio ingreso de pestaÃ±as form y lista   -->
+        <!-- Container: Necesaria para poder usar el famoso sistema grid de bootstrap -->
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="imagenes/logo_1.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                BTH
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrera.html">Carrrera</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="grupos.html">Grupos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ColegiosR.html">Colegios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Cerrar sesion</a>
+                    </li>
+                </ul>
+                <span id="usernamedocente" class="navbar-text">
+                    Admin Nombre persona
+                </span>
+            </div>
+        </nav>
+        <div class="">
+            <!-- mx-auto: Centra el div agregando auto margin al lado izquierda y derecha -->
+            <!--col-sm-8: utiliza 8 celdas de las 12 utilizadas por el grid sistem.  -->
+            <!-- main-section: clase definida para personalizarlo con css.-->
+            <div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+                <!--nav nav-tabs: Transforma la lista <ul> de vertical a horizontal y le agrega el estilo tipo â€œcajitaâ€. -->
+                <!--justify-content-end: Alinea los tabs a la derecha.  -->
+                <ul class="nav nav-tabs justify-content-end">
+                    <!--nav-item nav-link: Indica que ese  <li> es un tab y le da el estilo necesario-->
+                    <!--active: Indica que ese tab sera el seleccionado al mostrar la pagina. -->
+
+                    <li class="nav-item">
+                        <button onclick="abrirBusqueda()" class="btn btn-primary">Busqueda</button>
+                    </li>
+                </ul>
+                <!-- tab-content: El div con esta clase mostrara y contendra el contenido para los tabs -->
+                <div class="tab-pane" id="panelBusqueda" style="display: none">
+                    <!-- Formulario de Carrera-->
+                    <div class="card-header">
+                        <h4>Busqueda</h4>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">Colegio</label>
+                                <div class="col-lg-9">
+                                    <select id="colegio" class="form-control form-control-lg">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row" data-validate = "ingrese Area">
+                                <label class="col-lg-3 col-form-label form-control-label">Carrera</label>
+                                <div class="col-lg-9">
+                                    <select id="carrera" class="form-control form-control-lg">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 text-center">
+                                    <input type="reset" class="btn btn-secondary" onclick="cerrar()" value="Cancelar">
+                                    <input type="button" class="btn btn-primary" onclick="buscar()" value="Buscar">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mis-repotes">
+            </div>
+        </div>
+        <script src="js/main.js" type="text/javascript"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+        <script src="js/ReportesPagos.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+
+    </body>
+
+</html>

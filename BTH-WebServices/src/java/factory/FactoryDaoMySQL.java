@@ -32,7 +32,7 @@ public class FactoryDaoMySQL extends FactoryDao {
 
     @Override
     public UserDao getNewUserDao() {
-       return new UserDaoMySQL();
+        return new UserDaoMySQL();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class FactoryDaoMySQL extends FactoryDao {
     public PagoDao getNewPagoDao() {
         return new PagoDaoMysql();
     }
-    
+
     @Override
     public indexInformacionDaoMySQL getindexInformacionDao() {
         return new indexInformacionDaoMySQL();
@@ -67,9 +67,9 @@ public class FactoryDaoMySQL extends FactoryDao {
 
     @Override
     public EstudianteDao getNewEstudianteDao() {
-     return new EstudianteDaoMySQL();   
+        return new EstudianteDaoMySQL();
     }
-    
+
     @Override
     public NotaDao getNewNotaeDao() {
         return new NotaDaoMysql();
@@ -87,16 +87,31 @@ public class FactoryDaoMySQL extends FactoryDao {
 
     @Override
     public GruposDao getNewGruposDao() {
-       return new GruposDaoMySQL();
+        return new GruposDaoMySQL();
     }
-	
+
     @Override
     public AsistenciaDao getNewAsistenciaDao() {
         return new AsistenciaDaoMysql();
     }
-    
+
     @Override
     public ParticipantesDao getNewParticipanteDao() {
         return new ParticipantesDaoMysql();
+    }
+
+    @Override
+    public GestionDao getNewGestionDao() {
+        return new GestionDaoMySQL();
+    }
+
+    @Override
+    public ReportesNotasDao getNewReportesNotasDao() {
+        return new ReportesNotasDaoMySQL();
+    }
+
+    @Override
+    public ReportesPagosDao getNewReportesPagosDao() {
+        return new ReportesPagosDaoMySQL();
     }
 }
