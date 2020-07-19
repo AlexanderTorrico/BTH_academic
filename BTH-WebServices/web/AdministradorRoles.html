@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Administración de Roles</title>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+        <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+        <link href="css/user-form.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" type="text/css" href="css/user-form.css" th:href="@{/css/user-form.css}">
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"  crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">
+                <img src="imagenes/logo_1.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                BTH
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrera.html">Carrrera</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="grupos.html">Grupos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ColegiosR.html">Colegios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Cerrar sesion</a>
+                    </li>
+                </ul>
+                <span id="usernamedocente" class="navbar-text">
+                    Admin Nombre persona
+                </span>
+            </div>
+        </nav>
+        <div class="centro" style="margin-left: 15%; margin-right: 15%;">
+            <div class="mx-auto  main-section center-" id="myTab" role="tablist">
+                <ul class="nav nav-tabs justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">Lista</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Formulario</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Colegios</h4>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="userList" class="table table-bordered table-hover table-striped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Estudiante</th>
+                                            <th scope="col">Docente</th>
+                                            <th scope="col">Administrador</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="listColegioAdm">
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Leonardo</td>
+                                            <td>
+                                                <select name="estadoEstudiante" class="custom-select" id="estadoEstudiante">
+                                                    <option value="activo">Activo</option>
+                                                    <option value="desactivo">Desactivo</option>
+                                                </select>
+                                            </td>
+                                            <td> 
+                                                <select name="estadoDocente" class="custom-select" id="estadoDocente">
+                                                    <option value="activo">Activo</option>
+                                                    <option value="desactivo">Desactivo</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select name="estadoAdministradodr" class="custom-select" id="estadoAdministrador">
+                                                    <option value="activo">Activo</option>
+                                                    <option value="desactivo">Desactivo</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+                        <!-- Formulario de usuarios-->
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>Registro de Colegio</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="nombre" type="text" name="nombre" placeholder="Nombre Colegio">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Sigep</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="sigep" type="text" name="sigla" placeholder="Sigep Colegio">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Director</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="director" type="text" name="director" placeholder="Director Colegio">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Direccion</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="direccion" type="text" name="Direccion" placeholder="Direeccion Colegio">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Telefono</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="telefono" type="text" name="telefono" placeholder="Telefono Colegio" >
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Correo</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="correo" type="text" name="correo" placeholder="Correo Colegio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" class="btn btn-primary" data-toggle="modal" data-target="#modalColegio">
+                <div class="modal fade" id="modalColegio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Informacion de carrera</h5>
+                                <button type="button" style="width: auto;" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="contenidoModalColegio">
+                                <input type="hidden" id="idColegio">
+                                <div class="form-group">
+                                    <label for="nombreColegio">Nombre del Colegio</label>
+                                    <input type="text" name="nombreColegio" id="nombreColegio" class="form-control" placeholder="Nombre del Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sigepColegio">Sigep del Colegio</label>
+                                    <input type="text" name="SigepColegio" id="sigepColegio" class="form-control" maxlength="5" placeholder="Sigep del Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="directorColegio">Director de Colegio</label>
+                                    <input type="text" name="directorColegio" id="directorColegio"  class="form-control" placeholder="Director de Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="direccionColegio">Direccion de Colegio</label>
+                                    <input type="text" name="direccionColegio" id="direccionColegio" class="form-control" placeholder="Direccion Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefonoColegio">Telefono de colegio</label>
+                                    <input type="text" name="telefonoColegio" id="telefonoColegio" class="form-control" placeholder="Telefono Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="esModuloColegio">Es modulo</label>
+                                    <input type="text" name="esModuloColegio" id="esModuloColegio" class="form-control" placeholder="Telefono Colegio" value="">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-darwing" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="editarColegio()">Guardar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+            <script src="js/ListaColegios.js" type="text/javascript"></script>
+            <script src="js/registroCOLEGIOS.js" type="text/javascript"></script>
+        </div>
+    </body>
+</html>

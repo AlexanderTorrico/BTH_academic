@@ -366,7 +366,7 @@ function templateBaseCreate() {
             '     ' +
             '     ' +
             '               <input id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" />  ' +
-            '               <div id="imgTest"></div>  ' +
+            '               <div id="imgTest" style="width:200px; height:300px;"></div>  ' +
             '     ' +
             '               <br><br><br>  ' +
             '               <input id="btnsaveProyect" type="button" class="btn btn-success col-4 offset-4" data-toggle="modal" value="Guardar Proyecto" onclick="saveProyect()">  ' +
@@ -414,8 +414,8 @@ function templateItemGetListProyect(obj) {
     }
     return  '   <div class="card col-12 mt-3">  ' +
             '                       <div class="row no-gutters">  ' +
-            '                           <div class="col-md-3">  ' +
-            img +
+            '                           <div class="col-md-3">  \n\
+            ' + img +
             '                           </div>  ' +
             '                           <div class="col-5">  ' +
             '                               <div class="card-body">  ' +
@@ -425,14 +425,11 @@ function templateItemGetListProyect(obj) {
             '                                   <p class="card-text"><small class="text-muted"><b>Colegio: </b>' + obj.nombreColegio + '</small></p>  ' +
             '                               </div>  ' +
             '                           </div>  ' +
-            '     ' +
             '                           <div class="col-3 offset-1">  ' +
             '                               <div class="card-body">  ' +
             '                                   <h5>Participantes</h5>  ' +
             '                                   <div id="idParticipantes">  ' +
             '                                       <ul id="proyect_' + obj.id + '">  ' +
-            '     '+
-            '     ' +
             '                                       </ul>  ' +
             '                                   </div>  ' +
             '                               </div>  ' +
@@ -441,7 +438,6 @@ function templateItemGetListProyect(obj) {
             '                                   <a class="btn btn-danger" onClick="deleteProyect(' + obj.id + ')">Eliminar</a>  ' +
             '                               </div>  ' +
             '                           </div>  ' +
-            '     ' +
             '                       </div>  ' +
             '                  </div>  ';
 }
