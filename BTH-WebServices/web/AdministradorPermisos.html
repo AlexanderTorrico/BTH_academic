@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Administración de Roles</title>
+        <title>Administración de Permisos</title>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-        <link href="css/user-form.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="css/user-form.css" rel="stylesheet" type="text/css"/>-->
         <link rel="stylesheet" type="text/css" href="css/user-form.css" th:href="@{/css/user-form.css}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">
                 <img src="imagenes/logo_1.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                BTH
+                <p>BTH</p>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -66,28 +66,28 @@
                                         <tr>
                                             <th scope="col">Id</th>
                                             <th scope="col">Nombre</th>
-                                            <th scope="col">Estudiante</th>
-                                            <th scope="col">Docente</th>
-                                            <th scope="col">Administrador</th>
+                                            <th scope="col">Sólo lectura</th>
+                                            <th scope="col">Sólo escritura</th>
+                                            <th scope="col">Lectura y Escritura</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="listaUsuarios">
+                                    <tbody id="listaPermisos">
                                         <tr>
                                             <th scope="row">1</th>
                                             <td>Leonardo</td>
                                             <td>
                                                 <div class="form-check">
-                                                    <input type="checkbox"  name="rolLeo" class="form-check-input">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="form-check">
-                                                    <input type="checkbox"  name="rolLeo" class="form-check-input">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="form-check">
-                                                    <input type="checkbox"  name="rolLeo" class="form-check-input">
+                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                                                 </div>
                                             </td>
                                         </tr>
@@ -95,7 +95,6 @@
                                 </table>
                             </div>
                             <div class="card-body">
-                                <button type="button" class="btn btn-success">Success</button>
                             </div>
                         </div>
                     </div>
@@ -103,14 +102,43 @@
                         <!-- Formulario de usuarios-->
                         <div class="card">
                             <div class="card-header">
-                                <h4>Registro de Rol</h4>
+                                <h4>Registro de Permisos</h4>
                             </div>
                             <div class="card-body">
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Nombre del Rol</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">Nombre</label>
                                     <div class="col-lg-9">
                                         <input class="input100" id="nombre" type="text" name="nombre" placeholder="Nombre Colegio">
-                                        <button type="button" class="btn btn-primary" id="ingresarRol" id="btnCrearRol"onclick="RevisarXD()">Primary</button>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Sigep</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="sigep" type="text" name="sigla" placeholder="Sigep Colegio">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Director</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="director" type="text" name="director" placeholder="Director Colegio">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Direccion</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="direccion" type="text" name="Direccion" placeholder="Direeccion Colegio">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Telefono</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="telefono" type="text" name="telefono" placeholder="Telefono Colegio" >
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Correo</label>
+                                    <div class="col-lg-9">
+                                        <input class="input100" id="correo" type="text" name="correo" placeholder="Correo Colegio">
                                     </div>
                                 </div>
                             </div>
@@ -127,11 +155,31 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body" id="contenidoModalRoles">
-                                <input type="hidden" id="idRoles">
+                            <div class="modal-body" id="contenidoModalColegio">
+                                <input type="hidden" id="idColegio">
                                 <div class="form-group">
-                                    <label for="nombreRol">Nombre del Rol</label>
-                                    <input type="text" name="nombreRol" id="nombreRol" class="form-control" placeholder="Nombre del Rol">
+                                    <label for="nombreColegio">Nombre del Colegio</label>
+                                    <input type="text" name="nombreColegio" id="nombreColegio" class="form-control" placeholder="Nombre del Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sigepColegio">Sigep del Colegio</label>
+                                    <input type="text" name="SigepColegio" id="sigepColegio" class="form-control" maxlength="5" placeholder="Sigep del Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="directorColegio">Director de Colegio</label>
+                                    <input type="text" name="directorColegio" id="directorColegio"  class="form-control" placeholder="Director de Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="direccionColegio">Direccion de Colegio</label>
+                                    <input type="text" name="direccionColegio" id="direccionColegio" class="form-control" placeholder="Direccion Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefonoColegio">Telefono de colegio</label>
+                                    <input type="text" name="telefonoColegio" id="telefonoColegio" class="form-control" placeholder="Telefono Colegio" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="esModuloColegio">Es modulo</label>
+                                    <input type="text" name="esModuloColegio" id="esModuloColegio" class="form-control" placeholder="Telefono Colegio" value="">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -142,11 +190,11 @@
                     </div>
                 </div>
             </div>
-            <script src="js/jquery-3.3.1.min.js"></script>
             <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-            <script src="js/AdministradorRoles.js" type="text/javascript"></script>
+            <script src="js/AdministradorPermisos.js" type="text/javascript"></script>
         </div>
     </body>
 </html>

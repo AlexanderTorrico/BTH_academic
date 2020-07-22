@@ -114,4 +114,20 @@ public class FactoryDaoMySQL extends FactoryDao {
     public ReportesPagosDao getNewReportesPagosDao() {
         return new ReportesPagosDaoMySQL();
     }
+
+    @Override
+    public UsuarioDao getNewUsuarioDao() {
+        return new UsuarioDaoMySQL();
+    }
+    
+    @Override
+    public RolDao getNewRolDao() {
+        return new RolDaoMySQL();
+    }
+    
+    @Override
+    public PermisoDao getNewPermisoDao() {
+        return new PermisoDaoMySQL();
+    }
+    
 }
