@@ -8,6 +8,7 @@ package dao;
 
 import dto.MovilTrimestre;
 import dto.Pago;
+import dto.PlanPagos;
 import dto.Search;
 import dto.User;
 import java.util.ArrayList;
@@ -25,4 +26,6 @@ public abstract class PagoDao {
     public abstract int insert(Pago obj) throws Exception;
     
     public abstract Search getEstudent(String ci);
+    
+    public abstract ArrayList<PlanPagos> getPlanPagos(String ci) throws Exception;
 }

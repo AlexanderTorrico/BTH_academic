@@ -3,7 +3,9 @@ package dao;
 import consola.MessageCorreo;
 import consola.SendEmail;
 import dal.Conexion;
+import dto.CarrerasHabilitadasColegio;
 import dto.Colegio;
+import dto.ColegioReporte;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.util.logging.Level;
@@ -188,6 +190,221 @@ public class ColegioDaoMySQL extends ColegioDao {
         id = objConexion.ejecutarSimple(query.toString());
         objConexion.desconectar();
         return id;
+    }
+    
+     @Override
+    public ArrayList<ColegioReporte> getListReportesCarrera(int id) {
+        ArrayList<ColegioReporte> registros = new ArrayList<ColegioReporte>();
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            String query = "select p.fecha, concat(e.nombre,' ', e.aPaterno,' ', e.aMaterno) as nombre,c.nombre as carrera , p.monto, p.mes as mes from tblpagos p\n"
+                    + "inner join tblestudiantes_grupos eg\n"
+                    + "on p.idEstudiantes_grupos = eg.id\n"
+                    + "inner join tblgrupos g\n"
+                    + "on eg.idgrupo = g.id\n"
+                    + "inner join tblcarreras c\n"
+                    + "on g.idCarrera = c.id\n"
+                    + "inner join tblcolegios col\n"
+                    + "on g.idColegio = col.id\n"
+                    + "inner join tblestudiantes e\n"
+                    + "on eg.idEstudiante = e.id\n"
+                    + "where col.id =" + id;
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                ColegioReporte obj = new ColegioReporte();
+                String _fecha = objResultSet.getString("fecha");
+                obj.setFecha(_fecha);
+
+                String _nombre = objResultSet.getString("nombre");
+                obj.setNombre(_nombre);
+
+                String _carrera = objResultSet.getString("carrera");
+                obj.setCarrera(_carrera);
+
+                String _monto = objResultSet.getString("monto");
+                obj.setMonto(_monto);
+
+                String _mes = objResultSet.getString("mes");
+                obj.setMes(_mes);
+
+                registros.add(obj);
+            }
+        } catch (Exception ex) {
+            ;
+        }
+        return registros;
+    }
+
+    @Override
+    public ArrayList<ColegioReporte> getListReportesGrupo(int id) {
+        ArrayList<ColegioReporte> registros = new ArrayList<ColegioReporte>();
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            String query = "select g.id as grupo,p.fecha, ca.nombre as carrera,concat(e.nombre,' ', e.aPaterno,' ', e.aMaterno) as nombre  , p.monto, p.mes from tblcolegios c\n"
+                    + "inner join tblgrupos g\n"
+                    + "on c.id = g.idColegio\n"
+                    + "inner join tblestudiantes_grupos eg\n"
+                    + "on g.id = eg.idGrupo\n"
+                    + "inner join tblpagos p\n"
+                    + "on eg.id = p.idEstudiantes_grupos\n"
+                    + "inner join tblcarreras ca\n"
+                    + "on ca.id = g.idCarrera\n"
+                    + "inner join tblestudiantes e\n"
+                    + "on e.id =eg.idEstudiante\n"
+                    + "where c.id= " + id;
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                ColegioReporte obj = new ColegioReporte();
+                int _grupo = objResultSet.getInt("grupo");
+                obj.setGrupo(_grupo);
+                String _fecha = objResultSet.getString("fecha");
+                obj.setFecha(_fecha);
+
+                String _carrera = objResultSet.getString("carrera");
+                obj.setCarrera(_carrera);
+
+                String _nombre = objResultSet.getString("nombre");
+                obj.setNombre(_nombre);
+
+                String _monto = objResultSet.getString("monto");
+                obj.setMonto(_monto);
+
+                String _mes = objResultSet.getString("mes");
+                obj.setMes(_mes);
+
+                registros.add(obj);
+            }
+        } catch (Exception ex) {
+            ;
+        }
+        return registros;
+    }
+
+    @Override
+    public ArrayList<ColegioReporte> getListReportesNotasCarrera(int id) {
+        ArrayList<ColegioReporte> registros = new ArrayList<ColegioReporte>();
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            String query = "select g.id as grupo,ca.nombre as carrera ,concat(es.nombre,' ', es.aPaterno,' ', es.aMaterno) as nombre , n.nota\n"
+                    + "from tblcolegios c\n"
+                    + "inner join tblgrupos g\n"
+                    + "on c.id = g.idColegio\n"
+                    + "inner join tblcarreras ca\n"
+                    + "on g.idCarrera = ca.id\n"
+                    + "inner join tblestudiantes_grupos eg\n"
+                    + "on g.id = eg.idGrupo\n"
+                    + "inner join tblestudiantes es\n"
+                    + "on eg.idEstudiante = es.id\n"
+                    + "inner join tblnotas n\n"
+                    + "on es.id = n.idEstudiante_grupo\n"
+                    + "where c.id = " + id;
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                ColegioReporte obj = new ColegioReporte();
+                int _grupo = objResultSet.getInt("grupo");
+                obj.setGrupo(_grupo);
+
+                String _carrera = objResultSet.getString("carrera");
+                obj.setCarrera(_carrera);
+
+                String _nombre = objResultSet.getString("nombre");
+                obj.setNombre(_nombre);
+
+                int _nota = objResultSet.getInt("nota");
+                obj.setNota(_nota);
+                registros.add(obj);
+            }
+        } catch (Exception ex) {
+            ;
+        }
+        return registros;
+    }
+
+    @Override
+    public ArrayList<ColegioReporte> getListReportesNotasGrupo(int id) {
+        ArrayList<ColegioReporte> registros = new ArrayList<ColegioReporte>();
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            String query = "select g.id as grupo,ca.nombre as carrera ,concat(es.nombre,' ', es.aPaterno,' ', es.aMaterno) as nombre , n.nota\n"
+                    + "from tblcolegios c\n"
+                    + "inner join tblgrupos g\n"
+                    + "on c.id = g.idColegio\n"
+                    + "inner join tblcarreras ca\n"
+                    + "on g.idCarrera = ca.id\n"
+                    + "inner join tblestudiantes_grupos eg\n"
+                    + "on g.id = eg.idGrupo\n"
+                    + "inner join tblestudiantes es\n"
+                    + "on eg.idEstudiante = es.id\n"
+                    + "inner join tblnotas n\n"
+                    + "on es.id = n.idEstudiante_grupo\n"
+                    + "where c.id = " + id;
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                ColegioReporte obj = new ColegioReporte();
+                int _grupo = objResultSet.getInt("grupo");
+                obj.setGrupo(_grupo);
+
+                String _carrera = objResultSet.getString("carrera");
+                obj.setCarrera(_carrera);
+
+                String _nombre = objResultSet.getString("nombre");
+                obj.setNombre(_nombre);
+
+                int _nota = objResultSet.getInt("nota");
+                obj.setNota(_nota);
+                registros.add(obj);
+            }
+        } catch (Exception ex) {
+            ;
+        }
+        return registros;
+    }
+
+    @Override
+    public ArrayList<CarrerasHabilitadasColegio> getListCarrerasHabilitadas(int id) {
+        ArrayList<CarrerasHabilitadasColegio> registros = new ArrayList<CarrerasHabilitadasColegio>();
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            String query = "select  c.id as idcarrera,g.id as idgrupo,c.nombre,g.costo,g.inicio as fechainicio,g.fin as fechafin,h.inicio as horainicio,h.fin as horafin,TIMESTAMPDIFF(MONTH, g.inicio,g.fin) as duracion\n"
+                    + "from tblgrupos g\n"
+                    + "inner join tblcarreras c\n"
+                    + "on g.idCarrera = c.id\n"
+                    + "inner join tblgestiones ge\n"
+                    + "on g.idGestion = ge.id\n"
+                    + "inner join tbldias d\n"
+                    + "on g.id = d.idGrupo\n"
+                    + "inner join tblhoras h\n"
+                    + "on d.idHora = h.id\n"
+                    + "inner join tblcolegios co\n"
+                    + "on co.id = g.idColegio\n"
+                    + "where g.idColegio =" + id;
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                CarrerasHabilitadasColegio obj = new CarrerasHabilitadasColegio();
+                int _idcarrera = objResultSet.getInt("idcarrera");
+                obj.setIdcarrera(_idcarrera);
+                int _idgrupo = objResultSet.getInt("idgrupo");
+                obj.setIdgrupo(_idgrupo);
+                String _nombre = objResultSet.getString("nombre");
+                obj.setNombre(_nombre);
+                String _carrera = objResultSet.getString("costo");
+                obj.setCosto(_carrera);
+                String _fechainicio = objResultSet.getString("fechainicio");
+                obj.setFechainicio(_fechainicio);
+                String _fechafin = objResultSet.getString("fechafin");
+                obj.setFechafin(_fechafin);
+                String _horainicio = objResultSet.getString("horainicio");
+                obj.setHorainicio(_horainicio);
+                String _horafin = objResultSet.getString("horafin");
+                obj.setHorafin(_horafin);
+                String _duracion = objResultSet.getString("duracion");
+                obj.setDuracion(_duracion);
+                registros.add(obj);
+            }
+        } catch (Exception ex) {
+            ;
+        }
+        return registros;
     }
 
 }

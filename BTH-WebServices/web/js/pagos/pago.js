@@ -17,29 +17,52 @@ function buscarEstudiante() {
     return false;
 }
 function procesarObtenerEstudiante(respuesta) {
-    if (respuesta.success) {
-        var objEstudiante = respuesta.response;
-        $("#ci").text(objEstudiante.ci);
-        $("#nombre").text(objEstudiante.nombre);
-        $("#paterno").text(objEstudiante.apaterno);
-        $("#materno").text(objEstudiante.amaterno);
-        $("#carrera").text(objEstudiante.carrera);
-        $("#grupo").text(objEstudiante.grupo);
-        localStorage.setItem('grupoId', JSON.stringify(objEstudiante.grupo));
+    if (respuesta.success)
+    {
+        var codigo = 0;
+        var imput = "<div class='form-group col-md-2'><label for='inputEmail4'>Pagar Cuota</label><input type='number' class='form-control' id='monto'>";
+        imput += "<button type='submit' class='btn btn-info btn-lg' onclick='registrarPago()'>Registrar</button>";
+        imput += "</div>";
+        var table = "";
+        table += "<table  class='table table-striped table-sm'><thead><tr><th>Nombre Completo</th><th>Cuota</th><th>pago</th><th>Saldo</th><th>Fecha</th><th>Duracion</th><th>Costo materia</th></tr></thead><tbody>";
+        $.each(respuesta.response, function (i, obj) {
+            table += "<tr>";
+            table += " <td>" + obj.nombre + "</th>";
+            table += " <td>" + obj.cuota + "Bs</th>";
+            table += " <td>" + obj.pago + "Bs</th>";
+            table += " <td>" + obj.saldo + "Bs</th>";
+            table += " <td>" + obj.fecha + "</th>";
+            table += " <td>" + obj.duracion + "</th>";
+            table += " <td>" + obj.costomateria + "</th>";
+            codigo = obj.codigo;
+        });
+        table += "</table>";
+        $("#inputdiv").html(imput);
+        $("#tablaplan").html(table);
+
+
+        var objEstudiante = {idCodigo: codigo};
+        localStorage.setItem('objEstudiante', JSON.stringify(objEstudiante));
+
 
     }
     return false;
 }
 function registrarPago() {
+   
+    if (localStorage.getItem('objEstudiante')){
+        var objColegio = JSON.parse(localStorage.getItem('objEstudiante'));
+        codigo = objColegio.idCodigo;
+    } else {
+        // si estuviera en otra pagina, redirigir al index
+    }
+    var currentdate = new Date(); 
     var monto = $("#monto").val();
-    var mes = $("#mes").val();
-    var idgrupo = localStorage.getItem("grupoId");
-    // validar que no esten vacios
     var obj = new Object();
-    obj.monto = parseInt(monto);
-    obj.mes = mes;
-    obj.fecha = "20200406";
-    obj.idEstudiantes_grupos = idgrupo;
+    obj.monto = monto;
+    obj.mes = "1";
+    obj.fecha = "20200723";
+    obj.idEstudiantes_grupos = codigo;
     jQuery.ajax({
         headers: {
             'Accept': 'application/json',

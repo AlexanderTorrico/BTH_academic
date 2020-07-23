@@ -1,6 +1,8 @@
 package dao;
 
+import dto.CarrerasHabilitadasColegio;
 import dto.Colegio;
+import dto.ColegioReporte;
 import dto.Docente;
 import java.util.ArrayList;
 
@@ -25,5 +27,15 @@ public abstract class ColegioDao {
     public abstract Colegio get(int id);
 
     public abstract Colegio get(String username, String correo);
+    
+    public abstract ArrayList<ColegioReporte> getListReportesCarrera(int id);
+
+    public abstract ArrayList<ColegioReporte> getListReportesGrupo(int id);
+
+    public abstract ArrayList<ColegioReporte> getListReportesNotasCarrera(int id);
+
+    public abstract ArrayList<ColegioReporte> getListReportesNotasGrupo(int id);
+
+    public abstract ArrayList<CarrerasHabilitadasColegio> getListCarrerasHabilitadas(int id);
    
 }

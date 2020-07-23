@@ -11,7 +11,7 @@ import dao.ParametroDao;
 import dto.MovilTrimestre;
 import dto.Pago;
 import dto.Parametro;
-import dto.Search;
+import dto.PlanPagos;
 import dto.User;
 import factory.FactoryDao;
 import java.util.ArrayList;
@@ -79,15 +79,14 @@ public class PagoServices {
     @Path("/{ci}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String obtener(@PathParam("ci") String ci) {
+    public String obtener(@PathParam("ci") String ci) throws Exception {
         Respuesta respuesta = new Respuesta();
-
         FactoryDao factory = FactoryDao.getFactoryInstance();
         PagoDao dao = factory.getNewPagoDao();
-        Search estudiante = dao.getEstudent(ci);
+        ArrayList<PlanPagos> parametro = dao.getPlanPagos(ci);
         respuesta.setSuccess(true);
         respuesta.setMessage("el estudiante");
-        respuesta.setResponse(estudiante);
+        respuesta.setResponse(parametro);
         return new Gson().toJson(respuesta);
     }
       @Path("registrar")

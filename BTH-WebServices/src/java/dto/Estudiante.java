@@ -23,6 +23,7 @@ public class Estudiante {
     private String estado;
     private int idColegio;
     private int idCarrera;
+    private int idGrupo;
 
     public Estudiante() {
     }
@@ -121,6 +122,14 @@ public class Estudiante {
 
     public void setIdCarrera(int idCarrera) {
         this.idCarrera = idCarrera;
+    }
+
+    public int getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(int idGrupo) {
+        this.idGrupo = idGrupo;
     }
     
     

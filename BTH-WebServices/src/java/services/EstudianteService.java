@@ -40,18 +40,20 @@ public class EstudianteService {
 
         FactoryDao factory = FactoryDao.getFactoryInstance();
         EstudianteDao dao = factory.getNewEstudianteDao();
-        Estudiante estudiante = dao.get(param.getCi());
 
-//         si ya hay un usuario en la bd con ese nombre de usuario
-        if (estudiante != null) {       
-                respuesta.setMessage("el estudiante ya esta registrado");
-                return new Gson().toJson(respuesta);           
-        }
+//        Estudiante estudiante = dao.get(param.getCi());
+//
+////         si ya hay un usuario en la bd con ese nombre de usuario
+//        if (estudiante != null) {       
+//                respuesta.setMessage("el estudiante ya esta registrado");
+//                return new Gson().toJson(respuesta);           
+//        }
         try {
             int idGenerado = dao.insert(param);
             param.setId(idGenerado);
             respuesta.setSuccess(true);
-            respuesta.setMessage("registro exitoso");         
+            dao.insertAlgrupo(param.getId(), param.getIdGrupo());
+            respuesta.setMessage("registro exitoso");
             respuesta.setResponse(param);
         } catch (Exception ex) {
             respuesta.setMessage("registro fallido");

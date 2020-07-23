@@ -9,6 +9,7 @@ import dal.Conexion;
 import dto.MovilTrimestre;
 import dto.Pago;
 import dto.Parametro;
+import dto.PlanPagos;
 import dto.Search;
 import dto.User;
 import java.sql.ResultSet;
@@ -111,21 +112,48 @@ public class PagoDaoMysql extends PagoDao {
                 String _amaterno = objResultSet.getString("aMaterno");
                 obj.setAmaterno(_amaterno);
 
-                String _ci= objResultSet.getString("ci");
+                String _ci = objResultSet.getString("ci");
                 obj.setCi(_ci);
 
                 int _grupo = objResultSet.getInt("grupo");
                 obj.setGrupo(_grupo);
-                
-                String _carrera= objResultSet.getString("carrera");
+
+                String _carrera = objResultSet.getString("carrera");
                 obj.setCarrera(_carrera);
-                
+
                 return obj;
             }
         } catch (Exception ex) {
             ;
         }
         return null;
+    }
+
+    @Override
+    public ArrayList<PlanPagos> getPlanPagos(String ci) throws Exception {
+
+        ArrayList<PlanPagos> lista = new ArrayList<PlanPagos>();
+
+        String query = "call getplanpagos('" + ci + "');";
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                PlanPagos obj = new PlanPagos();
+                obj.setCodigo(objResultSet.getInt("codigo"));
+                obj.setNombre(objResultSet.getString("nombre"));
+                obj.setCuota(objResultSet.getString("cuota"));
+                obj.setPago(objResultSet.getString("pago"));
+                obj.setSaldo(objResultSet.getString("saldo"));
+                obj.setFecha(objResultSet.getString("fecha"));
+                obj.setDuracion(objResultSet.getString("duracion"));
+                obj.setCostomateria(objResultSet.getString("costomateria"));
+                lista.add(obj);
+            }
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage() + " " + query);
+        }
+        return lista;
     }
 
 }

@@ -7,6 +7,7 @@ package services;
 
 import com.google.gson.Gson;
 import dao.ColegioDao;
+import dto.CarrerasHabilitadasColegio;
 import dto.Colegio;
 import factory.FactoryDao;
 import java.util.ArrayList;
@@ -188,4 +189,17 @@ public class ColegioService {
         return new Gson().toJson(respuesta);
     }
 
+      @Path("listacarreras/habilitadas/{id}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getListaCarrerasHabilitadas(@PathParam("id") int idColegio) {
+        Respuesta respuesta = new Respuesta();
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        ColegioDao dao = factory.getNewColegioDao();
+        ArrayList<CarrerasHabilitadasColegio> reportes = dao.getListCarrerasHabilitadas(idColegio);
+        respuesta.setSuccess(true);
+        respuesta.setMessage("4");
+        respuesta.setResponse(reportes);
+        return new Gson().toJson(respuesta);
+    }
 }

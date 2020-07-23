@@ -24,7 +24,9 @@ public abstract class EstudianteDao {
     public abstract ArrayList<Estudiante> getList();
 
     public abstract Estudiante get(String id);
-    
+
     public abstract Estudiante get(String username, String correo);
+
+    public abstract int insertAlgrupo(int idEstudiante, int idGrupo) throws Exception;
 
 }

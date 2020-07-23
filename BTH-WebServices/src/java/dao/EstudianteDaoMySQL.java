@@ -79,5 +79,17 @@ public class EstudianteDaoMySQL extends EstudianteDao {
     public Estudiante get(String username, String correo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+       @Override
+    public int insertAlgrupo(int idEstudiante, int idGrupo) throws Exception {
+        Conexion objConexion = Conexion.getOrCreate();
 
+        int id = 0;
+        StringBuilder query = new StringBuilder("INSERT INTO TBLESTUDIANTES_GRUPOS VALUES (NULL," + idEstudiante + "," + idGrupo + ")");
+        id = objConexion.ejecutarInsert(query.toString());
+        if (id == 0) {
+            throw new Exception("El estudiante no se regitro al grupo");
+        }
+        objConexion.desconectar();
+        return id;
+    }
 }
