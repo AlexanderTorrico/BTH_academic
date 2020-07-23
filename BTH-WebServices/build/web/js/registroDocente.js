@@ -10,6 +10,8 @@ function registrarDocente() {
     var username = $("#username").val();
     var contrasena = $("#contrasena").val();
 
+
+
     // validar que no esten vacios
     if (!usuario) {
         alert("debe ingresar el nombre de usuario");
@@ -37,11 +39,20 @@ function registrarDocente() {
 }
 
 
-function procesarRegistro(respuesta){
+function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;
         localStorage.setItem('objUsuario', JSON.stringify(usuario));
         alert("su registro fu exitoso. se le envio un mensaje a su correo para verificar su cuenta");
+
+        
+        document.getElementById("nombre").value="";
+        document.getElementById("apaterno").value="";
+        document.getElementById("amaterno").value="";
+        document.getElementById("correo").value="";
+        document.getElementById("username").value="";
+        document.getElementById("contrasena").value="";
+        
 //        $(location).attr('href', 'index.html');
     } else {
         alert(respuesta.message);
