@@ -35,7 +35,7 @@ function getRoles() {
                     //html += templateCard(json[i].carrera, json[i].colegio, json[i].nivel, grupo, json[i].id);
                     if(json[i].idRol==1){
                         
-                        html+=templateDocente();
+                        html+=templateDocente(json[i]);
                     }else if(json[i].idRol==2){
                         html+=templateColegio(json[i]);
                     }else if(json[i].idRol==3){
@@ -74,8 +74,10 @@ function btnDocnete(){
     getIdDocente();
     location.href = "/bth/docentegrupos.html";
 }
-function btnColegio(idColegio){
-    localStorage.setItem("objColegio", idColegio);
+function btnColegio(obj){
+    
+    
+    localStorage.setItem("idColegio", obj);
     location.href = "/bth/perfilcolegio.html";
 }
 function btnAdminBTH(){
@@ -102,7 +104,9 @@ function templateDocente(){
 }
 
 function templateColegio(json){
+    
     var nombre = "Admin Colegio "+json["colegio"];
+    localStorage.setItem("nombre", json["colegio"]);
     return  '   <div class="card mt-5">  '  + 
  '                   <div class="card-header">  '  + 
  '                       Administrador  de Colegios Bachillerato tecnico humanistico  '  + 
@@ -112,7 +116,7 @@ function templateColegio(json){
  '                           <div class="col-9">  '  + 
  '                               <h5 class="card-title">'+nombre+'</h5>  '  + 
  '                               <p class="card-text">Con esta cuenta se podra registrar estudiantes y asignarlos a los diferentes grupo como tabien un control de pagos</p>  '  + 
- '                               <a href="#" class="btn btn-primary" onClick="btnColegio('+json["idReference"]+')">Ingresar</a>  '  + 
+ '                               <a href="#" class="btn btn-primary" onClick="btnColegio('+json["idReferencia"]+')">Ingresar</a>  '  + 
  '                           </div>  '  + 
  '                           <div class="col-2">  '  + 
  '                               <img src="imagenes/bth/colegio.png"  width="20" class="card-img" alt="...">  '  + 
