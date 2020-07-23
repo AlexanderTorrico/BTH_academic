@@ -83,7 +83,7 @@ BEGIN
 							where trimestre=1 and idGrupo =_idGrupo and tipo = 's') a
 				join tblnotas n on n.idParametro_grupo = a.id
 				group by n.idEstudiante_grupo) c1 on a1.id = c1.id) x
-		join (select a1.id, (a1.nota+b1.nota+c1.nota)/3 as segundo from (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+		left join (select a1.id, (a1.nota+b1.nota+c1.nota)/3 as segundo from (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
 							where trimestre=2 and idGrupo =_idGrupo and tipo = 'h') a
 				join tblnotas n on n.idParametro_grupo = a.id
 				group by n.idEstudiante_grupo) a1
@@ -95,7 +95,7 @@ BEGIN
 							where trimestre=2 and idGrupo =_idGrupo and tipo = 's') a
 				join tblnotas n on n.idParametro_grupo = a.id
 				group by n.idEstudiante_grupo) c1 on a1.id = c1.id) y on x.id = y.id
-		join (select a1.id, (a1.nota+b1.nota+c1.nota)/3 as tercer from (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
+		left join (select a1.id, (a1.nota+b1.nota+c1.nota)/3 as tercer from (select n.idEstudiante_grupo as id, avg(n.nota) as nota from (SELECT * from tblparametros
 							where trimestre=3 and idGrupo =_idGrupo and tipo = 'h') a
 				join tblnotas n on n.idParametro_grupo = a.id
 				group by n.idEstudiante_grupo) a1
@@ -108,4 +108,18 @@ BEGIN
 				join tblnotas n on n.idParametro_grupo = a.id
 				group by n.idEstudiante_grupo) c1 on a1.id = c1.id) z on x.id = z.id) nota on est.id = nota.id
 	order by nombre;
+END $$
+
+CREATE PROCEDURE getplanpagos(_ci varchar(50))
+BEGIN  
+	SET @saldo=0;
+select eg.id as codigo,concat(e.nombre,' ',e.aPaterno,' ',e.aPaterno) as nombre,p.monto as cuota,@saldo := @saldo + p.monto as pago, pa.costo-@saldo := @saldo as saldo,p.fecha,pa.duracion,pa.costo as costomateria
+from tblestudiantes e
+inner join tblestudiantes_grupos eg
+on e.id=eg.idEstudiante
+inner join tblpagos p
+on eg.id = p.idEstudiantes_grupos
+inner join (select TIMESTAMPDIFF(MONTH,g.inicio,g.fin) as duracion,g.costo/TIMESTAMPDIFF(MONTH,g.inicio,g.fin) as cuotas,g.id as idgrupo, g.costo as costo from tblgrupos as g where idColegio = 1) as pa
+on eg.idGrupo = pa.idgrupo
+where e.ci='113';
 END $$
