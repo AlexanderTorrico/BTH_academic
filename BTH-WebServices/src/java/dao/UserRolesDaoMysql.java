@@ -54,5 +54,57 @@ public class UserRolesDaoMysql extends UserRolesDao{
         }
         return lista;
     }
+
+    @Override
+    public void save(UserRoles obj) throws Exception {
+        Conexion objConexion = Conexion.getOrCreate();
+
+        String query = "insert into tbldocentes values(default,(select nombre from tblusuarios where id = " +obj.getId()+
+"										),(select apPaterno from tblusuarios where id = " +obj.getId()+
+"										),(select apMaterno from tblusuarios where id = " +obj.getId()+
+"										),(select correo from tblusuarios where id = " +obj.getId()+
+"										),(select username from tblusuarios where id = " +obj.getId()+
+"										),'fdaffads',1);";
+        
+        
+        int upd = objConexion.ejecutarSimple(query);
+        if (upd == 0) {
+            throw new Exception("El registro no pudo ser actualizado "+query);
+        }
+        
+        objConexion.desconectar();
+        
+    }
+
+    @Override
+    public ArrayList<UserRoles> getIdDocente(UserRoles param) throws Exception {
+        ArrayList<UserRoles> lista = new ArrayList<UserRoles>();
+
+        String query = "select * from tbldocentes " +
+            "where username =(" +
+            "select username from tblusuarios where id="+param.getId()+")";
+
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                UserRoles obj = new UserRoles();
+
+                obj.setId(objResultSet.getInt("id"));
+                
+                obj.setNombre(objResultSet.getString("aPaterno")+" "+objResultSet.getString("aMaterno")+" "+objResultSet.getString("nombre"));
+                
+
+                lista.add(obj);
+            }
+        } catch (Exception ex) {
+            try {
+                throw new Exception("El registro no pudo ser obtenido " + query);
+            } catch (Exception ex1) {
+                Logger.getLogger(CarreraDaoMySQL.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        return lista;
+    }
     
 }

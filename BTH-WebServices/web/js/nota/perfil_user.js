@@ -2,6 +2,11 @@ $(document).ready(function () {
 
 });
 
+if(localStorage.getItem("idAux")){
+    
+    localStorage.setItem("idDocente", localStorage.getItem("idAux"));
+    localStorage.removeItem("idAux");
+}
 getRoles();
 
 function getRoles() {
@@ -40,14 +45,38 @@ function getRoles() {
 
                 document.getElementById("body").innerHTML = html;
             });
-
 }
+
+function getIdDocente() {
+    var data = {
+        id: localStorage.getItem("idDocente")
+    };
+    fetch("/bth/api/user-roles/getIddocente", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
+            .then(function (request) {
+                return request.json();
+            })
+            .then(function (json) {
+                json = json["response"];
+                console.log(json);
+                localStorage.setItem("idDocente", json[0].id);
+            });
+}
+
 function btnDocnete(){
-    
+    localStorage.setItem("idAux", localStorage.getItem("idDocente"));
+    getIdDocente();
+    location.href = "/bth/docentegrupos.html";
 }
 function btnColegio(idColegio){
     localStorage.setItem("objColegio", idColegio);
-    location.href = "/bth/PerfilColegio.html";
+    location.href = "/bth/perfilcolegio.html";
 }
 function btnAdminBTH(){
     location.href = "/bth/Perfilbth.html";
@@ -62,7 +91,7 @@ function templateDocente(){
  '                           <div class="col-9">  '  + 
  '                               <h5 class="card-title">Docente BTH</h5>  '  + 
  '                               <p class="card-text">Con esta cuenta se podra tener un mejor control de los estudiantes al poder controlar la nota, asistencia.</p>  '  + 
- '                               <a href="#" class="btn btn-primary">Ingresar</a>  '  + 
+ '                               <a href="#" class="btn btn-primary" onClick="btnDocnete()">Ingresar</a>  '  + 
  '                           </div>  '  + 
  '                           <div class="col-2">  '  + 
  '                               <img src="imagenes/bth/docente.png"  width="20" class="card-img" alt="...">  '  + 
