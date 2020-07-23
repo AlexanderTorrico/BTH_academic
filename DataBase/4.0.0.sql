@@ -12,6 +12,8 @@ CREATE TABLE tblUsuarios(
     PRIMARY KEY(id)
 );
 
+insert into tblusuarios values(default,"Admin","Admin","","admin@gmail.com","admin","16DC65E18E123DA36C11466AACF3965A",1);
+
 create table tblUsuariosRoles(
 	id INT NOT NULL AUTO_INCREMENT,
 	idreference INT,
