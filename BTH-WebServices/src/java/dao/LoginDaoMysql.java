@@ -28,9 +28,9 @@ public class LoginDaoMysql extends LoginDao{
     
     private Login loginDocente(Login obj) throws Exception{
         String encript = "";
-        String query = "select * from tbldocentes "
+        String query = "select * from tblusuarios "
                     + "where username='" + obj.getUsername() + "' and "
-                + "contrasenia = hex(aes_encrypt('"+obj.getPassword()+"','DOC')) and estado =1;";
+                + "password = hex(aes_encrypt('"+obj.getPassword()+"','DOC')) and estado =1;";
         try {
             Conexion objConexion = Conexion.getOrCreate();
             
@@ -41,7 +41,7 @@ public class LoginDaoMysql extends LoginDao{
                 int idDocente = objResultSet.getInt("id");
                 login.setId(idDocente);
                 
-                String nombre = objResultSet.getString("nombre")+" "+objResultSet.getString("apaterno")+" "+objResultSet.getString("amaterno");
+                String nombre = objResultSet.getString("nombre")+" "+objResultSet.getString("apPaterno")+" "+objResultSet.getString("apMaterno");
                 
                 login.setEstado(objResultSet.getInt("estado"));
                 login.setNombreCompleto(nombre);
@@ -57,7 +57,7 @@ public class LoginDaoMysql extends LoginDao{
         String encript = "";
         String query = "select * from tblcolegios "
                     + "where username='" + obj.getUsername() + "' and "
-                + "contrasenia = hex(aes_encrypt('"+obj.getPassword()+"','COL')) and estado =1;";
+                + "contrasenia = hex(aes_encrypt('"+obj.getPassword()+"','DOC')) and estado =1;";
         try {
             Conexion objConexion = Conexion.getOrCreate();
             

@@ -64,4 +64,8 @@ public abstract class FactoryDao {
     public abstract RolDao getNewRolDao();
     
     public abstract PermisoDao getNewPermisoDao();
+
+    public abstract UserRolesDao getNewUserRolesDao();
+
+    
 }

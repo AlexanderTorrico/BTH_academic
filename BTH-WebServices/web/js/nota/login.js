@@ -41,7 +41,7 @@ function loginQueryDocente() {
                     if (json["estado"] == 1) {
                         localStorage.setItem("idDocente", json["id"]);
                         localStorage.setItem("nombre", json["nombreCompleto"]);
-                        location.href = "/bth/docentegrupos.html";
+                        location.href = "/bth/perfil-user.html";
                     } else {
                         alert("El docente no ha confirmado su cuenta");
                     }
