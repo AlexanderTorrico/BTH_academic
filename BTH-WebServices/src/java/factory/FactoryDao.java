@@ -58,14 +58,17 @@ public abstract class FactoryDao {
     public abstract ReportesNotasDao getNewReportesNotasDao();
 
     public abstract ReportesPagosDao getNewReportesPagosDao();
-    
+
     public abstract UsuarioDao getNewUsuarioDao();
-    
+
     public abstract RolDao getNewRolDao();
-    
+
     public abstract PermisoDao getNewPermisoDao();
 
     public abstract UserRolesDao getNewUserRolesDao();
 
-    
+    public abstract HorasDao getNewHorasDao();
+
+    public abstract DiasDao getNewDiasDao();
+
 }

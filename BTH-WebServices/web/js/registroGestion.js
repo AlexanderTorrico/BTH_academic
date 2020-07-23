@@ -6,31 +6,30 @@ function abrirModal() {
     $("#CreateCursoModal").modal("show");
 }
 function registrarGestion() {
-    var MesAPaga = $("#mespagar").val();
+    var mesapagar = $("#mespagar").val();
     var obj = new Object();
-    obj.mes = mes;
+    var obj = new Object();
+    obj.mesapagar = mesapagar;
     
-    if (mes == "") {
-        alert("debe ingresar el Mes");
+    if (mesapagar == "") {
+        alert("debe ingresar la gestion");
         return;
-        var obj = new Object();
-        obj.mespagar = MesAPagar;
-        fetch("api/gestiones/registrar", {
-            method: 'POST',
-            body: JSON.stringify(obj),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8'
-            }
-        }).then(function (request) {
-            //console.log(request);
-            return request.json();
-        })
-                .then(function (json) {
-                    //console.log(json);
-                    procesarRegistro(json)
-                });
     }
+    fetch("api/gestiones/registrar", {
+        method: 'POST',
+        body: JSON.stringify(obj),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    }).then(function (request) {
+        //console.log(request);
+        return request.json();
+    })
+            .then(function (json) {
+                //console.log(json);
+                procesarRegistro(json)
+            });
 }
 function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
@@ -66,7 +65,7 @@ function eliminarGestion(idGestion) {
     })
             .then(function (json) {
                 alert(json.message);
-                getListadoGestion()();
+                getListadoGestion();
 
             });
 }

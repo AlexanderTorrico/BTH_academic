@@ -57,6 +57,35 @@ public class ColegioService {
             }
         }
 
+        if (param.getNombre() == "") {
+            respuesta.setMessage("Falta el nombre");
+            return new Gson().toJson(respuesta);
+        }
+        if (param.getSigep() == "") {
+            respuesta.setMessage("Falta Completar ApellidoPaterno");
+            return new Gson().toJson(respuesta);
+        }
+        if (param.getDirector() == "") {
+            respuesta.setMessage("Falta Completar ApellidoMaterno");
+            return new Gson().toJson(respuesta);
+        }
+        if (param.getDireccion() == "") {
+            respuesta.setMessage("Falta Completar Direccion");
+            return new Gson().toJson(respuesta);
+        }
+        if (param.getTelefono() == "") {
+            respuesta.setMessage("Falta Completar Telefono");
+            return new Gson().toJson(respuesta);
+        }
+        if (param.getCorreo() == "") {
+            respuesta.setMessage("Falta Completar Correo");
+            return new Gson().toJson(respuesta);
+        }
+        if (param.getUsername() == "") {
+            respuesta.setMessage("Falta Completar Username");
+            return new Gson().toJson(respuesta);
+        }
+
         try {
             int idGenerado = dao.insert(param);
             param.setId(idGenerado);
@@ -189,7 +218,7 @@ public class ColegioService {
         return new Gson().toJson(respuesta);
     }
 
-      @Path("listacarreras/habilitadas/{id}")
+    @Path("listacarreras/habilitadas/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getListaCarrerasHabilitadas(@PathParam("id") int idColegio) {

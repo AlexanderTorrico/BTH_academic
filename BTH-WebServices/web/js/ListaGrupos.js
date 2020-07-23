@@ -26,7 +26,7 @@ function procesarRegistro(respuesta) {
         //    Nombre,Sigep,Directo,Direccion,Telefono,EsModulo,Correo,Username,Contrasena,Estad
 
         for (var i in list) {
-       
+            console.log(list[i]);
             html += templateitemGrupos(list[i]);
         }
         document.getElementById("listGruposAdm").innerHTML = html;
@@ -40,7 +40,6 @@ function procesarRegistro(respuesta) {
 function templateitemGrupos(objGrupos) {
     return  '   <tr>  ' +
             '                                               <td>' + objGrupos.Nivel + '</td>  ' +
-            '                                               <td>' + objGrupos.Estado + '</td>  ' +
             '                                               <td>' + objGrupos.Gestion + '</td>  ' +
             '                                               <td>' + objGrupos.Colegio + '</td>  ' +
             '                                               <td>' + objGrupos.Carrera + '</td>  ' +
@@ -53,6 +52,3 @@ function templateitemGrupos(objGrupos) {
             '                                               </td>  ' +
             '                                          </tr>  ';
 }
-
-
-

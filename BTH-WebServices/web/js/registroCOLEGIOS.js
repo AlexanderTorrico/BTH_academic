@@ -12,12 +12,6 @@ function registrarColegio() {
     var username = $("#username").val();
     var contrasena = $("#contrasena").val();
 
-    // validar que no esten vacios
-    if (!usuario) {
-        alert("debe ingresar el nombre de usuario");
-        return;
-    }
-
 
 
     var obj = new Object();
@@ -30,33 +24,77 @@ function registrarColegio() {
     obj.username = username;
     obj.contrasenia = contrasena;
 
-    jQuery.ajax({
+
+    if (usuario == "") {
+        alert("debe ingresar el nombre del colegio");
+        return;
+    }
+
+    if (sigep == "") {
+        alert("debe ingresar el sigep");
+        return;
+    }
+    if (director == "") {
+        alert("debe ingresar el director");
+        return;
+    }
+    if (direccion == "") {
+        alert("debe ingresar la direccion");
+        return;
+    }
+    if (telefono == "") {
+        alert("debe ingresar el telefono");
+        return;
+    }
+    if (correo == "") {
+        alert("debe ingresar el correo");
+        return;
+    }
+    if (username == "") {
+        alert("debe ingresar el username");
+        return;
+    }
+    if (contrasena == "") {
+        alert("debe ingresar la contrasena");
+        return;
+    }
+
+
+    fetch("api/colegio/registro", {
+        method: 'POST',
+        body: JSON.stringify(obj),
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        'type': 'POST',
-        'url': 'api/colegio/registro',
-        'data': JSON.stringify(obj), // lo que se envia
-        'dataType': 'json', // lo que se recibe 
-        'success': procesarRegistro
-    });
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    }).then(function (request) {
+        //console.log(request);
+        return request.json();
+    })
+            .then(function (json) {
+                //console.log(json);
+                alert('Se registro Colegio');
+                procesarRegistro();
+
+            });
 }
 
 function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;
         localStorage.setItem('objUsuario', JSON.stringify(usuario));
+        alert("El colegio fue registrado");
         limpiarDatosColegio();
         getListadoColegio();
         //  alert("su registro fu exitoso. se le envio un mensaje a su correo para verificar su cuenta");
 //        $(location).attr('href', 'index.html');
     } else {
+        console.log(respuesta);
         alert(respuesta.message);
     }
 }
 
-function eliminarColegio(idColegio) {
+function eliminarGrupos(idColegio) {
     if (!confirm('Realmente desea eliminar el colegio?')) {
         return;
     }
@@ -203,6 +241,34 @@ function editarColegio() {
                 alert('se realizo con exito la operacion');
                 limpiarDatosColegio();
                 getListadoColegio();
+
             });
+
+}
+function eliminarColegio(idCarrera) {
+    if (!confirm('Realmente desea eliminar el Colegio?')) {
+        return;
+    }
+    fetch("api/colegio/" + idCarrera, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    }).then(function (request) {
+        return request.json();
+    })
+            .then(function (json) {
+                alert(json.message);
+                getListadoColegio();
+
+            });
+}
+function ProcesoEliminarColegio(respuesta) {
+    if (respuesta.success) {
+// actualiza la tabla y quita la fila
+    } else {
+        alert("hubo un error al eliminar el Colegio");
+    }
 
 }
