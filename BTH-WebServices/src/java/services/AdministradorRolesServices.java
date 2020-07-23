@@ -7,10 +7,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import dao.UsuarioDao;
+import dao.RolDao;
 import dto.Usuario;
+import dto.Rol;
 import factory.FactoryDao;
 import java.util.ArrayList;
-import javax.ws.rs.DELETE;
 
 /**
  *
@@ -52,11 +53,11 @@ public class AdministradorRolesServices {
         respuesta.setResponse(null);
         return new Gson().toJson(respuesta);
     }
-    
-    @Path("/Insertar")
+
+    @Path("/Asignar")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public String insertarRol(Usuario user) {
+    public String asignarRol(Usuario user) {
         Respuesta respuesta = new Respuesta();
         FactoryDao factory = FactoryDao.getFactoryInstance();
         UsuarioDao dao = factory.getNewUsuarioDao();
@@ -69,6 +70,42 @@ public class AdministradorRolesServices {
         }
         respuesta.setSuccess(true);
         respuesta.setMessage("Sí se pudo asignar el Rol");
+        respuesta.setResponse(null);
+        return new Gson().toJson(respuesta);
+    }
+
+    @Path("/ListadoRoles")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String Roles() {
+        Respuesta respuesta = new Respuesta();
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        RolDao dao = factory.getNewRolDao();
+        ArrayList<Rol> rol = dao.getList();
+        respuesta.setSuccess(true);
+        respuesta.setMessage("Lista de Rol");
+        respuesta.setResponse(rol);
+        return new Gson().toJson(respuesta);
+    }
+    
+    @Path("/InsertarRol")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String insertarRol(Rol nuevoRol) throws Exception {
+        Respuesta respuesta = new Respuesta();
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        RolDao dao = factory.getNewRolDao();
+        Rol rol= new Rol();
+        rol.setNombre(nuevoRol.getNombre());
+        int i = dao.insert(rol);
+        if (i == 0) {
+            respuesta.setSuccess(false);
+            respuesta.setMessage("No se pudo añadir el rol");
+            respuesta.setResponse(null);
+            return new Gson().toJson(respuesta);
+        }
+        respuesta.setSuccess(true);
+        respuesta.setMessage("Sí se pudo añadir el rol");
         respuesta.setResponse(null);
         return new Gson().toJson(respuesta);
     }

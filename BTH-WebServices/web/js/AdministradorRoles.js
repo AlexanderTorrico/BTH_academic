@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 });
 
-getListadoUsuarios()
+getListadoUsuarios();
 
 function getListadoUsuarios() {
     jQuery.ajax({
@@ -21,8 +21,7 @@ function procesarListadoUsuarios(respuesta) {
         var list = respuesta.response;
         var html = "";
         for (var i in list) {
-            console.log(list[i]);
-            html += templateitemRol(list[i].id, list[i].nombre, list[i].apPaterno, list[i].apMaterno, list[i].roles);
+            html += templateitemUsuarios(list[i].id, list[i].nombre, list[i].apPaterno, list[i].apMaterno, list[i].roles);
         }
         document.getElementById("listaUsuarios").innerHTML = html;
         checkInfo(list);
@@ -31,41 +30,29 @@ function procesarListadoUsuarios(respuesta) {
     }
 }
 
-function templateitemRol(id, nombre, apPaterno, apMaterno, roles) {
-    var docente = "'Docente-" + id + "'";
-    var administrador = "'Administrador-" + id + "'";
-    var administradorBTH = "'AdministradorBTH-" + id + "'";
-    return  '<tr>' +
+function templateitemUsuarios(id, nombre, apPaterno, apMaterno, roles) {
+    var html = '<tr>' +
             '   <th scope="row">' + id + '</th>  ' +
-            '   <td>' + nombre.concat(' ', apPaterno, ' ', apMaterno) + '</td>  ' +
-            '   <td>' +
-            '       <div class="form-check">' +
-            '           <input type="checkbox" onclick="checkRoles(' + docente + ')" name="' + "rol".concat(nombre) + '" class="form-check-input" id="' + "rolDocente".concat("-", id) + '">' +
-            '       </div>' +
-            '   </td>' +
-            '   <td>' +
-            '       <div class="form-check">' +
-            '           <input type="checkbox" onclick="checkRoles(' + administrador + ')" name="' + "rol".concat(nombre) + '" class="form-check-input" id="' + "rolAdministrador".concat("-", id) + '">' +
-            '       </div>' +
-            '   </td>' +
-            '   <td>' +
-            '       <div class="form-check">' +
-            '           <input type="checkbox" onclick="checkRoles(' + administradorBTH + ')" name="' + "rol".concat(nombre) + '" class="form-check-input" id="' + "rolAdministradorBTH".concat("-", id) + '">' +
-            '       </div>' +
-            '   </td>' +
-            '</tr>';
+            '       <td>' + nombre.concat(' ', apPaterno, ' ', apMaterno) + '</td>  ' /*+*/;
+    //console.log("Admin Cantidad de Roles:".concat(listaRoles.length));
+    for (var i in listaRoles) {
+        html += '       <td>' +
+                '           <div class="form-check">' +
+                '               <input type="checkbox" onclick="checkRoles(' + "'" + listaRoles[i].nombre + "-" + id + "'" + ')" name="' + "rol".concat(nombre) + '" class="form-check-input" id=rol' + listaRoles[i].nombre + "-" + id + '>' +
+                '           </div>' +
+                '       </td>';
+    }
+    return  html;
 }
 
 function checkInfo(list) {
-    for(var i in list) {
-        if(list[i].roles.length != 0) {
-            for(var j in list[i].roles) {
-                if(list[i].roles[j] == 1) {
-                    document.getElementById("rolDocente".concat("-", list[i].id)).checked = true;
-                } else if(list[i].roles[j] == 2) {
-                    document.getElementById("rolAdministrador".concat("-", list[i].id)).checked = true;
-                } else if(list[i].roles[j] == 3) {
-                    document.getElementById("rolAdministradorBTH".concat("-", list[i].id)).checked = true;
+    for (var i in list) {
+        if (list[i].roles.length !== 0) {
+            for (var j in list[i].roles) {
+                for (var k = 1; k <= listaRoles.length; k++) {
+                    if (list[i].roles[j] === k) {
+                        document.getElementById("rol".concat(listaRoles[k - 1].nombre, "-", list[i].id)).checked = true;
+                    }
                 }
             }
         }
@@ -74,17 +61,17 @@ function checkInfo(list) {
 
 function checkRoles(dato) {
     var losDatos = dato.split("-");
-    console.log(losDatos);
+    //console.log(losDatos);
     var inf = document.getElementById("rol".concat(dato)).checked;
     var url = "";
-    if(inf) {
+    if (inf) {
         //Insertando
-        url = "api/Usuario/Insertar";
+        url = "api/Usuario/Asignar";
     } else {
         //Eliminando
         url = "api/Usuario/Eliminar";
     }
-    console.log(inf);
+    //console.log(inf);
     var obj = new Object();
     obj.nombre = losDatos[0];
     obj.id = losDatos[1];
@@ -97,14 +84,31 @@ function checkRoles(dato) {
         'url': url,
         'data': JSON.stringify(obj),
         'dataType': 'json',
-        'success': function(dato) {
+        'success': function (dato) {
             //if(!dato.res) {
-                alert(dato.message);
+            alert(dato.message);
             //}
         }
     });
 }
 
-
-
-
+function IngresarRol() {
+    var elemento = document.getElementById("nombreRolNuevo").value;
+    var obj = new Object();
+    obj.nombre = elemento;
+    jQuery.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'type': 'POST',
+        'url': 'api/Usuario/InsertarRol',
+        'data': JSON.stringify(obj),
+        'dataType': 'json',
+        'success': function (dato) {
+            //if(!dato.res) {
+            alert(dato.message);
+            //}
+        }
+    });
+}

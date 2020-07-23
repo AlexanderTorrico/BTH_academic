@@ -42,17 +42,17 @@ function templateitemPermiso(id, nombre, tipo1, tipo2, tipo3) {
             '   <td>' + nombre + '</td>  ' +
             '   <td>' +
             '       <div class="form-check">' +
-            '           <input type="checkbox"  name="' + nombre + '" class="form-check-input" id="' + nombre.concat(tipo1) + '">' +
+            '           <input type="radio"  name="' + nombre + '" class="form-check-input" id="' + nombre.concat(tipo1) + '">' +
             '       </div>' +
             '   </td>' +
             '   <td>' +
             '       <div class="form-check">' +
-            '           <input type="checkbox"  name="' + nombre + '" class="form-check-input" id="' + nombre.concat(tipo2) + '">' +
+            '           <input type="radio"  name="' + nombre + '" class="form-check-input" id="' + nombre.concat(tipo2) + '">' +
             '       </div>' +
             '   </td>' +
             '   <td>' +
             '       <div class="form-check">' +
-            '           <input type="checkbox"  name="' + nombre + '" class="form-check-input" id="' + nombre.concat(tipo3) + '">' +
+            '           <input type="radio"  name="' + nombre + '" class="form-check-input" id="' + nombre.concat(tipo3) + '">' +
             '       </div>' +
             '   </td>' +
             '</tr>';
