@@ -21,7 +21,7 @@ public class DocenteDaoMySQL extends DocenteDao {
         Conexion objConexion = Conexion.getOrCreate();
 
         int id = 0;
-        StringBuilder query = new StringBuilder("INSERT INTO TBLDOCENTES VALUES (");
+        StringBuilder query = new StringBuilder("INSERT INTO tblusuarios VALUES (");
         query.append("NULL,");
         query.append("'" + obj.getNombre() + "',");
         query.append("'" + obj.getApaterno() + "',");
@@ -31,6 +31,7 @@ public class DocenteDaoMySQL extends DocenteDao {
         query.append("hex(aes_encrypt('" + obj.getContrasenia() + "','DOC')),");
         query.append("" + obj.getEstado() + "");
         query.append(")");
+        
         id = objConexion.ejecutarInsert(query.toString());
         if (id == 0) {
             throw new Exception("El registro no pudo ser insertado");
@@ -90,7 +91,7 @@ public class DocenteDaoMySQL extends DocenteDao {
     public Docente get(String _username, String _correo) {
         try {
             Conexion objConexion = Conexion.getOrCreate();
-            String query = "select * from tbldocentes\n"
+            String query = "select * from tblusuarios\n"
                     + "where username='" + _username + "' or correo = '" + _correo + "';";
             ResultSet objResultSet = objConexion.ejecutar(query);
             if (objResultSet.next()) {
@@ -98,23 +99,14 @@ public class DocenteDaoMySQL extends DocenteDao {
                 int idDocente = objResultSet.getInt("id");
                 obj.setId(idDocente);
 
-                String nombre = objResultSet.getString("nombre");
-                obj.setNombre(nombre);
-
-                String paterno = objResultSet.getString("apaterno");
-                obj.setApaterno(paterno);
-
-                String materno = objResultSet.getString("amaterno");
-                obj.setAmaterno(materno);
-
+                
                 String correo = objResultSet.getString("correo");
                 obj.setCorreo(correo);
 
                 String username = objResultSet.getString("username");
                 obj.setUsername(username);
 
-                String contrasenia = objResultSet.getString("contrasenia");
-                obj.setContrasenia(contrasenia);
+                
 
                 int estado = objResultSet.getInt("estado");
                 obj.setEstado(estado);
@@ -140,7 +132,7 @@ public class DocenteDaoMySQL extends DocenteDao {
     public void ActivarCuenta(String username) throws Exception {
         Conexion objConexion = Conexion.getOrCreate();
 
-        StringBuilder query = new StringBuilder("UPDATE tbldocentes SET estado = 1 WHERE username = '" + username + "'");
+        StringBuilder query = new StringBuilder("UPDATE tblusuarios SET estado = 1 WHERE username = '" + username + "'");
         int upd = objConexion.ejecutarSimple(query.toString());
         if (upd == 0) {
             throw new Exception("El registro no pudo ser actualizado");

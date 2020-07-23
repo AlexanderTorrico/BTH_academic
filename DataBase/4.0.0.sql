@@ -5,7 +5,8 @@ CREATE TABLE tblUsuarios(
     nombre VARCHAR(50) NOT NULL,
     apPaterno VARCHAR(50) NOT NULL,
     apMaterno VARCHAR(50) NOT NULL,
-	email VARCHAR(50) NOT NULL,
+	correo VARCHAR(50) NOT NULL,
+	username VARCHAR(50) NOT NULL,
     password TEXT,
     estado INT,
     PRIMARY KEY(id)

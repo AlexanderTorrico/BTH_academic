@@ -129,5 +129,10 @@ public class FactoryDaoMySQL extends FactoryDao {
     public PermisoDao getNewPermisoDao() {
         return new PermisoDaoMySQL();
     }
+
+    @Override
+    public UserRolesDao getNewUserRolesDao() {
+        return new UserRolesDaoMysql();
+    }
     
 }

@@ -43,10 +43,7 @@ public class DocenteService {
 
 //         si ya hay un usuario en la bd con ese nombre de usuario
         if (docente != null) {
-            if (docente.getCorreo().equals(param.getCorreo()) && docente.getUsername().equals(param.getUsername())) {
-                respuesta.setMessage("el docente ya esta registrado");
-                return new Gson().toJson(respuesta);
-            } else if (docente.getCorreo().equals(param.getCorreo())) {
+            if (docente.getCorreo().equals(param.getCorreo())) {
                 respuesta.setMessage("el correo ya fue utilizado");
                 return new Gson().toJson(respuesta);
             } else if (docente.getUsername().equals(param.getUsername())) {
