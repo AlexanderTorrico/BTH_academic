@@ -34,10 +34,6 @@ function procesarListadoCarrera(respuesta) {
     }
 }
 
-
-function edit(obj) {
-    alert(obj.dataset.id);
-}
 function templateitemCarrera(numero, carrera, sigla, descripcion, img, id) {
     return  '   <tr>  ' +
             '                                               <th scope="row">' + numero + '</th>  ' +
@@ -46,12 +42,7 @@ function templateitemCarrera(numero, carrera, sigla, descripcion, img, id) {
             '                                               <td>' + descripcion + '</td>  ' +
             '                                               <td>' + img + '</td>  ' +
             '                                               <td>  ' +
-            '                                               <a href="#" data-toggle="modal" data-target="#exampleModal" onclick=(informacion(' + id + '))><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarCarrera(' + id + '))><i class="fas fa-trash-alt"></i></a> | <a href="#" onclick="abrirVentana(' + id + ')" ><i class="fas fa-eye"></i></a>  ' +
+            '                                               <a href="#" data-toggle="modal" data-target="#exampleModal" onclick=(informacion(' + id + '))><i class="fas fa-edit"></i></a> <a href="#"  onclick=(eliminarCarrera(' + id + '))><i class="fas fa-trash-alt"></i></a></a>  ' +
             '                                               </td>  ' +
             '                                          </tr>  ';
-}
-
-function abrirVentana(id) {
-    window.location = "PerfilCarrera.html?id=" + id;
-
 }

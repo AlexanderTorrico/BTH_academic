@@ -119,12 +119,12 @@ public class FactoryDaoMySQL extends FactoryDao {
     public UsuarioDao getNewUsuarioDao() {
         return new UsuarioDaoMySQL();
     }
-    
+
     @Override
     public RolDao getNewRolDao() {
         return new RolDaoMySQL();
     }
-    
+
     @Override
     public PermisoDao getNewPermisoDao() {
         return new PermisoDaoMySQL();
@@ -134,5 +134,16 @@ public class FactoryDaoMySQL extends FactoryDao {
     public UserRolesDao getNewUserRolesDao() {
         return new UserRolesDaoMysql();
     }
-    
+
+    @Override
+    public HorasDao getNewHorasDao() {
+        return new HorasDaoMySQL();
+    }
+
+    @Override
+    public DiasDao getNewDiasDao() {
+        return new DiasDaoMySQL();
+
+    }
+
 }

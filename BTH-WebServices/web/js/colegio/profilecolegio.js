@@ -2,8 +2,8 @@
 $(document).ready(function (){
 //    var html = "esto es una prueba";
 //    $("#titulo").html(html);
-
-    var testObject = {id: 1, nombre: "Col. Don Bosco"};
+    //plocalStorage.getItem("objColegio");
+    var testObject = {id: localStorage.getItem("idColegio"), nombre: localStorage.getItem("nombre")};
     localStorage.setItem('objColegio', JSON.stringify(testObject));
 //    $(location).attr('href', 'index.html');
 

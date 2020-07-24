@@ -38,12 +38,12 @@ function procesarListadoGestiones(respuesta) {
 function edit(obj) {
     alert(obj.dataset.id);
 }
-function templateitemGestion(numero, MesAPagar, Id) {
+function templateitemGestion(numero, mesapagar, id) {
     return  '   <tr>  ' +
             '                                               <th scope="row">' + numero + '</th>  ' +
-            '                                               <td>' + MesAPagar + '</td>  ' +
+            '                                               <td>' + mesapagar + '</td>  ' +
             '                                               <td>  ' +
-            '                                               <a href="#" data-toggle="modal" data-target="#exampleModal" onclick=(informacion(' + Id + '))><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarGestion(' + Id + '))><i class="fas fa-trash-alt"></i></a>  ' +
+            '                                               <a href="#" data-toggle="modal" data-target="#exampleModal" onclick=(informacion(' + id + '))><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarGestion(' + id + '))><i class="fas fa-trash-alt"></i></a>  ' +
             '                                               </td>  ' +
             '                                          </tr>  ';
 }

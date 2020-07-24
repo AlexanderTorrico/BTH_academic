@@ -110,16 +110,16 @@ BEGIN
 	order by nombre;
 END $$
 
-CREATE PROCEDURE getplanpagos(_ci varchar(50))
-BEGIN  
-	SET @saldo=0;
-select eg.id as codigo,concat(e.nombre,' ',e.aPaterno,' ',e.aPaterno) as nombre,p.monto as cuota,@saldo := @saldo + p.monto as pago, pa.costo-@saldo := @saldo as saldo,p.fecha,pa.duracion,pa.costo as costomateria
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getplanpagos`(_ci varchar(50))
+BEGIN
+SET @saldo=0;
+select eg.id as codigo,concat(e.nombre,' ',e.aPaterno,' ',e.aPaterno) as nombre,pa.cuotas as cuota,@saldo := @saldo + p.monto as pago, pa.costo-@saldo := @saldo as saldo,p.fecha,pa.duracion,pa.costo as costomateria
 from tblestudiantes e
-inner join tblestudiantes_grupos eg
+left join tblestudiantes_grupos eg
 on e.id=eg.idEstudiante
-inner join tblpagos p
+left join tblpagos p
 on eg.id = p.idEstudiantes_grupos
-inner join (select TIMESTAMPDIFF(MONTH,g.inicio,g.fin) as duracion,g.costo/TIMESTAMPDIFF(MONTH,g.inicio,g.fin) as cuotas,g.id as idgrupo, g.costo as costo from tblgrupos as g where idColegio = 1) as pa
+left join (select TIMESTAMPDIFF(MONTH,g.inicio,g.fin) as duracion,g.costo/TIMESTAMPDIFF(MONTH,g.inicio,g.fin) as cuotas,g.id as idgrupo, g.costo as costo from tblgrupos as g where idColegio = 1) as pa
 on eg.idGrupo = pa.idgrupo
-where e.ci='113';
-END $$
+where e.ci=_ci;
+END

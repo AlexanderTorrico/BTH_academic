@@ -1,4 +1,4 @@
-$(document).ready(function () {
+(document).ready(function () {
 
 });
 
@@ -9,8 +9,6 @@ function registrarDocente() {
     var correo = $("#correo").val();
     var username = $("#username").val();
     var contrasena = $("#contrasena").val();
-
-
 
     // validar que no esten vacios
     if (!usuario) {
@@ -25,37 +23,85 @@ function registrarDocente() {
     obj.username = username;
     obj.contrasenia = contrasena;
 
-    jQuery.ajax({
+// validar que no esten vacios
+    if (!usuario) {
+        alert("debe ingresar el nombre del Docente");
+        return;
+    }
+    if (!apaterno) {
+        alert("debe ingresar el Apellido Paterno");
+        return;
+    }
+    if (!amaterno) {
+        alert("debe ingresar el Apellido Materno");
+        return;
+    }
+    if (!correo) {
+        alert("debe ingresar el Correo");
+        return;
+    }
+    if (!username) {
+        alert("debe ingresar el Username");
+        return;
+    }
+    if (!contrasena) {
+        alert("debe ingresar la contrasena");
+        return;
+    }
+
+    fetch("api/docente/registro", {
+        method: 'POST',
+        body: JSON.stringify(obj),
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        'type': 'POST',
-        'url': 'api/docente/registro',
-        'data': JSON.stringify(obj), // lo que se envia
-        'dataType': 'json', // lo que se recibe 
-        'success': procesarRegistro
-    });
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    }).then(function (request) {
+        //console.log(request);
+        return request.json();
+    })
+            .then(function (json) {
+                //console.log(json);
+                alert('Se registro Docente');
+                getListadoDocentes();
+            });
 }
-
-
 function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;
         localStorage.setItem('objUsuario', JSON.stringify(usuario));
         alert("su registro fu exitoso. se le envio un mensaje a su correo para verificar su cuenta");
-
-        
-        document.getElementById("nombre").value="";
-        document.getElementById("apaterno").value="";
-        document.getElementById("amaterno").value="";
-        document.getElementById("correo").value="";
-        document.getElementById("username").value="";
-        document.getElementById("contrasena").value="";
-        
+        getListadoDocentes();
 //        $(location).attr('href', 'index.html');
     } else {
         alert(respuesta.message);
     }
 }
 
+
+function eliminarGrupos(idGrupos) {
+    if (!confirm('Realmente desea eliminar docente?')) {
+        return;
+    }
+    fetch("api/docente/" + idGrupos, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    }).then(function (request) {
+        return request.json();
+    })
+            .then(function (json) {
+                alert(json.message);
+                getListadoDocentes();
+            });
+}
+function ProcesoEliminarGrupos(respuesta) {
+    if (respuesta.success) {
+// actualiza la tabla y quita la fila
+    } else {
+        alert("hubo un error al eliminar Grupo");
+    }
+
+}

@@ -67,6 +67,11 @@ function checkRoles(dato) {
     if (inf) {
         //Insertando
         url = "api/Usuario/Asignar";
+
+        if(losDatos[0]=="Docente"){
+            saveTldocente(losDatos[1]);
+            
+        }
     } else {
         //Eliminando
         url = "api/Usuario/Eliminar";

@@ -44,6 +44,10 @@ public class ColegioDaoMySQL extends ColegioDao {
 
     @Override
     public void delete(int id) {
+        Conexion objConexion = Conexion.getOrCreate();
+        StringBuilder query = new StringBuilder("DELETE FROM tblcolegios where id = " + id + ";");
+        int i = objConexion.ejecutarSimple(query.toString());
+        objConexion.desconectar();
     }
 
     @Override
@@ -191,8 +195,8 @@ public class ColegioDaoMySQL extends ColegioDao {
         objConexion.desconectar();
         return id;
     }
-    
-     @Override
+
+    @Override
     public ArrayList<ColegioReporte> getListReportesCarrera(int id) {
         ArrayList<ColegioReporte> registros = new ArrayList<ColegioReporte>();
         try {

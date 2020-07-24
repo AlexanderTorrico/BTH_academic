@@ -1,6 +1,7 @@
 $(document).ready(function () {
 });
 listOpcionesCarrera();
+//listOpcionesGestion();
 listOpcionesColegio();
 listOpcionesDocente();
 
@@ -35,6 +36,34 @@ function procesarListadoCarrera(respuesta) {
         alert(respuesta.message);
     }
 }
+//function listOpcionesGestion() {
+//    jQuery.ajax({
+//        headers: {
+//            'Accept': 'application/json',
+//            'Content-Type': 'application/json'
+//        },
+//        'type': 'GET',
+//        'url': 'api/carrera/get',
+//        'dataType': 'json', // lo que se recibe 
+//        'success': procesarListadoGestion
+//    });
+//}
+//function procesarListadoGestion(respuesta) {
+//    if (respuesta.success) { // if (respuesta.success == true)
+//        var list = respuesta.response;
+//
+//        var html = "<option value='0'>Seleccione</option>";
+//
+//        for (var i in list) {
+//            console.log(list[i]);
+//            html += "<option value='" + list[i].Id + "'>" + list[i].Mesapagar + "</option>";
+//        }
+//        document.getElementById("gestion").innerHTML = html;
+//        document.getElementById("gestionGrupo").innerHTML = html;
+//    } else {
+//        alert(respuesta.message);
+//    }
+//}
 function listOpcionesColegio() {
     jQuery.ajax({
         headers: {
@@ -62,7 +91,6 @@ function procesarListadoColegio(respuesta) {
         alert(respuesta.message);
     }
 }
-
 function listOpcionesDocente() {
     jQuery.ajax({
         headers: {
@@ -91,9 +119,6 @@ function procesarListadoDocente(respuesta) {
         alert(respuesta.message);
     }
 }
-
-
-
 function registrarGrupos() {
     var nivel = $("#nivel").val();
     var estado = $("#estado").val();
@@ -106,6 +131,17 @@ function registrarGrupos() {
     var fin = $("#fin").val() + "";
 
 
+
+    var obj = new Object();
+    obj.nivel = nivel;
+    obj.estado = estado;
+    obj.idGestion = idGestion;
+    obj.idColegio = idColegio;
+    obj.idCarrera = idCarrera;
+    obj.idDocente = idDocente;
+    obj.costo = costo;
+    obj.fechaInicio = inicio;
+    obj.fechaFin = fin;
 
     // validar que no esten vacios
     if (!nivel) {
@@ -148,27 +184,22 @@ function registrarGrupos() {
     }
 
 
-    var obj = new Object();
-    obj.nivel = nivel;
-    obj.estado = estado;
-    obj.idGestion = idGestion;
-    obj.idColegio = idColegio;
-    obj.idCarrera = idCarrera;
-    obj.idDocente = idDocente;
-    obj.costo = costo;
-    obj.fechaInicio = inicio;
-    obj.fechaFin = fin;
-    jQuery.ajax({
+    fetch("api/grupos/registrar", {
+        method: 'POST',
+        body: JSON.stringify(obj),
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        'type': 'POST',
-        'url': 'api/grupos/registrar',
-        'data': JSON.stringify(obj), // lo que se envia
-        'dataType': 'json', // lo que se recibe 
-        'success': procesarRegistro
-    });
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    }).then(function (request) {
+        //console.log(request);
+        return request.json();
+    })
+            .then(function (json) {
+                //console.log(json);
+                alert('Se registro Grupo');
+                getListadoGrupos();
+            });
 }
 
 function procesarRegistro(respuesta) {
@@ -184,9 +215,6 @@ function procesarRegistro(respuesta) {
         alert(respuesta.message);
     }
 }
-
-
-
 function eliminarGrupos(idGrupos) {
     if (!confirm('Realmente desea eliminar el grupo?')) {
         return;
@@ -237,7 +265,6 @@ function limpiarDatosGrupos() {
 
 
 }
-
 function informacion(id) {
     fetch("api/grupos/" + id, {
         method: 'GET',
@@ -269,7 +296,6 @@ function informacion(id) {
 
             });
 }
-
 function editarGrupos() {
     var idGrupos = $('#idGrupos').val();
     var nivel = $("#nivelGrupo").val();

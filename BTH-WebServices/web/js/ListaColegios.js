@@ -1,7 +1,6 @@
 $(document).ready(function () {
 
 });
-
 getListadoColegio();
 
 function getListadoColegio() {
@@ -27,9 +26,7 @@ function procesarRegistro(respuesta) {
 
         for (var i in list) {
             console.log(list[i]);
-            html += templateitemColegios(i, list[i].nombre, list[i].sigep, list[i].director, list[i].direccion, list[i].telefono, list[i].esModulo, list[i].correo, list[i].username, list[i].estado, list[i].id);
-
-
+            html += templateitemColegios(list[i]);
         }
         document.getElementById("listColegioAdm").innerHTML = html;
 //        $(location).attr('href', 'index.html');
@@ -38,30 +35,18 @@ function procesarRegistro(respuesta) {
     }
 }
 
-function edit(obj) {
-    alert(obj.dataset.id);
-}
 
-function templateitemColegios(numero, nombre, sigep, director, direccion, telefono, esModulo, correo, username, estado, id) {
-
+function templateitemColegios(objColegios) {
     return  '   <tr>  ' +
-            '                                               <th scope="row">' + numero + '</th>  ' +
-            '                                               <th>' + nombre + '</th>  ' +
-            '                                               <td>' + sigep + '</td>  ' +
-            '                                               <td>' + director + '</td>  ' +
-            '                                               <td>' + direccion + '</td>  ' +
-            '                                               <td>' + telefono + '</td>  ' +
-            '                                               <td>' + esModulo + '</td>  ' +
-            '                                               <td>' + correo + '</td>  ' +
-            '                                               <td>' + username + '</td>  ' +
-            '                                               <td>' + estado + '</td>  ' +
+            '                                               <td>' + objColegios.nombre + '</td>  ' +
+            '                                               <td>' + objColegios.sigep + '</td>  ' +
+            '                                               <td>' + objColegios.director + '</td>  ' +
+            '                                               <td>' + objColegios.direccion + '</td>  ' +
+            '                                               <td>' + objColegios.telefono + '</td>  ' +
+            '                                               <td>' + objColegios.correo + '</td>  ' +
+            '                                               <td>' + objColegios.username + '</td>  ' +
             '                                               <td>  ' +
-            '                                               <a href="#" data-toggle="modal" data-target="#modalColegio" onclick=informacion(' + id + ')><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarColegio(' + id + '))><i class="fas fa-trash-alt"></i></a> | <a href="#" onclick="abrirVentana(' + id +')" ><i class="fas fa-eye"></i></a>  ' +
+            '                                               <a href="#" data-toggle="modal" data-target="#modalGrupos" onclick=informacion(' + objColegios.id + ')><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarGrupos(' + objColegios.id + '))><i class="fas fa-trash-alt"></i></a>  ' +
             '                                               </td>  ' +
             '                                          </tr>  ';
 }
-function abrirVentana(id) {
-    window.location="PerfilColegio.html?id=" + id;
-    
-}
-

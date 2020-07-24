@@ -16,4 +16,9 @@ import java.util.ArrayList;
 public abstract class UserRolesDao {
     
     public abstract ArrayList<UserRoles> getList(UserRoles obj)throws Exception;
+
+    public abstract void save(UserRoles obj)throws Exception;
+    
+    
+    public abstract ArrayList<UserRoles> getIdDocente(UserRoles obj)throws Exception;
 }

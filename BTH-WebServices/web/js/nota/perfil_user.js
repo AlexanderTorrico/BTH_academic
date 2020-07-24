@@ -2,6 +2,11 @@ $(document).ready(function () {
 
 });
 
+if(localStorage.getItem("idAux")){
+    
+    localStorage.setItem("idDocente", localStorage.getItem("idAux"));
+    localStorage.removeItem("idAux");
+}
 getRoles();
 
 function getRoles() {
@@ -30,7 +35,7 @@ function getRoles() {
                     //html += templateCard(json[i].carrera, json[i].colegio, json[i].nivel, grupo, json[i].id);
                     if(json[i].idRol==1){
                         
-                        html+=templateDocente();
+                        html+=templateDocente(json[i]);
                     }else if(json[i].idRol==2){
                         html+=templateColegio(json[i]);
                     }else if(json[i].idRol==3){
@@ -40,14 +45,40 @@ function getRoles() {
 
                 document.getElementById("body").innerHTML = html;
             });
+}
 
+function getIdDocente() {
+    var data = {
+        id: localStorage.getItem("idDocente")
+    };
+    fetch("/bth/api/user-roles/getIddocente", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
+            .then(function (request) {
+                return request.json();
+            })
+            .then(function (json) {
+                json = json["response"];
+                console.log(json);
+                localStorage.setItem("idDocente", json[0].id);
+            });
 }
+
 function btnDocnete(){
-    
+    localStorage.setItem("idAux", localStorage.getItem("idDocente"));
+    getIdDocente();
+    location.href = "/bth/docentegrupos.html";
 }
-function btnColegio(idColegio){
-    localStorage.setItem("objColegio", idColegio);
-    location.href = "/bth/PerfilColegio.html";
+function btnColegio(obj){
+    
+    
+    localStorage.setItem("idColegio", obj);
+    location.href = "/bth/perfilcolegio.html";
 }
 function btnAdminBTH(){
     location.href = "/bth/Perfilbth.html";
@@ -62,7 +93,7 @@ function templateDocente(){
  '                           <div class="col-9">  '  + 
  '                               <h5 class="card-title">Docente BTH</h5>  '  + 
  '                               <p class="card-text">Con esta cuenta se podra tener un mejor control de los estudiantes al poder controlar la nota, asistencia.</p>  '  + 
- '                               <a href="#" class="btn btn-primary">Ingresar</a>  '  + 
+ '                               <a href="#" class="btn btn-primary" onClick="btnDocnete()">Ingresar</a>  '  + 
  '                           </div>  '  + 
  '                           <div class="col-2">  '  + 
  '                               <img src="imagenes/bth/docente.png"  width="20" class="card-img" alt="...">  '  + 
@@ -73,7 +104,9 @@ function templateDocente(){
 }
 
 function templateColegio(json){
+    
     var nombre = "Admin Colegio "+json["colegio"];
+    localStorage.setItem("nombre", json["colegio"]);
     return  '   <div class="card mt-5">  '  + 
  '                   <div class="card-header">  '  + 
  '                       Administrador  de Colegios Bachillerato tecnico humanistico  '  + 
@@ -83,7 +116,7 @@ function templateColegio(json){
  '                           <div class="col-9">  '  + 
  '                               <h5 class="card-title">'+nombre+'</h5>  '  + 
  '                               <p class="card-text">Con esta cuenta se podra registrar estudiantes y asignarlos a los diferentes grupo como tabien un control de pagos</p>  '  + 
- '                               <a href="#" class="btn btn-primary" onClick="btnColegio('+json["idReference"]+')">Ingresar</a>  '  + 
+ '                               <a href="#" class="btn btn-primary" onClick="btnColegio('+json["idReferencia"]+')">Ingresar</a>  '  + 
  '                           </div>  '  + 
  '                           <div class="col-2">  '  + 
  '                               <img src="imagenes/bth/colegio.png"  width="20" class="card-img" alt="...">  '  + 
