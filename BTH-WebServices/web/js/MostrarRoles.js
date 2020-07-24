@@ -36,5 +36,9 @@ function procesarListadoRoles(respuesta) {
 }
 
 function templateitemRol(id, nombre) {
-    return  '<th scope="col" id="' + "rol".concat(id,nombre) + '">' + nombre + '</th>';
+    return  '<th scope="col" id="' + "rol".concat(id,nombre) + '" onclick="redireccion(' + id + ')">' + nombre + '</th>';
+}
+
+function redireccion(id) {
+    window.location.href = "http://localhost:8080/bth/AdministradorPermisos.html?" + id;
 }

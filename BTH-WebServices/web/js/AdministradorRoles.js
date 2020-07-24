@@ -16,6 +16,7 @@ function getListadoUsuarios() {
         'success': procesarListadoUsuarios
     });
 }
+
 function procesarListadoUsuarios(respuesta) {
     if (respuesta.success) {
         var list = respuesta.response;
@@ -61,7 +62,6 @@ function checkInfo(list) {
 
 function checkRoles(dato) {
     var losDatos = dato.split("-");
-    //console.log(losDatos);
     var inf = document.getElementById("rol".concat(dato)).checked;
     var url = "";
     if (inf) {

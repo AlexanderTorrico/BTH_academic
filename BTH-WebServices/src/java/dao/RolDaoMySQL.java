@@ -2,6 +2,7 @@ package dao;
 
 import dal.Conexion;
 import dto.Rol;
+import dto.RolPermiso;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class RolDaoMySQL extends RolDao {
                 lista.add(obj);
             }
         } catch (SQLException ex) {
-            
+
         }
         return lista;
     }
@@ -78,10 +79,69 @@ public class RolDaoMySQL extends RolDao {
                 obj.setNombre(_nombre);
                 return obj;
             }
-        } catch(Exception ex) {
-            
+        } catch (Exception ex) {
+
         }
         return null;
+    }
+
+    @Override
+    public int eliminarRolPermiso(String permiso, String tipo, int idRol) {
+        Conexion objConexion = Conexion.getOrCreate();
+        String eliminar1 = "";
+        String eliminar2 = "";
+        System.out.println(tipo);
+        if("SoloEscritura".equals(tipo)) {
+            System.out.println("Funciona");
+            eliminar1 += "SoloLectura";
+            eliminar2 += "EscrituraLectura";
+        } else if("SoloLectura".equals(tipo)) {
+            eliminar1 += "SoloEscritura";
+            eliminar2 += "EscrituraLectura";
+        } else if("EscrituraLectura".equals(tipo)) {
+            eliminar1 += "SoloLectura";
+            eliminar2 += "SoloEscritura";
+        }
+        StringBuilder query = new StringBuilder("DELETE FROM tblRolesPermisos WHERE idRol = " + idRol + " AND idPermiso = "
+                + "(SELECT id FROM tblPermisos WHERE nombre = '" + permiso + "' AND tipo = '" + eliminar1 + "')");
+        System.out.println(query);
+        int i = objConexion.ejecutarSimple(query.toString());
+        query = new StringBuilder("DELETE FROM tblRolesPermisos WHERE idRol = " + idRol + " AND idPermiso = "
+                + "(SELECT id FROM tblPermisos WHERE nombre = '" + permiso + "' AND tipo = '" + eliminar2 + "')");
+        System.out.println(query);
+        i = objConexion.ejecutarSimple(query.toString());
+        objConexion.desconectar();
+        return i;
+    }
+
+    @Override
+    public int insertarRoPermiso(String permiso, String tipo, int idRol) {
+        Conexion objConexion = Conexion.getOrCreate();
+        StringBuilder query = new StringBuilder("INSERT INTO tblRolesPermisos VALUES(" + idRol + ",(SELECT id FROM tblPermisos "
+                + "WHERE nombre = '" + permiso + "' AND tipo = '" + tipo + "'))");
+        System.out.println(query);
+        int i = objConexion.ejecutarSimple(query.toString());
+        objConexion.desconectar();
+        return i;
+    }
+
+    @Override
+    public ArrayList<RolPermiso> getListRolPermisos() {
+        ArrayList<RolPermiso> lista = new ArrayList<RolPermiso>();
+        String query = "SELECT * FROM tblRolesPermisos";
+        try {
+            Conexion objConexion = Conexion.getOrCreate();
+            ResultSet objResultSet = objConexion.ejecutar(query);
+            while (objResultSet.next()) {
+                RolPermiso obj = new RolPermiso();
+                obj.setIdRol(objResultSet.getInt("idRol"));
+                obj.setIdPermiso(objResultSet.getInt("idPermiso"));
+                lista.add(obj);
+            }
+        } catch (SQLException ex) {
+
+        }
+        return lista;
     }
 
 }

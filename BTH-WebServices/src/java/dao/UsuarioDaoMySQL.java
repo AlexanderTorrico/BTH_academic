@@ -117,9 +117,9 @@ public class UsuarioDaoMySQL extends UsuarioDao {
         }
         return lista;
     }
-    
+
     @Override
-    public int eliminarUsuarioRol(String rol, int idUsuario){
+    public int eliminarUsuarioRol(String rol, int idUsuario) {
         Conexion objConexion = Conexion.getOrCreate();
         StringBuilder query = new StringBuilder("DELETE FROM tblUsuariosRoles WHERE idUsuario = " + idUsuario + " AND idRol = "
                 + "(SELECT id FROM tblRoles WHERE nombre = '" + rol + "')");
@@ -127,14 +127,14 @@ public class UsuarioDaoMySQL extends UsuarioDao {
         objConexion.desconectar();
         return i;
     }
-    
+
     @Override
-    public int insertarUsuarioRol(String rol, int idUsuario){
+    public int insertarUsuarioRol(String rol, int idUsuario) {
         Conexion objConexion = Conexion.getOrCreate();
         StringBuilder query = new StringBuilder("INSERT INTO tblUsuariosRoles VALUES(DEFAULT, 1, " + idUsuario + ", (SELECT id FROM tblRoles WHERE nombre = '" + rol + "'), 1)");
         int i = objConexion.ejecutarSimple(query.toString());
         objConexion.desconectar();
         return i;
     }
-    
+
 }

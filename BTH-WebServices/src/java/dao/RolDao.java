@@ -2,6 +2,7 @@
 package dao;
 
 import dto.Rol;
+import dto.RolPermiso;
 import java.util.ArrayList;
 
 /**
@@ -19,5 +20,11 @@ public abstract class RolDao {
     public abstract ArrayList<Rol> getList();
 
     public abstract Rol get(int id);
+    
+    public abstract int eliminarRolPermiso(String permiso, String tipo, int idPermiso);
+    
+    public abstract int insertarRoPermiso(String permiso, String tipo, int idPermiso);
+    
+    public abstract ArrayList<RolPermiso> getListRolPermisos();
     
 }

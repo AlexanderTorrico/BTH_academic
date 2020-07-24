@@ -10,6 +10,7 @@ public class Permiso {
     private int id;
     private String nombre;
     private String tipo;
+    private int idRol;
 
     public Permiso() {
 
@@ -43,6 +44,14 @@ public class Permiso {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+    
+    public int getIdRol() {
+        return this.idRol;
+    }
+    
+    public void setIdRol(int idRol) {
+        this.idRol = idRol;
     }
 
 }
