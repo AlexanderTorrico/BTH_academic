@@ -14,7 +14,6 @@ function loadNota() {
 }
 
 /*  Cargar combo Box   */
-var puerto = "36129";
 var contacts = [
     "Haber",
     "Hacer",
@@ -76,7 +75,7 @@ function createTableShowNota() {
     };
 
 
-    fetch("http://localhost:" + puerto + "/bth/api/parametro/showTable", {
+    fetch("/bth/api/parametro/showTable", {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -121,7 +120,7 @@ function llenarTableShowNota() {
     };
 
 
-    fetch("http://localhost:" + puerto + "/bth/api/nota/getList", {
+    fetch("/bth/api/nota/getList", {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -220,7 +219,7 @@ function saveUpdateNote() {
         }
     }
     if (valid) {
-        fetch('http://localhost:36129/bth/api/nota/update', {
+        fetch('/bth/api/nota/update', {
             method: "Post",
             body: JSON.stringify(data),
             headers: {
@@ -247,7 +246,7 @@ function showNoteTrimestre() {
     var data = {
         id: 1
     };
-    fetch('http://localhost:36129/bth/api/nota/notatrimestral', {
+    fetch('/bth/api/nota/notatrimestral', {
         method: "Post",
         body: JSON.stringify(data),
         headers: {
