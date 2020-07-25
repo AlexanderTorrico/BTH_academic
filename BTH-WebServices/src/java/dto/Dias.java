@@ -18,16 +18,18 @@ public class Dias {
     private int IdGrupo;
     private int IdHora;
     private String Hora;
+    private String Fin;
 
     public Dias() {
     }
 
-    public Dias(int Id, int Dia, int IdGrupo, int IdHora, String Hora) {
+    public Dias(int Id, int Dia, int IdGrupo, int IdHora, String Hora, String Fin) {
         this.Id = Id;
         this.Dia = Dia;
         this.IdGrupo = IdGrupo;
         this.IdHora = IdHora;
         this.Hora = Hora;
+        this.Fin = Fin;
     }
 
     public int getId() {
@@ -70,4 +72,11 @@ public class Dias {
         this.Hora = Hora;
     }
 
+    public String getFin() {
+        return Fin;
+    }
+
+    public void setFin(String Fin) {
+        this.Fin = Fin;
+    }
 }

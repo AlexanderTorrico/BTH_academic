@@ -10,9 +10,10 @@ function registrarHora() {
     //console.log(inicio);
     //console.log(fin);
     var obj = new Object();
+
     obj.inicio = inicio;
     obj.fin = fin;
-    
+
     fetch("api/horas/registrar", {
         method: 'POST',
         body: JSON.stringify(obj),

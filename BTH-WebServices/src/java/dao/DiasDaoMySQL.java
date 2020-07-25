@@ -60,9 +60,9 @@ public class DiasDaoMySQL extends DiasDao {
         ArrayList<Dias> lista = new ArrayList<Dias>();
 
         String query = "select \n"
-                + "D.id , D.dia ,D.idGrupo as Grupo , H.inicio as HoraInicio\n"
+                + "D.id , D.dia ,D.idGrupo as Grupo , H.inicio as HoraInicio, H.fin as HoraFin\n"
                 + "from tbldias D\n"
-                + "left join tblhoras H on D.idHora = H.id";
+                + "left join tblhoras H on D.idHora = H.id;";
 
         try {
             Conexion objConexion = Conexion.getOrCreate();
@@ -74,6 +74,7 @@ public class DiasDaoMySQL extends DiasDao {
                 obj.setDia(objResultSet.getInt("dia"));
                 obj.setIdGrupo(objResultSet.getInt("Grupo"));
                 obj.setHora(objResultSet.getString("HoraInicio"));
+                obj.setFin(objResultSet.getString("HoraFin"));
 
                 lista.add(obj);
             }

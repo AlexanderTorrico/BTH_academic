@@ -26,7 +26,7 @@ function procesarRegistro(respuesta) {
         //    Nombre,Sigep,Directo,Direccion,Telefono,EsModulo,Correo,Username,Contrasena,Estad
 
         for (var i in list) {
-       
+
             html += templateitemDias(list[i]);
         }
         document.getElementById("listDiasAdm").innerHTML = html;
@@ -42,6 +42,8 @@ function templateitemDias(objGrupos) {
             '                                               <td>' + objGrupos.Dia + '</td>  ' +
             '                                               <td>' + objGrupos.IdGrupo + '</td>  ' +
             '                                               <td>' + objGrupos.Hora + '</td>  ' +
+            '                                               <td>' + objGrupos.Fin + '</td>  ' +
+            
             '                                               <td>  ' +
             '                                               <a href="#" data-toggle="modal" data-target="#modalGrupos" onclick=informacion(' + objGrupos.Id + ')><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarGrupos(' + objGrupos.Id + '))><i class="fas fa-trash-alt"></i></a>  ' +
             '                                               </td>  ' +

@@ -44,7 +44,6 @@ function templateitemColegios(objColegios) {
             '                                               <td>' + objColegios.direccion + '</td>  ' +
             '                                               <td>' + objColegios.telefono + '</td>  ' +
             '                                               <td>' + objColegios.correo + '</td>  ' +
-            '                                               <td>' + objColegios.username + '</td>  ' +
             '                                               <td>  ' +
             '                                               <a href="#" data-toggle="modal" data-target="#modalGrupos" onclick=informacion(' + objColegios.id + ')><i class="fas fa-edit"></i></a> | <a href="#"  onclick=(eliminarGrupos(' + objColegios.id + '))><i class="fas fa-trash-alt"></i></a>  ' +
             '                                               </td>  ' +

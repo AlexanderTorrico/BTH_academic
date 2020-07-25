@@ -46,7 +46,7 @@ function procesarListadoHora(respuesta) {
 
         for (var i in list) {
             console.log(list[i]);
-            html += "<option value='" + list[i].Id + "'>" + list[i].Inicio + "</option>";
+            html += "<option value='" + list[i].Id + "'>" + list[i].Inicio+ list[i].Fin +"</option>";
         }
         document.getElementById("idHora").innerHTML = html;
         document.getElementById("HorasDia").innerHTML = html;

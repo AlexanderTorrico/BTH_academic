@@ -36,34 +36,6 @@ function procesarListadoCarrera(respuesta) {
         alert(respuesta.message);
     }
 }
-//function listOpcionesGestion() {
-//    jQuery.ajax({
-//        headers: {
-//            'Accept': 'application/json',
-//            'Content-Type': 'application/json'
-//        },
-//        'type': 'GET',
-//        'url': 'api/carrera/get',
-//        'dataType': 'json', // lo que se recibe 
-//        'success': procesarListadoGestion
-//    });
-//}
-//function procesarListadoGestion(respuesta) {
-//    if (respuesta.success) { // if (respuesta.success == true)
-//        var list = respuesta.response;
-//
-//        var html = "<option value='0'>Seleccione</option>";
-//
-//        for (var i in list) {
-//            console.log(list[i]);
-//            html += "<option value='" + list[i].Id + "'>" + list[i].Mesapagar + "</option>";
-//        }
-//        document.getElementById("gestion").innerHTML = html;
-//        document.getElementById("gestionGrupo").innerHTML = html;
-//    } else {
-//        alert(respuesta.message);
-//    }
-//}
 function listOpcionesColegio() {
     jQuery.ajax({
         headers: {
@@ -91,6 +63,7 @@ function procesarListadoColegio(respuesta) {
         alert(respuesta.message);
     }
 }
+
 function listOpcionesDocente() {
     jQuery.ajax({
         headers: {
@@ -119,10 +92,13 @@ function procesarListadoDocente(respuesta) {
         alert(respuesta.message);
     }
 }
+
+
+
 function registrarGrupos() {
     var nivel = $("#nivel").val();
-    var estado = $("#estado").val();
-    var idGestion = $("#gestion").val();
+    var estado = "e";
+    var idGestion = 20;
     var idColegio = $("#colegio").val();
     var idCarrera = $("#carrera").val();
     var idDocente = $("#docente").val();
@@ -131,33 +107,15 @@ function registrarGrupos() {
     var fin = $("#fin").val() + "";
 
 
-
-    var obj = new Object();
-    obj.nivel = nivel;
-    obj.estado = estado;
-    obj.idGestion = idGestion;
-    obj.idColegio = idColegio;
-    obj.idCarrera = idCarrera;
-    obj.idDocente = idDocente;
-    obj.costo = costo;
-    obj.fechaInicio = inicio;
-    obj.fechaFin = fin;
-
     // validar que no esten vacios
     if (!nivel) {
         alert("debe ingresar el nivel");
         return;
     }
-    if (!estado) {
-        alert("debe ingresar el estado");
-        return;
-    }
-
     if (!idGestion) {
-        alert("debe ingresar la gestion");
+        alert("ingresa la Gestion");
         return;
     }
-
     if (idColegio == 0) {
         alert('debe selecionar un colegio');
         return;
@@ -184,6 +142,16 @@ function registrarGrupos() {
     }
 
 
+    var obj = new Object();
+    obj.nivel = nivel;
+    obj.estado = estado;
+    obj.idGestion = idGestion;
+    obj.idColegio = idColegio;
+    obj.idCarrera = idCarrera;
+    obj.idDocente = idDocente;
+    obj.costo = costo;
+    obj.fechaInicio = inicio;
+    obj.fechaFin = fin;
     fetch("api/grupos/registrar", {
         method: 'POST',
         body: JSON.stringify(obj),
@@ -197,7 +165,7 @@ function registrarGrupos() {
     })
             .then(function (json) {
                 //console.log(json);
-                alert('Se registro Grupo');
+                alert('se registro el grupo');
                 getListadoGrupos();
             });
 }
@@ -215,6 +183,9 @@ function procesarRegistro(respuesta) {
         alert(respuesta.message);
     }
 }
+
+
+
 function eliminarGrupos(idGrupos) {
     if (!confirm('Realmente desea eliminar el grupo?')) {
         return;
@@ -265,6 +236,7 @@ function limpiarDatosGrupos() {
 
 
 }
+
 function informacion(id) {
     fetch("api/grupos/" + id, {
         method: 'GET',
@@ -296,11 +268,12 @@ function informacion(id) {
 
             });
 }
+
 function editarGrupos() {
     var idGrupos = $('#idGrupos').val();
     var nivel = $("#nivelGrupo").val();
-    var estado = $("#estadoGrupo").val();
-    var idGestion = $("#gestionGrupo").val();
+    var estado = "e";
+    var idGestion = 20;
     var idColegio = $("#colegioGrupo").val();
     var idCarrera = $("#carreraGrupo").val();
     var idDocente = $("#docenteGrupo").val();
