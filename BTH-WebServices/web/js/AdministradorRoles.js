@@ -34,8 +34,11 @@ function procesarListadoUsuarios(respuesta) {
 function templateitemUsuarios(id, nombre, apPaterno, apMaterno, roles) {
     var html = '<tr>' +
             '   <th scope="row">' + id + '</th>  ' +
-            '       <td>' + nombre.concat(' ', apPaterno, ' ', apMaterno) + '</td>  ' /*+*/;
-    //console.log("Admin Cantidad de Roles:".concat(listaRoles.length));
+            '       <td>' + 
+            '           <a href=perfil-user.html?id=' + id + ' target="_blank"> ' + 
+                            nombre.concat(' ', apPaterno, ' ', apMaterno) + 
+            '           </a>' +
+            '       </td>';
     for (var i in listaRoles) {
         html += '       <td>' +
                 '           <div class="form-check">' +
@@ -110,10 +113,12 @@ function IngresarRol() {
         'url': 'api/Usuario/InsertarRol',
         'data': JSON.stringify(obj),
         'dataType': 'json',
-        'success': function (dato) {
-            //if(!dato.res) {
-            alert(dato.message);
-            //}
-        }
+        'success': anadirPermisos
     });
+}
+
+function anadirPermisos() {
+    largo = listaRoles.length;
+    largo++;
+    location.href = "AdministradorPermisos.html?".concat(largo);
 }

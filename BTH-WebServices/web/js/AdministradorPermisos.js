@@ -1,7 +1,8 @@
 $(document).ready(function () {
 
 });
-var user = window.location.search[1];
+console.log(window.location.search.substr(4));
+var user = window.location.search.substr(4);
 getListaPermisos();
 
 var list;
@@ -50,7 +51,11 @@ function procesarListadoPermisos(respuesta) {
 function templateitemPermiso(id, nombre) {
     return  '<tr>' +
             '   <th scope="row">' + id + '</th>  ' +
-            '   <td>' + nombre + '</td>  ' +
+            '   <td>' +
+            '       <a href=' + nombre + '.html target="_blank">' +
+                        nombre +
+            '        </a>' +
+            '   </td>  ' +
             '   <td>' +
             '       <div class="form-check">' +
             '           <input type="radio" onclick=verificarCheck("' + nombre + '",1) id="' + nombre.concat(1) + '" class="form-check-input">' +
@@ -69,21 +74,33 @@ function templateitemPermiso(id, nombre) {
             '</tr>';
 }
 
+var listaEspacios = [,];
+
 function checkInfo(rolesPermisos) {
     lista = rolesPermisos.response;
-    for (var i in list) {
+    for (var i in list + 1) {
         for (var j in lista) {
             if (lista[j].idPermiso == i) {
-                var x = i;
-                while (x > 3) {
-                    x -= 3;
-                }
+                var x = devuelvePosicion(i);
+                var nombreActual = list[i - 1].nombre.concat(x);
+                listaEspacios.push([nombreActual, true]);
                 if (lista[j].idRol == user) {
-                    document.getElementById(list[i - 1].nombre.concat(x)).checked = true;
+                    document.getElementById(nombreActual).checked = true;
+                    document.getElementById(nombreActual).disabled = true;
                 }
             }
         }
     }
+    for(var i in list + 1) {
+        console.log(listaEspacios[i]);
+    }
+}
+
+function devuelvePosicion(x) {
+    while (x > 3) {
+        x -= 3;
+    }
+    return x;
 }
 
 function verificarCheck(nombre, id) {
@@ -92,12 +109,34 @@ function verificarCheck(nombre, id) {
             var nro2 = parseFloat(id) + parseFloat(i);
             var nro = parseFloat(nro2) - parseFloat(i);
             i = list.length;
-            checkPermisos(nombre, nro, nro2);
+            console.log("P1 = " + nro2);
+            console.log("P2 = " + nro);
+            console.log(nombre);
+            if(nro === 1) {
+                document.getElementById(nombre.concat(1)).disabled = true;
+                document.getElementById(nombre.concat(2)).checked = false;
+                document.getElementById(nombre.concat(2)).disabled = false;
+                document.getElementById(nombre.concat(3)).checked = false;
+                document.getElementById(nombre.concat(3)).disabled = false;
+            } else if(nro === 2) {
+                document.getElementById(nombre.concat(1)).checked = false;
+                document.getElementById(nombre.concat(1)).disabled = false;
+                document.getElementById(nombre.concat(2)).disabled = true;
+                document.getElementById(nombre.concat(3)).disabled = false;
+                document.getElementById(nombre.concat(3)).checked = false;
+            } else if(nro === 3) {
+                document.getElementById(nombre.concat(1)).checked = false;
+                document.getElementById(nombre.concat(1)).disabled = false;
+                document.getElementById(nombre.concat(2)).checked = false;
+                document.getElementById(nombre.concat(2)).disabled = false;
+                document.getElementById(nombre.concat(3)).disabled = true;
+            }
+            checkPermisos(nombre, nro);
         }
     }
 }
 
-function checkPermisos(nombre, id, idrol) {
+function checkPermisos(nombre, id) {
     var url = "api/Permisos/Asignar";
     var obj = new Object();
     obj.nombre = nombre;
@@ -118,9 +157,8 @@ function checkPermisos(nombre, id, idrol) {
         'url': url,
         'data': JSON.stringify(obj),
         'dataType': 'json',
-        'success': function (dato) {
-            alert(dato.message);
-            uncheckPermisos(obj);
+        'success': function dato() {
+            uncheckPermisos(obj)
         }
     });
 }
