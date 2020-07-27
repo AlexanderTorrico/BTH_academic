@@ -1,6 +1,9 @@
 $(document).ready(function () {
-
+    
 });
+
+localStorage.setItem('1', 'Admin');
+
 console.log(window.location.search.substr(4));
 var user = window.location.search.substr(4);
 getListaPermisos();
