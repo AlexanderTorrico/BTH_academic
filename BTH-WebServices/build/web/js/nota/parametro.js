@@ -1,14 +1,14 @@
 $(document).ready(function () {
 
 });
-var puerto= "36129";
+
 var contacts = [
     "1: Primer Trimestre",
     "2: Segundo Trimestre",
     "3: Tercer Trimestre"
 ];
 
-getInfoGrupoInDropdowns();
+//getInfoGrupoInDropdowns();
 dropdownsTrimestre();
 
 function dropdownsTrimestre() {
