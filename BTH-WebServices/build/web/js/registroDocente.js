@@ -62,8 +62,16 @@ function registrarDocente() {
     })
             .then(function (json) {
                 //console.log(json);
-                alert('Se registro Docente');
-                getListadoDocentes();
+                
+                if(json["success"]){
+                    alert("Se envio un mensaje a su correo. Por favor confirmar para poder ingresar");
+                    
+                    location.href="/bth/loginbth.html";
+                    return;
+                }
+                alert(json["message"]);
+                //getListadoDocentes();
+                
             });
 }
 function procesarRegistro(respuesta) {

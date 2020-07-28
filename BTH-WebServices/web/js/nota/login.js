@@ -37,6 +37,7 @@ function loginQueryDocente() {
             })
             .then(function (json) {
                 if (json["success"]) {
+                    console.log(json);
                     json = json["response"];
                     if (json["estado"] == 1) {
                         localStorage.setItem("idDocente", json["id"]);
