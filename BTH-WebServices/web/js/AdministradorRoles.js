@@ -122,3 +122,32 @@ function anadirPermisos() {
     largo++;
     location.href = "AdministradorPermisos.html?".concat(largo);
 }
+
+
+
+
+
+/*---------------------------------------------------------------*/
+/* Parche para que funcione el Rol de docente [Alexander Torrico]*/
+/*---------------------------------------------------------------*/
+function saveTldocente(idUser) {
+
+    var data = {
+        id: idUser
+    };
+    fetch("/bth/api/user-roles/getIddocente", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
+            .then(function (request) {
+                return request.json();
+            })
+            .then(function (json) {
+                console.log(json);
+            });
+
+}

@@ -98,4 +98,61 @@ public class UserRolesServices {
             return new Gson().toJson(respuesta);
         }
     }
+    
+    
+    @Path("/exist/")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String exist() {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        UserRolesDao dao = factory.getNewUserRolesDao();
+
+        try {
+            ArrayList<UserRoles> parametro = dao.existUserRol();
+            
+            if(parametro.size()==0){
+                respuesta.setMessage("Sin usuarios");
+            }else{
+                respuesta.setSuccess(true);
+                respuesta.setMessage("Existen "+parametro.size()+" usuarios con roles");
+            }
+            
+            //respuesta.setResponse(parametro);
+
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            return new Gson().toJson(respuesta);
+        }
+    }
+    
+    @Path("/convertAdmBTH")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String convertAdmBTH(UserRoles obj) {
+        Respuesta respuesta = new Respuesta();
+
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        UserRolesDao dao = factory.getNewUserRolesDao();
+        int i = 0;
+        try {
+            dao.convertInBTHAdmin(obj);
+            
+            respuesta.setSuccess(true);
+            respuesta.setResponse(i);
+            if (i == 0) {
+                respuesta.setMessage("Sin datos a actualizar");
+            } else {
+                respuesta.setMessage("Dato actualizado");
+            }
+            return new Gson().toJson(respuesta);
+        } catch (Exception ex) {
+            respuesta.setMessage(ex.getMessage());
+            respuesta.setResponse(i);
+            return new Gson().toJson(respuesta);
+        }
+    }
 }
