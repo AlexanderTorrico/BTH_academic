@@ -120,7 +120,11 @@ public class AdministradorRolesServices {
         FactoryDao factory = FactoryDao.getFactoryInstance();
         RolDao dao = factory.getNewRolDao();
         UserRoles uRoles = new UserRoles();
-        uRoles.setIdReferencia(userRoles.getIdReferencia());
+        uRoles.setIdReferencia(userRoles.getIdRol());
+        uRoles.setIdUsuario(userRoles.getIdUsuario());
+        System.out.println(userRoles.toString());
+        System.out.println("ID REFERENCIA = " + uRoles.getIdRol());
+        System.out.println("ID USUARIO = " + uRoles.getIdUsuario());
         int i = dao.asignarColegio(uRoles);
         if (i == 0) {
             respuesta.setSuccess(false);

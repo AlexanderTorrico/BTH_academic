@@ -147,12 +147,13 @@ public class RolDaoMySQL extends RolDao {
 
     @Override
     public int asignarColegio(UserRoles rolUser) {
-        String query = "UPDATE * FROM tblUsuariosRoles SET idreferece = " + rolUser.getIdReferencia() +
-                " WHERE idUsuario = " + rolUser.getIdUsuario();
+        String query = "UPDATE tblUsuariosRoles SET idreference = " + rolUser.getIdReferencia()
+                + " WHERE idUsuario = " + rolUser.getIdUsuario();
         System.out.println(query);
         Conexion objConexion = Conexion.getOrCreate();
-        ResultSet objResultSet = objConexion.ejecutar(query);
-        return 0;
+        int i = objConexion.ejecutarSimple(query.toString());
+        objConexion.desconectar();
+        return i;
     }
 
 }

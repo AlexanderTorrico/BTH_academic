@@ -53,7 +53,7 @@ function templateitemUsuarios(id, nombre, apPaterno, apMaterno, roles) {
 
 function listaColegios(id, nombreRol) {
     numeroUser = id;
-    if($("#" + nombreRol).is(':checked')) {
+    if ($("#" + nombreRol).is(':checked')) {
         $("#exampleModalCenter").modal('show');
     }
     jQuery.ajax({
@@ -71,7 +71,7 @@ function listaColegios(id, nombreRol) {
 function colegioModal(respuesta) {
     var lista = respuesta.response;
     var html = "";
-    for(var i in lista) {
+    for (var i in lista) {
         var aux = parseFloat(i) + parseFloat(1);
         console.log(aux);
         html += '<label class="radio-inline">' +
@@ -85,7 +85,7 @@ function colegioReferencia(id) {
     console.log("Id de colegio = " + id);
     console.log("id de usuario = " + numeroUser);
     var obj = new Object();
-    obj.idreference = id;
+    obj.idRol = id;
     obj.idUsuario = numeroUser;
     jQuery.ajax({
         headers: {
@@ -93,14 +93,14 @@ function colegioReferencia(id) {
             'Content-Type': 'application/json'
         },
         'type': 'POST',
-        'url': 'api/Usuario/InsertarRol',
+        'url': 'api/Usuario/AsignarColegio',
         'data': JSON.stringify(obj),
         'dataType': 'json',
-        'success': function() {
+        'success': function () {
             alert("Se logró asignar el colegio");
         }
     });
-    
+
 }
 
 function checkInfo(list) {
@@ -179,9 +179,9 @@ function anadirPermisos() {
 
 
 
-/*---------------------------------------------------------------*/
+
 /* Parche para que funcione el Rol de docente [Alexander Torrico]*/
-/*---------------------------------------------------------------*/
+
 function saveTldocente(idUser) {
 
     var data = {
@@ -201,5 +201,4 @@ function saveTldocente(idUser) {
             .then(function (json) {
                 console.log(json);
             });
-
 }
