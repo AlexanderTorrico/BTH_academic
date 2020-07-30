@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import dao.UsuarioDao;
 import dao.RolDao;
 import dto.Usuario;
+import dto.UserRoles;
 import dto.Rol;
 import factory.FactoryDao;
 import java.util.ArrayList;

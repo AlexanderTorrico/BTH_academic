@@ -27,7 +27,6 @@ function procesarListadoUsuarios(respuesta) {
         document.getElementById("listaUsuarios").innerHTML = html;
         checkInfo(list);
     } else {
-        alert(respuesta.message);
     }
 }
 
@@ -93,9 +92,6 @@ function checkRoles(dato) {
         'data': JSON.stringify(obj),
         'dataType': 'json',
         'success': function (dato) {
-            //if(!dato.res) {
-            alert(dato.message);
-            //}
         }
     });
 }

@@ -1,29 +1,26 @@
-$(document).ready(function() {
-    if (localStorage.getItem('objUsuario')) {
-        var us = JSON.parse(localStorage.getItem('objUsuario'));
-        $("#login-btn").hide();
-        $("#registro-btn").hide();
-        $("#perfil-btn").show();
-        $("#cerrarSecion-btn").show();
-        $('#cambiContracena').show();
-        //alert(localStorage.getItem('objUsuario'));
-        $('#cambiContracena').attr('href','changePassword.html?id=' + us.id);
+var direccion = "index";
+
+$(document).ready(function () {
+    if (localStorage.getItem('idDocente') == null || localStorage.getItem('nombre') == null) {
+        $("#loginIndex").show();
+        $("#registroIndex").show();
+        $("#perfilIndex").hide();
+        $("#cerrarIndex").hide();
     } else {
-        $("#login-btn").show();
-        $("#registro-btn").show();
-        $("#perfil-btn").hide();
-        $("#cerrarSecion-btn").hide();
-        $('#cambiContracena').hide();
+        $("#loginIndex").hide();
+        $("#registroIndex").hide();
+        $("#perfilIndexUsuario").html(localStorage.getItem('nombre'));
+        $("#cerrarSesion").html('Cerrar Sesión');
+        $("#perfilIndex").show();
+        $("#cerrarIndex").show();
     }
-    
-    // por ahora, voy a conseguir todas las canciones
     jQuery.ajax({
         headers: {
             'Accept': 'application/json',
         },
         'type': 'GET',
         'url': 'api/index/',
-        'dataType': 'json', // lo que se recibe 
+        'dataType': 'json',
         'success': procesarIndex
     });
 });
@@ -43,8 +40,8 @@ function procesarIndex(respuesta) {
             html += "<h5 class='card-title'>" + obj.Nombre + " " + "(" + obj.Sigla + ")" + "</h5>";
             html += "<p class='card-text'>" + obj.Descripcion + "</p>";
             html += "<div class='justify-content-lg-between d-flex'>"
-            html += "<a onClick='o("+obj.Id+")' class='btn btn-outline-info'>" + "Sus proyectos" + "</a>";
-            html += "<a href='#' data-toggle='modal' data-target='#exampleModal' onclick='encontrarInformacion(" + obj.Id + ")' class='btn btn-primary'>" + "Informacion" + "</a>";
+            html += "<a onClick='o(" + obj.Id + ")' class='btn btn-outline-info'>" + "Sus proyectos" + "</a>";
+            html += "<a href='#' data-toggle='modal' data-target='#exampleModal' onclick='encontrarInformacion(" + obj.Id + ")' class='btn btn-primary'>" + "Información" + "</a>";
             html += "</div></div></div><br>";
         });
         html += "</div></div></div>";
@@ -53,68 +50,37 @@ function procesarIndex(respuesta) {
     }
 }
 
-function o(id){
-    localStorage.setItem("carrera",id);
-    location.href="/bth/homeProyect.html";
+function o(id) {
+    localStorage.setItem("carrera", id);
+    location.href = "/bth/homeProyect.html";
 }
+
 function encontrarInformacion(id) {
     jQuery.ajax({
         headers: {
             'Accept': 'application/json',
         },
         'type': 'GET',
-        'url': 'api/index/'+id,
-        'dataType': 'json', // lo que se recibe 
+        'url': 'api/index/' + id,
+        'dataType': 'json',
         'success': modalInformacion
     });
 }
+
 function modalInformacion(respuesta) {
-    var html = "";
     var contenido = "";
     console.log(respuesta);
-    if(respuesta.success) {
+    if (respuesta.success) {
         $.each(respuesta.response, function (i, obj) {
-            contenido += "<strong>"+obj.titulo+"</strong>";
+            contenido += "<strong>" + obj.titulo + "</strong>";
             contenido += "<p>" + obj.descripcion + "</p>"
             contenido += "<hr>";
         });
         if (contenido === "") {
-            contenido += "no hay ninguna informacion";
+            contenido += "No hay ninguna información";
         }
     } else {
         contenido += respuesta.message;
     }
-    
     $("#contenidoModal").html(contenido);
-
-    
-}
-
-function procesarCanciones(respuesta){
-    if (respuesta.success) {
-        var html = "";
-
-        $.each(respuesta.response, function(i, obj){
-            
-            html += "<article class='info' onclick='verCancion(" + obj.cancionId + ")'>";
-            html += "<h4>" + obj.titulo + "</h4>";
-            html += "<img src='imagenes/imagen1.jpg' alt=''>";
-            html += "</article>";
-        });
-         
-        $("#contenedor-canciones").html(html);
-    } else {       
-    }
-}
-function verCancion(idCancion){
-    $(location).attr('href','contenido.html?id=' + idCancion);
-}
-
-function cerrarSesion(){
-    localStorage.clear();
-}
-
-function buscarCancion(){
-    var titulo = $("#buscar").val();
-   $(location).attr('href','buscador.html?titulo='+titulo);
 }

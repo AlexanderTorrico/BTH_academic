@@ -1,5 +1,9 @@
-(document).ready(function () {
+$(document).ready(function () {
+    if (localStorage.getItem('idDocente') == null || localStorage.getItem('nombre') == null) {
 
+    } else {
+        window.location.href = "/bth/perfil-user.html";
+    }
 });
 
 function registrarDocente() {
@@ -9,8 +13,6 @@ function registrarDocente() {
     var correo = $("#correo").val();
     var username = $("#username").val();
     var contrasena = $("#contrasena").val();
-
-    // validar que no esten vacios
     if (!usuario) {
         alert("debe ingresar el nombre de usuario");
         return;
@@ -22,30 +24,29 @@ function registrarDocente() {
     obj.correo = correo;
     obj.username = username;
     obj.contrasenia = contrasena;
-
 // validar que no esten vacios
     if (!usuario) {
-        alert("debe ingresar el nombre del Docente");
+        alert("Debe ingresar el nombre del Docente.");
         return;
     }
     if (!apaterno) {
-        alert("debe ingresar el Apellido Paterno");
+        alert("Debe ingresar el Apellido Paterno.");
         return;
     }
     if (!amaterno) {
-        alert("debe ingresar el Apellido Materno");
+        alert("Debe ingresar el Apellido Materno.");
         return;
     }
     if (!correo) {
-        alert("debe ingresar el Correo");
+        alert("Debe ingresar el Correo.");
         return;
     }
     if (!username) {
-        alert("debe ingresar el Username");
+        alert("Debe ingresar el Username.");
         return;
     }
     if (!contrasena) {
-        alert("debe ingresar la contrasena");
+        alert("Debe ingresar la Contrasena.");
         return;
     }
 
@@ -62,23 +63,21 @@ function registrarDocente() {
     })
             .then(function (json) {
                 //console.log(json);
-                
-                if(json["success"]){
-                    alert("Se envio un mensaje a su correo. Por favor confirmar para poder ingresar");
-                    
-                    location.href="/bth/loginbth.html";
+                if (json["success"]) {
+                    alert("Se envió un mensaje a su correo, por favor confirmar para poder ingresar.");
+                    location.href = "/bth/loginbth.html";
                     return;
                 }
                 alert(json["message"]);
                 //getListadoDocentes();
-                
             });
 }
+
 function procesarRegistro(respuesta) {
     if (respuesta.success) { // if (respuesta.success == true)
         var usuario = respuesta.response;
         localStorage.setItem('objUsuario', JSON.stringify(usuario));
-        alert("su registro fu exitoso. se le envio un mensaje a su correo para verificar su cuenta");
+        alert("Su registro fue exitoso, se le envió un mensaje a su correo para verificar su cuenta.");
         getListadoDocentes();
 //        $(location).attr('href', 'index.html');
     } else {
@@ -86,9 +85,8 @@ function procesarRegistro(respuesta) {
     }
 }
 
-
 function eliminarGrupos(idGrupos) {
-    if (!confirm('Realmente desea eliminar docente?')) {
+    if (!confirm('¿Realmente desea eliminar docente?')) {
         return;
     }
     fetch("api/docente/" + idGrupos, {
@@ -109,7 +107,7 @@ function ProcesoEliminarGrupos(respuesta) {
     if (respuesta.success) {
 // actualiza la tabla y quita la fila
     } else {
-        alert("hubo un error al eliminar Grupo");
+        alert("Hubo un error al eliminar Grupo.");
     }
 
 }

@@ -1,28 +1,26 @@
 $(document).ready(function () {
+    if (localStorage.getItem('idDocente') == null || localStorage.getItem('nombre') == null) {
 
+    } else {
+        window.location.href = "/bth/perfil-user.html";
+    }
 });
+
 var puerto = "36129";
 
 function validateloginQuery() {
-
     if (document.getElementById("username").value && document.getElementById("pass").value) {
-        
-        if (document.getElementById("radio_docente").checked) {
-            loginQueryDocente();
-        } else {
-            alert("colegio");
-        }
+        loginQueryDocente();
     } else {
         alert("Debes completar todos los campos");
     }
-
 }
-function loginQueryDocente() {
 
+function loginQueryDocente() {
     var data = {
         username: document.getElementById("username").value,
         password: document.getElementById("pass").value,
-        tipo:"docente"
+        tipo: "docente"
     };
     fetch("/bth/api/login/docente", {
         method: "POST",
@@ -46,20 +44,17 @@ function loginQueryDocente() {
                     } else {
                         alert("El docente no ha confirmado su cuenta");
                     }
-
                 } else {
-                    alert("Usuario o Contraseña incorrepta");
+                    alert("Usuario o Contraseña incorrecta");
                 }
             });
-
 }
 
 function loginQueryColegio() {
-
     var data = {
         username: document.getElementById("username").value,
         password: document.getElementById("pass").value,
-        tipo:"colegio"
+        tipo: "colegio"
     };
     fetch("/bth/api/login/docente", {
         method: "POST",
@@ -82,10 +77,8 @@ function loginQueryColegio() {
                     } else {
                         alert("El docente no ha confirmado su cuenta");
                     }
-
                 } else {
-                    alert("Usuario o Contraseña incorrepta");
+                    alert("Usuario o Contraseña incorrecta");
                 }
             });
-
 }

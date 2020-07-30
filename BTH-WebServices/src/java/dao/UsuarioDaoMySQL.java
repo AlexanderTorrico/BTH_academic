@@ -1,6 +1,7 @@
 package dao;
 
 import dal.Conexion;
+import dto.UserRoles;
 import dto.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -135,6 +136,33 @@ public class UsuarioDaoMySQL extends UsuarioDao {
         int i = objConexion.ejecutarSimple(query.toString());
         objConexion.desconectar();
         return i;
+    }
+
+    @Override
+    public ArrayList<UserRoles> getRoles(int id) {
+        ArrayList<UserRoles> lista = new ArrayList<UserRoles>();
+        Conexion objConexion = Conexion.getOrCreate();
+        String query = "SELECT idRol FROM tblUsuariosRoles WHERE idUsuario = " + id;
+        ResultSet objResultSet = objConexion.ejecutar(query);
+        try {
+            while (objResultSet.next()) {
+                UserRoles rol = new UserRoles();
+                int _id = objResultSet.getInt("id");
+                rol.setId(_id);
+                int _idreference = objResultSet.getInt("idreference");
+                rol.setIdReferencia(_idreference);
+                int _idUsuario = objResultSet.getInt("idUsuario");
+                rol.setIdUsuario(_idUsuario);
+                int _idRol = objResultSet.getInt("idRol");
+                rol.setIdRol(_idRol);
+                boolean _estado = objResultSet.getBoolean("estado");
+                rol.setEstado(_estado);
+                lista.add(rol);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDaoMySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 
 }

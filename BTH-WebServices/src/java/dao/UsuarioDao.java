@@ -1,6 +1,7 @@
 package dao;
 
 import dto.Usuario;
+import dto.UserRoles;
 
 /**
  *
@@ -23,5 +24,6 @@ public abstract class UsuarioDao {
     public abstract int eliminarUsuarioRol(String rol, int idUsuario);
     
     public abstract int insertarUsuarioRol(String rol, int idUsuario);
-
+    
+    public abstract ArrayList<UserRoles> getRoles(int id);
 }

@@ -5,7 +5,7 @@ if(localStorage.getItem("idDocente")==null){
 }
 
 function cerrar(){
-    var msg = confirm("Estas seguro de cerrar su sesion.");
+    var msg = confirm("¿Estás seguro de cerrar su sesion?");
     if(msg){
         localStorage.clear();
         location.href="/bth/loginbth.html";
