@@ -61,7 +61,7 @@ public class GrupoDaoMysql extends GrupoDao{
 "ca.nombre as carrera, ca.sigla from (select * from tblGrupos g " +
 "		where idDocente = "+param.getId()+") a " +
 "	join tblColegios c on c.id = a.idColegio " +
-"	join tblDocentes d on d.id = a.id " +
+"	join tblDocentes d on d.id = a.idDocente " +
 "	join tblCarreras ca on ca.id = a.idCarrera;";
         try {
             Conexion objConexion = Conexion.getOrCreate();

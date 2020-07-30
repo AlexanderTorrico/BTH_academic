@@ -32,6 +32,7 @@ function existDataUserRole() {
                 console.log(json);
                 
                 if(json["success"]){
+                    
                     getRoles();
                     document.getElementById("btnConvertBTHAdmin").style.visibility = "hidden";
                 }else{
@@ -63,7 +64,9 @@ function getRoles() {
                 json = json["response"];
                 var html = "";
                 for (var i in json) {
-                    
+                    console.log("-----------------");
+                    console.log(json);
+                    console.log("-----------------");
                     //html += templateCard(json[i].carrera, json[i].colegio, json[i].nivel, grupo, json[i].id);
                     if(json[i].idRol==1){
                         

@@ -72,6 +72,7 @@ function checkRoles(dato) {
         url = "api/Usuario/Asignar";
 
         if(losDatos[0]=="Docente"){
+            alert("vamos");
             saveTldocente(losDatos[1]);
             
         }
@@ -135,7 +136,7 @@ function saveTldocente(idUser) {
     var data = {
         id: idUser
     };
-    fetch("/bth/api/user-roles/getIddocente", {
+    fetch("/bth/api/user-roles/saveDocente", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
