@@ -21,4 +21,8 @@ public abstract class UserRolesDao {
     
     
     public abstract ArrayList<UserRoles> getIdDocente(UserRoles obj)throws Exception;
+    
+    public abstract ArrayList<UserRoles> existUserRol()throws Exception;
+    
+    public abstract void convertInBTHAdmin(UserRoles obj)throws Exception;
 }

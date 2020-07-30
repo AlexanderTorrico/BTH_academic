@@ -7,7 +7,39 @@ if(localStorage.getItem("idAux")){
     localStorage.setItem("idDocente", localStorage.getItem("idAux"));
     localStorage.removeItem("idAux");
 }
-getRoles();
+init();
+function init(){
+    existDataUserRole();
+}
+
+function existDataUserRole() {
+
+    var data = {
+        id: localStorage.getItem("idDocente")
+    };
+    fetch("/bth/api/user-roles/exist", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
+            .then(function (request) {
+                return request.json();
+            })
+            .then(function (json) {
+                console.log(json);
+                
+                if(json["success"]){
+                    getRoles();
+                    document.getElementById("btnConvertBTHAdmin").style.visibility = "hidden";
+                }else{
+                    document.getElementById("btnConvertBTHAdmin").style.visibility = "none";
+                }
+            });
+}
+
 
 function getRoles() {
 
@@ -26,12 +58,12 @@ function getRoles() {
                 return request.json();
             })
             .then(function (json) {
-                
+                console.log(json);
                 var array = [];
                 json = json["response"];
                 var html = "";
                 for (var i in json) {
-                    console.log(json[i]);
+                    
                     //html += templateCard(json[i].carrera, json[i].colegio, json[i].nivel, grupo, json[i].id);
                     if(json[i].idRol==1){
                         
@@ -66,6 +98,28 @@ function getIdDocente() {
                 json = json["response"];
                 console.log(json);
                 localStorage.setItem("idDocente", json[0].id);
+            });
+}
+
+function convertUserInBTHAdmin(){
+    var data = {
+        id: localStorage.getItem("idDocente")
+    };
+    fetch("/bth/api/user-roles/convertAdmBTH", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            'Accept': 'application/json, text/plain',
+            'Content-Type': 'application/json;charset=UTF-8'
+        }
+    })
+            .then(function (request) {
+                return request.json();
+            })
+            .then(function (json) {
+                alert("El usuario se a convertido en AdminBTH");
+                document.getElementById("btnConvertBTHAdmin").style.visibility = "hidden";
+                getRoles();
             });
 }
 
