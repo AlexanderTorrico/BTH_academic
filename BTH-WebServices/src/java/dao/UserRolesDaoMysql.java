@@ -149,7 +149,7 @@ public class UserRolesDaoMysql extends UserRolesDao{
         StringBuilder query = new StringBuilder("INSERT INTO tblusuariosroles(id, idreference, idUsuario, idRol, estado) VALUES(");
         query.append("DEFAULT, ");
         query.append("0,");
-        query.append("1,");
+        query.append(obj.getId()+",");
         query.append("3,");
         query.append("1);");
         

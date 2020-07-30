@@ -60,7 +60,13 @@ function existDataUserRole() {
             })
             .then(function (json) {
                 console.log(json);
+<<<<<<< HEAD
                 if (json["success"]) {
+=======
+                
+                if(json["success"]){
+                    
+>>>>>>> 0cb5aa53e1b6767af79248eb4475f7ed6d92de1c
                     getRoles();
                     document.getElementById("btnConvertBTHAdmin").style.visibility = "hidden";
                     document.getElementById("adminBTH").style.display = "none";
@@ -92,6 +98,12 @@ function getRoles() {
                 json = json["response"];
                 var html = "";
                 for (var i in json) {
+<<<<<<< HEAD
+=======
+                    console.log("-----------------");
+                    console.log(json);
+                    console.log("-----------------");
+>>>>>>> 0cb5aa53e1b6767af79248eb4475f7ed6d92de1c
                     //html += templateCard(json[i].carrera, json[i].colegio, json[i].nivel, grupo, json[i].id);
                     if (json[i].idRol == 1) {
 

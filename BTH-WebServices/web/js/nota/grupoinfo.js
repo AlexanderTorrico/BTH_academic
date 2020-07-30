@@ -94,7 +94,7 @@ function save_Assistances(id){
 
 
 function templateCard(carrera, colegio, nivel, grupo, id) {
-    return  '   <div class="card col-5 ml-5" style="width: 18rem;">  ' +
+    return  '   <div class="card col-5 ml-5" mt-5 style="width: 18rem;">  ' +
             '                       <div class="card-header">' + carrera + '</div>  ' +
             '                       <div class="card-body">  ' +
             '                           <h5 class="card-title">Grupo: ' + grupo + '</h5>' +

@@ -13,6 +13,8 @@ $(document).ready(function (){
     } else {
         // si estuviera en otra pagina, redirigir al index
     }
+     
+    $("#contenido").load("carousel.html");
 });
 (function () {
     'use strict'
@@ -67,8 +69,7 @@ $(document).ready(function (){
 }())
 
 function pruebahome() {
-    var html = "Bienvenido";
-    $("#contenido").html(html);
+    $("#contenido").load("carousel.html");
 }
 function listacarrera() {
     var html = "Lista de carrera";
