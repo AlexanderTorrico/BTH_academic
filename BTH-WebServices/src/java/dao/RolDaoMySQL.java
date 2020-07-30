@@ -3,6 +3,7 @@ package dao;
 import dal.Conexion;
 import dto.Rol;
 import dto.RolPermiso;
+import dto.UserRoles;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -91,14 +92,14 @@ public class RolDaoMySQL extends RolDao {
         String eliminar1 = "";
         String eliminar2 = "";
         System.out.println(tipo);
-        if("SoloEscritura".equals(tipo)) {
+        if ("SoloEscritura".equals(tipo)) {
             System.out.println("Funciona");
             eliminar1 += "SoloLectura";
             eliminar2 += "EscrituraLectura";
-        } else if("SoloLectura".equals(tipo)) {
+        } else if ("SoloLectura".equals(tipo)) {
             eliminar1 += "SoloEscritura";
             eliminar2 += "EscrituraLectura";
-        } else if("EscrituraLectura".equals(tipo)) {
+        } else if ("EscrituraLectura".equals(tipo)) {
             eliminar1 += "SoloLectura";
             eliminar2 += "SoloEscritura";
         }
@@ -142,6 +143,16 @@ public class RolDaoMySQL extends RolDao {
 
         }
         return lista;
+    }
+
+    @Override
+    public int asignarColegio(UserRoles rolUser) {
+        String query = "UPDATE * FROM tblUsuariosRoles SET idreferece = " + rolUser.getIdReferencia() +
+                " WHERE idUsuario = " + rolUser.getIdUsuario();
+        System.out.println(query);
+        Conexion objConexion = Conexion.getOrCreate();
+        ResultSet objResultSet = objConexion.ejecutar(query);
+        return 0;
     }
 
 }

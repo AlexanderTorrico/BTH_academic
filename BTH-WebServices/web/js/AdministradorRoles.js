@@ -2,6 +2,8 @@ $(document).ready(function () {
 
 });
 
+var numeroUser;
+
 getListadoUsuarios();
 
 function getListadoUsuarios() {
@@ -33,19 +35,72 @@ function procesarListadoUsuarios(respuesta) {
 function templateitemUsuarios(id, nombre, apPaterno, apMaterno, roles) {
     var html = '<tr>' +
             '   <th scope="row">' + id + '</th>  ' +
-            '       <td>' + 
-            '           <a href=perfil-user.html?id=' + id + ' target="_blank"> ' + 
-                            nombre.concat(' ', apPaterno, ' ', apMaterno) + 
+            '       <td>' +
+            '           <a href=perfil-user.html?id=' + id + ' target="_blank"> ' +
+            nombre.concat(' ', apPaterno, ' ', apMaterno) +
             '           </a>' +
             '       </td>';
     for (var i in listaRoles) {
+        rol = "rol" + listaRoles[i].nombre + "-" + id;
         html += '       <td>' +
                 '           <div class="form-check">' +
-                '               <input type="checkbox" onclick="checkRoles(' + "'" + listaRoles[i].nombre + "-" + id + "'" + ')" name="' + "rol".concat(nombre) + '" class="form-check-input" id=rol' + listaRoles[i].nombre + "-" + id + '>' +
+                '               <input type="checkbox" onclick="checkRoles(' + "'" + listaRoles[i].nombre + "-" + id + "'" + ');listaColegios(' + id + ", '" + rol + "'" + ');" name="' + "rol".concat(nombre) + '" class="form-check-input ' + listaRoles[i].nombre + '" id=' + rol + '>' +
                 '           </div>' +
                 '       </td>';
     }
     return  html;
+}
+
+function listaColegios(id, nombreRol) {
+    numeroUser = id;
+    if($("#" + nombreRol).is(':checked')) {
+        $("#exampleModalCenter").modal('show');
+    }
+    jQuery.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'type': 'GET',
+        'url': 'api/colegio/get',
+        'dataType': 'json',
+        'success': colegioModal
+    });
+}
+
+function colegioModal(respuesta) {
+    var lista = respuesta.response;
+    var html = "";
+    for(var i in lista) {
+        var aux = parseFloat(i) + parseFloat(1);
+        console.log(aux);
+        html += '<label class="radio-inline">' +
+                '   <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" onclick="colegioReferencia(' + aux + ')"> ' + lista[i].nombre +
+                '</label><br>'
+    }
+    $(".modal-body").html(html);
+}
+
+function colegioReferencia(id) {
+    console.log("Id de colegio = " + id);
+    console.log("id de usuario = " + numeroUser);
+    var obj = new Object();
+    obj.idreference = id;
+    obj.idUsuario = numeroUser;
+    jQuery.ajax({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        'type': 'POST',
+        'url': 'api/Usuario/InsertarRol',
+        'data': JSON.stringify(obj),
+        'dataType': 'json',
+        'success': function() {
+            alert("Se logró asignar el colegio");
+        }
+    });
+    
 }
 
 function checkInfo(list) {
@@ -70,10 +125,10 @@ function checkRoles(dato) {
         //Insertando
         url = "api/Usuario/Asignar";
 
-        if(losDatos[0]=="Docente"){
+        if (losDatos[0] == "Docente") {
             alert("vamos");
             saveTldocente(losDatos[1]);
-            
+
         }
     } else {
         //Eliminando

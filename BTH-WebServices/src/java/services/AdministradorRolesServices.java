@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import dao.UsuarioDao;
 import dao.RolDao;
+import dao.UserRolesDao;
 import dto.Usuario;
 import dto.UserRoles;
 import dto.Rol;
@@ -110,5 +111,27 @@ public class AdministradorRolesServices {
         respuesta.setResponse(null);
         return new Gson().toJson(respuesta);
     }
-
+    
+    @Path("/AsignarColegio")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public String asignarColegio(UserRoles userRoles) throws Exception {
+        Respuesta respuesta = new Respuesta();
+        FactoryDao factory = FactoryDao.getFactoryInstance();
+        RolDao dao = factory.getNewRolDao();
+        UserRoles uRoles = new UserRoles();
+        uRoles.setIdReferencia(userRoles.getIdReferencia());
+        int i = dao.asignarColegio(uRoles);
+        if (i == 0) {
+            respuesta.setSuccess(false);
+            respuesta.setMessage("No se pudo asignar el colegio");
+            respuesta.setResponse(null);
+            return new Gson().toJson(respuesta);
+        }
+        respuesta.setSuccess(true);
+        respuesta.setMessage("Sí se pudo asignar el colegio");
+        respuesta.setResponse(null);
+        return new Gson().toJson(respuesta);
+    }
+    
 }
